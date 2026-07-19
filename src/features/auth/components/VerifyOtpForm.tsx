@@ -115,7 +115,7 @@ export default function VerifyOtpForm() {
             })
           } else {
             setSuccessMessage('Account verified successfully!')
-            window.location.href = '/dashboard'
+            window.location.href = '/onboarding'
           }
         },
       }
