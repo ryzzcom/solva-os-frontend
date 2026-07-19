@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
 export const axiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -72,10 +72,10 @@ axiosInstance.interceptors.response.use(
 
         const { access_token } = response.data
         localStorage.setItem('access_token', access_token)
-        
+
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
         originalRequest.headers.Authorization = `Bearer ${access_token}`
-        
+
         processQueue(null, access_token)
         return axiosInstance(originalRequest)
       } catch (refreshError) {
