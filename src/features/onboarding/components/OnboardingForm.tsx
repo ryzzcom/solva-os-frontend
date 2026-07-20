@@ -12,6 +12,7 @@ import {
   type OnboardingStep2Input,
 } from '../schemas/onboardingSchema'
 import { useOnboarding } from '../api/useOnboarding'
+import { useAuthStore } from '@/store/authStore'
 
 interface OnboardingFormProps {
   step: number
@@ -130,6 +131,23 @@ export default function OnboardingForm({ step, setStep }: OnboardingFormProps) {
         },
         onSuccess: (res) => {
           setSuccessMsg(res.message || 'School details setup successfully and is pending approval.')
+          if (res.data) {
+            if (res.data.user) {
+              useAuthStore.getState().updateUser({
+                fullName: res.data.user.full_name,
+                profile_picture_url: res.data.user.profile_picture_url,
+              })
+            }
+            if (res.data.school) {
+              useAuthStore.getState().updateSchool({
+                id: res.data.school.id,
+                schoolCode: res.data.school.school_code,
+                name: res.data.school.name,
+                email: res.data.school.email,
+                logo_url: res.data.school.logo_url,
+              })
+            }
+          }
           setTimeout(() => {
             window.location.href = '/dashboard'
           }, 3000)

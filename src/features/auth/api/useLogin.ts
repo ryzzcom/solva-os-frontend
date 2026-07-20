@@ -1,30 +1,32 @@
 import { useMutation } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
 import type { LoginInput } from '../schemas/loginSchema'
-
-interface LoginResponse {
-  access_token: string
-  user: {
-    id: string
-    name: string
-    email: string
-    role: string
-    school_id?: string
-  }
-}
+import { useAuthStore } from '@/store/authStore'
 
 export const useLogin = () => {
-  return useMutation<LoginResponse, Error, LoginInput>({
-    mutationFn: async (data) => {
-      const response = await axiosInstance.post<LoginResponse>('/auth/login', {
+  return useMutation({
+    mutationFn: async (data: LoginInput) => {
+      const response = await axiosInstance.post('/auth/login', {
         email: data.email,
         password: data.password,
       })
       return response.data
     },
-    onSuccess: (data) => {
-      localStorage.setItem('access_token', data.access_token)
-      localStorage.setItem('user', JSON.stringify(data.user))
+    onSuccess: (res: any) => {
+      const payload = res?.data || res
+      const token = payload?.access_token || payload?.accessToken
+      const user = payload?.user
+
+      if (token) {
+        localStorage.setItem('access_token', token)
+      }
+      if (user) {
+        localStorage.setItem('user', JSON.stringify(user))
+      }
+
+      if (token && user) {
+        useAuthStore.getState().setAuth(user, token)
+      }
     },
   })
 }

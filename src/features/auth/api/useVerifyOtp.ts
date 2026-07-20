@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 
 interface VerifyOtpResponse {
   message?: string
@@ -10,6 +11,16 @@ interface VerifyOtpResponse {
     email: string
     role: string
     school_id?: string
+    fullName?: string
+    schoolId?: string
+    profile_picture_url?: string | null
+  }
+  school?: {
+    id: string
+    schoolCode: string
+    name: string
+    email: string
+    logo_url?: string | null
   }
   data?: {
     message?: string
@@ -35,8 +46,16 @@ export const useVerifyOtp = () => {
     },
     onSuccess: (data) => {
       if (data.access_token && data.user) {
-        localStorage.setItem('access_token', data.access_token)
-        localStorage.setItem('user', JSON.stringify(data.user))
+        const userPayload = {
+          id: data.user.id,
+          fullName: data.user.fullName || data.user.name || '',
+          email: data.user.email,
+          role: data.user.role,
+          schoolId: data.user.schoolId || data.user.school_id || '',
+          profile_picture_url: data.user.profile_picture_url || null,
+          school: data.school || null,
+        }
+        useAuthStore.getState().setAuth(userPayload, data.access_token)
       }
     },
   })
