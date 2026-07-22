@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { ChevronRight, ArrowLeft, AlertCircle } from 'lucide-react'
+import { ChevronRight, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 import { useClassesOverview, useClassSections } from '@/features/classes/api/useClasses'
