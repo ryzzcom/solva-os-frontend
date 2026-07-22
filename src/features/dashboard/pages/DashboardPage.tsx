@@ -11,7 +11,7 @@ import {
 } from 'lucide-react'
 import { useDashboardMetrics } from '../api/useDashboardMetrics'
 import { Skeleton } from '@/components/ui/skeleton'
-import { MetricCard } from '../components/MetricCard'
+import { MetricCard } from '@/components/ui/MetricCard'
 
 export default function DashboardPage() {
   const { data: metrics, isLoading, error } = useDashboardMetrics()
