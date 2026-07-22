@@ -14,6 +14,8 @@ import { StudentProfilePhotoUpload } from '../components/StudentProfilePhotoUplo
 import { StudentFormFields } from '../components/StudentFormFields'
 import { SubjectSelectionBox } from '../components/SubjectSelectionBox'
 
+import { saveLocalStudent } from '../api/useStudents'
+
 export default function AddStudentPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -32,7 +34,6 @@ export default function AddStudentPage() {
   const [photoPreview, setPhotoPreview] = useState<string | null>(null)
 
   const [fullName, setFullName] = useState('')
-  const [rollNo, setRollNo] = useState('')
   const [grade, setGrade] = useState('')
   const [section, setSection] = useState('')
 
@@ -117,7 +118,6 @@ export default function AddStudentPage() {
     // Declarative Zod Validation
     const validationResult = addStudentSchema.safeParse({
       fullName,
-      rollNo,
       grade,
       section,
       dob,
@@ -134,6 +134,8 @@ export default function AddStudentPage() {
       return setErrorMessage(firstError)
     }
 
+    const generatedRollNo = `STU-${Math.floor(1000 + Math.random() * 9000)}`
+
     const payload: CreateStudentPayload = {
       full_name: fullName.trim(),
       profile_picture_url: photoPreview || undefined,
@@ -143,7 +145,7 @@ export default function AddStudentPage() {
       city: city || undefined,
       class_id: grade,
       section_id: section,
-      registration_no: rollNo.trim(),
+      registration_no: generatedRollNo,
       guardian_type: 'PARENT',
       father_name: fatherName.trim(),
       father_phone: fatherPhone.trim(),
@@ -156,7 +158,7 @@ export default function AddStudentPage() {
     const newStudentItem = {
       id: `st-${Date.now()}`,
       full_name: fullName.trim(),
-      roll_no: rollNo.trim(),
+      roll_no: generatedRollNo,
       class_name: selectedClassLabel,
       section_name: selectedSecLabel,
       gender: gender,
@@ -171,28 +173,17 @@ export default function AddStudentPage() {
       await createStudentMutation.mutateAsync(payload)
       setSuccessMessage(`Student "${fullName}" successfully enrolled! Redirecting...`)
 
-      queryClient.setQueriesData({ queryKey: ['students'] }, (oldData: any) => {
-        if (!oldData) return { students: [newStudentItem], totalCount: 1, page: 1, limit: 10 }
-        return {
-          ...oldData,
-          students: [newStudentItem, ...(oldData.students || [])],
-          totalCount: (oldData.totalCount || 0) + 1,
-        }
-      })
+      saveLocalStudent(newStudentItem)
+      queryClient.invalidateQueries({ queryKey: ['students'] })
 
       setTimeout(() => {
         navigate('/students')
       }, 1200)
     } catch (err: any) {
       console.warn('Backend API submission warning:', err)
-      queryClient.setQueriesData({ queryKey: ['students'] }, (oldData: any) => {
-        if (!oldData) return { students: [newStudentItem], totalCount: 1, page: 1, limit: 10 }
-        return {
-          ...oldData,
-          students: [newStudentItem, ...(oldData.students || [])],
-          totalCount: (oldData.totalCount || 0) + 1,
-        }
-      })
+      saveLocalStudent(newStudentItem)
+      queryClient.invalidateQueries({ queryKey: ['students'] })
+
       setSuccessMessage(`Student "${fullName}" added to directory! Redirecting...`)
       setTimeout(() => {
         navigate('/students')
@@ -262,8 +253,6 @@ export default function AddStudentPage() {
         <StudentFormFields
           fullName={fullName}
           setFullName={setFullName}
-          rollNo={rollNo}
-          setRollNo={setRollNo}
           grade={grade}
           onClassChange={handleClassChange}
           classOptions={classOptions}

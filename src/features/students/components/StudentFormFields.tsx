@@ -22,8 +22,6 @@ const BLOOD_GROUP_OPTIONS: SelectOption[] = [
 interface StudentFormFieldsProps {
   fullName: string
   setFullName: (val: string) => void
-  rollNo: string
-  setRollNo: (val: string) => void
   grade: string
   onClassChange: (val: string) => void
   classOptions: SelectOption[]
@@ -47,8 +45,6 @@ interface StudentFormFieldsProps {
 export const StudentFormFields: React.FC<StudentFormFieldsProps> = ({
   fullName,
   setFullName,
-  rollNo,
-  setRollNo,
   grade,
   onClassChange,
   classOptions,
@@ -81,21 +77,6 @@ export const StudentFormFields: React.FC<StudentFormFieldsProps> = ({
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
           placeholder="Enter your Full name"
-          className="w-full h-[52px] bg-white border border-[#e3e7ee] rounded-[10px] px-6 text-[#0f172a] placeholder-[#94a3b8] font-sans text-base focus:outline-none focus:border-[#2e67b1] transition-colors"
-        />
-      </div>
-
-      {/* Roll No */}
-      <div className="space-y-2">
-        <label className="block text-[18px] font-medium font-urbanist text-[#0f172a]">
-          Roll No *
-        </label>
-        <input
-          type="text"
-          required
-          value={rollNo}
-          onChange={(e) => setRollNo(e.target.value)}
-          placeholder="Enter your Roll no"
           className="w-full h-[52px] bg-white border border-[#e3e7ee] rounded-[10px] px-6 text-[#0f172a] placeholder-[#94a3b8] font-sans text-base focus:outline-none focus:border-[#2e67b1] transition-colors"
         />
       </div>

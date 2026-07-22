@@ -25,37 +25,57 @@ export const StudentsTable: React.FC<StudentsTableProps> = ({
 }) => {
   const columns = React.useMemo(
     () => [
-      columnHelper.accessor('name', {
+      columnHelper.accessor('full_name', {
         header: 'Student Name',
-        cell: (info) => (
-          <span className="font-medium text-[#0f172a] text-base font-urbanist">
-            {info.getValue()}
-          </span>
-        ),
+        cell: (info) => {
+          const row = info.row.original
+          const studentName = row.name || row.full_name || 'Student'
+          return (
+            <span className="font-medium text-[#0f172a] text-base font-urbanist">
+              {studentName}
+            </span>
+          )
+        },
       }),
-      columnHelper.accessor('rollNo', {
+      columnHelper.accessor('roll_no', {
         header: 'Roll No.',
-        cell: (info) => (
-          <span className="text-[#334155] text-base font-sans">
-            {info.getValue()}
-          </span>
-        ),
+        cell: (info) => {
+          const row = info.row.original
+          const roll = row.rollNo || row.roll_no || 'N/A'
+          return (
+            <span className="text-[#334155] text-base font-sans font-medium">
+              {roll}
+            </span>
+          )
+        },
       }),
-      columnHelper.accessor('classSection', {
+      columnHelper.accessor('class_name', {
         header: 'Class & Section',
-        cell: (info) => (
-          <span className="text-[#334155] text-base font-sans">
-            {info.getValue()}
-          </span>
-        ),
+        cell: (info) => {
+          const row = info.row.original
+          const classSec =
+            row.classSection ||
+            (row.class_name && row.section_name
+              ? `${row.class_name} (${row.section_name})`
+              : 'N/A')
+          return (
+            <span className="text-[#334155] text-base font-sans">
+              {classSec}
+            </span>
+          )
+        },
       }),
-      columnHelper.accessor('parentContact', {
+      columnHelper.accessor('father_phone', {
         header: 'Parent Contact',
-        cell: (info) => (
-          <span className="text-[#334155] text-base font-sans">
-            {info.getValue()}
-          </span>
-        ),
+        cell: (info) => {
+          const row = info.row.original
+          const contact = row.parentContact || row.father_phone || 'N/A'
+          return (
+            <span className="text-[#334155] text-base font-sans">
+              {contact}
+            </span>
+          )
+        },
       }),
       columnHelper.accessor('attendancePercentage', {
         header: 'Attendance',
