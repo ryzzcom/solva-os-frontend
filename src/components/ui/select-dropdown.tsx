@@ -42,25 +42,25 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
   }, [])
 
   return (
-    <div ref={containerRef} className={`relative h-[42px] inline-block ${className}`}>
-      {/* Trigger Button matching Figma Node 83:720 */}
+    <div ref={containerRef} className={`relative h-[52px] inline-block ${className}`}>
+      {/* Trigger Button matching Form Input Fields */}
       <button
         type="button"
         disabled={disabled}
         onClick={() => !disabled && setIsOpen((prev) => !prev)}
-        className={`h-[42px] px-4 py-2 border rounded-[8px] flex items-center justify-between gap-2 font-medium font-urbanist text-[18px] leading-[20px] transition-all w-full ${
+        className={`h-[52px] px-6 border rounded-[10px] flex items-center justify-between gap-2 font-sans text-base transition-all w-full ${
           disabled
             ? 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed opacity-60'
-            : 'bg-[#f5f4fb] border-black/10 hover:border-[#2e67b1]/30 text-[#2e67b1] cursor-pointer shadow-xs active:scale-[0.98]'
+            : 'bg-white border-[#e3e7ee] hover:border-[#2e67b1] text-[#0f172a] cursor-pointer shadow-xs active:scale-[0.99]'
         }`}
       >
         <span className="truncate">
           {selectedOption ? selectedOption.label : placeholder}
         </span>
         <ChevronDown
-          className={`size-[18px] shrink-0 transition-transform duration-200 ${
-            disabled ? 'text-slate-400 opacity-40' : 'text-[#2e67b1] opacity-50'
-          } ${isOpen ? 'rotate-180 opacity-100' : ''}`}
+          className={`size-5 shrink-0 transition-transform duration-200 ${
+            disabled ? 'text-slate-400 opacity-40' : 'text-[#94a3b8]'
+          } ${isOpen ? 'rotate-180 text-[#2e67b1]' : ''}`}
         />
       </button>
 

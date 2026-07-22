@@ -26,8 +26,8 @@ export const StudentProfilePhotoUpload: React.FC<StudentProfilePhotoUploadProps>
   }
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 bg-white border border-[#d8dee8] rounded-[12px]">
-      <label className="relative size-[100px] rounded-full border-2 border-dashed border-[#2e67b1] flex flex-col items-center justify-center cursor-pointer hover:border-[#255694] transition-colors bg-[#f8fafc] overflow-hidden group shrink-0">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 p-6 rounded-[12px]">
+      <label className="relative size-[120px] rounded-[12px] border-2 border-dashed border-[#2e67b1] flex flex-col items-center justify-center cursor-pointer hover:border-[#255694] transition-colors bg-[#f8fafc] overflow-hidden group shrink-0">
         {photoPreview ? (
           <img
             src={photoPreview}
@@ -36,7 +36,7 @@ export const StudentProfilePhotoUpload: React.FC<StudentProfilePhotoUploadProps>
           />
         ) : (
           <>
-            <UserPlus className="size-8 text-[#2e67b1] group-hover:scale-110 transition-transform" />
+            <UserPlus className="size-6 text-[#2e67b1] group-hover:scale-110 transition-transform" />
             <span className="text-[10px] text-[#2e67b1] font-medium font-urbanist mt-1">
               Upload Photo
             </span>

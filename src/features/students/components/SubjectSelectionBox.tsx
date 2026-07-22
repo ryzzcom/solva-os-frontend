@@ -59,7 +59,7 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
             value={subjectSearch}
             onChange={(e) => setSubjectSearch(e.target.value)}
             placeholder="Search Subjects..."
-            className="w-full h-[52px] bg-white border border-[#d8dee8] rounded-[8px] pl-12 pr-4 text-base md:text-lg text-[#0f172a] placeholder-[#94a3b8] font-urbanist focus:outline-none focus:border-[#2e67b1] transition-colors disabled:bg-slate-100"
+            className="w-full h-[52px] bg-white border border-[#e3e7ee] rounded-[10px] pl-12 pr-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors disabled:bg-slate-100"
           />
         </div>
 
