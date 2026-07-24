@@ -8,6 +8,7 @@ import OnboardingPage from '@/features/onboarding/pages/OnboardingPage'
 import DashboardPage from '@/features/dashboard/pages/DashboardPage'
 import StudentsPage from '@/features/students/pages/StudentsPage'
 import AddStudentPage from '@/features/students/pages/AddStudentPage'
+import StudentProfilePage from '@/features/students/pages/StudentProfilePage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -28,6 +29,7 @@ export const AppRoutes = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/students" element={<StudentsPage />} />
           <Route path="/students/add" element={<AddStudentPage />} />
+          <Route path="/students/:id" element={<StudentProfilePage />} />
           <Route path="/teachers" element={<Navigate to="/dashboard" replace />} />
           <Route path="/classes" element={<Navigate to="/dashboard" replace />} />
           <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />

@@ -5,6 +5,7 @@ import { useStudents } from '../api/useStudents'
 import { StudentsFilterBar } from '../components/StudentsFilterBar'
 import { StudentsTable } from '../components/StudentsTable'
 import { StudentsPagination } from '../components/StudentsPagination'
+import { BulkUploadModal } from '../components/BulkUploadModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Button } from '@/components/ui/button'
@@ -14,6 +15,7 @@ export default function StudentsPage() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
   const [showNotice, setShowNotice] = useState(false)
+  const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false)
 
   const page = parseInt(searchParams.get('page') || '1', 10)
   const limit = parseInt(searchParams.get('limit') || '10', 10)
@@ -119,9 +121,9 @@ export default function StudentsPage() {
             Add New student
           </Button>
           <Button
-            onClick={() => setShowNotice(true)}
+            onClick={() => setIsBulkUploadOpen(true)}
             variant="outline"
-            leftIcon={<Upload className="size-5" />}
+            leftIcon={<Upload className="size-5 text-[#2e67b1]" />}
           >
             Import CSV
           </Button>
@@ -165,7 +167,7 @@ export default function StudentsPage() {
         <>
           <StudentsTable
             data={studentsList}
-            onView={(student) => console.log('View student', student)}
+            onView={(student) => navigate(`/students/${student.id || student.roll_no || student.rollNo}`)}
             onEdit={(student) => console.log('Edit student', student)}
             onDelete={(student) => console.log('Delete student', student)}
           />
@@ -180,6 +182,12 @@ export default function StudentsPage() {
           />
         </>
       )}
+
+      {/* 7. Bulk Upload CSV Modal */}
+      <BulkUploadModal
+        isOpen={isBulkUploadOpen}
+        onClose={() => setIsBulkUploadOpen(false)}
+      />
     </div>
   )
 }
