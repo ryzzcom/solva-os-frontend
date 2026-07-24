@@ -14,8 +14,6 @@ import { StudentProfilePhotoUpload } from '../components/StudentProfilePhotoUplo
 import { StudentFormFields } from '../components/StudentFormFields'
 import { SubjectSelectionBox } from '../components/SubjectSelectionBox'
 
-import { saveLocalStudent } from '../api/useStudents'
-
 export default function AddStudentPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
@@ -134,8 +132,6 @@ export default function AddStudentPage() {
       return setErrorMessage(firstError)
     }
 
-    const generatedRollNo = `STU-${Math.floor(1000 + Math.random() * 9000)}`
-
     const payload: CreateStudentPayload = {
       full_name: fullName.trim(),
       profile_picture_url: photoPreview || undefined,
@@ -145,49 +141,23 @@ export default function AddStudentPage() {
       city: city || undefined,
       class_id: grade,
       section_id: section,
-      registration_no: generatedRollNo,
       guardian_type: 'PARENT',
       father_name: fatherName.trim(),
       father_phone: fatherPhone.trim(),
       subjects: selectedSubjects,
     }
 
-    const selectedClassLabel = classOptions.find((c) => c.value === grade)?.label || 'Class'
-    const selectedSecLabel = sectionOptions.find((s) => s.value === section)?.label || 'Section'
-
-    const newStudentItem = {
-      id: `st-${Date.now()}`,
-      full_name: fullName.trim(),
-      roll_no: generatedRollNo,
-      class_name: selectedClassLabel,
-      section_name: selectedSecLabel,
-      gender: gender,
-      father_name: fatherName.trim(),
-      father_phone: fatherPhone.trim(),
-      status: 'ACTIVE',
-      avatar_url: photoPreview || '',
-      enrollment_date: new Date().toISOString(),
-    }
-
     try {
       await createStudentMutation.mutateAsync(payload)
       setSuccessMessage(`Student "${fullName}" successfully enrolled! Redirecting...`)
-
-      saveLocalStudent(newStudentItem)
       queryClient.invalidateQueries({ queryKey: ['students'] })
 
       setTimeout(() => {
         navigate('/students')
       }, 1200)
     } catch (err: any) {
-      console.warn('Backend API submission warning:', err)
-      saveLocalStudent(newStudentItem)
-      queryClient.invalidateQueries({ queryKey: ['students'] })
-
-      setSuccessMessage(`Student "${fullName}" added to directory! Redirecting...`)
-      setTimeout(() => {
-        navigate('/students')
-      }, 1200)
+      const backendError = err?.response?.data?.message || err?.message || 'Failed to enroll student.'
+      setErrorMessage(backendError)
     } finally {
       setIsSubmitting(false)
     }

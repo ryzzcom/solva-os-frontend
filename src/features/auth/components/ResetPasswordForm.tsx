@@ -9,6 +9,8 @@ import { Label } from '@/components/ui/label'
 import { resetPasswordSchema, type ResetPasswordInput } from '../schemas/resetPasswordSchema'
 import { useResetPassword } from '../api/useResetPassword'
 
+import { extractAuthErrorMessage } from '../utils/extractError'
+
 export default function ResetPasswordForm() {
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -50,11 +52,7 @@ export default function ResetPasswordForm() {
       },
       {
         onError: (error: any) => {
-          setAuthError(
-            error.response?.data?.message ||
-              error.message ||
-              'Failed to reset password. Please try again.'
-          )
+          setAuthError(extractAuthErrorMessage(error, 'Failed to reset password. Please try again.'))
         },
         onSuccess: () => {
           setSuccessMessage('Password reset successfully! Redirecting to login...')

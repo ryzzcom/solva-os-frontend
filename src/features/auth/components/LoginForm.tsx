@@ -10,6 +10,8 @@ import { loginSchema, type LoginInput } from '../schemas/loginSchema'
 import { useLogin } from '../api/useLogin'
 import { axiosInstance } from '@/lib/axios'
 
+import { extractAuthErrorMessage } from '../utils/extractError'
+
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [authError, setAuthError] = useState<string | null>(null)
@@ -33,7 +35,7 @@ export default function LoginForm() {
     setAuthError(null)
     loginMutation.mutate(data, {
       onError: (error: any) => {
-        setAuthError(error.response?.data?.message || error.message || 'Invalid credentials. Please try again.')
+        setAuthError(extractAuthErrorMessage(error, 'Invalid credentials. Please try again.'))
       },
       onSuccess: () => {
         window.location.href = '/dashboard'

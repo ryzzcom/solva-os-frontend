@@ -11,6 +11,8 @@ import { signupSchema, type SignupInput } from '../schemas/signupSchema'
 import { useSignup } from '../api/useSignup'
 import { axiosInstance } from '@/lib/axios'
 
+import { extractAuthErrorMessage } from '../utils/extractError'
+
 export default function SignupForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
@@ -37,11 +39,7 @@ export default function SignupForm() {
     setAuthError(null)
     signupMutation.mutate(data, {
       onError: (error: any) => {
-        setAuthError(
-          error.response?.data?.message ||
-            error.message ||
-            'Registration failed. Please try again.'
-        )
+        setAuthError(extractAuthErrorMessage(error, 'Registration failed. Please try again.'))
       },
       onSuccess: (_, variables) => {
         navigate('/verify-otp', { state: { email: variables.email } })

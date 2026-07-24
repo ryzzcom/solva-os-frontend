@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button'
 import { Loader2, ArrowRight } from 'lucide-react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
+import { extractAuthErrorMessage } from '../utils/extractError'
+
 export default function VerifyOtpForm() {
   const [otpValues, setOtpValues] = useState<string[]>(Array(6).fill(''))
   const [authError, setAuthError] = useState<string | null>(null)
@@ -101,11 +103,7 @@ export default function VerifyOtpForm() {
       { email, code, type },
       {
         onError: (error: any) => {
-          setAuthError(
-            error.response?.data?.message ||
-              error.message ||
-              'OTP verification failed. Please try again.'
-          )
+          setAuthError(extractAuthErrorMessage(error, 'OTP verification failed. Please try again.'))
         },
         onSuccess: (data) => {
           if (type === 'forgot-password') {
@@ -130,11 +128,7 @@ export default function VerifyOtpForm() {
     if (!email) return
     resendMutation.mutate({ email }, {
       onError: (error: any) => {
-        setAuthError(
-          error.response?.data?.message ||
-            error.message ||
-            'Failed to resend verification code. Please try again.'
-        )
+        setAuthError(extractAuthErrorMessage(error, 'Failed to resend OTP code. Please try again.'))
       },
       onSuccess: () => {
         setSuccessMessage('Verification code resent successfully to your email.')

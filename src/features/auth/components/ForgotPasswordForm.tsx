@@ -9,6 +9,8 @@ import { Label } from '@/components/ui/label'
 import { forgotPasswordSchema, type ForgotPasswordInput } from '../schemas/forgotPasswordSchema'
 import { useForgotPassword } from '../api/useForgotPassword'
 
+import { extractAuthErrorMessage } from '../utils/extractError'
+
 export default function ForgotPasswordForm() {
   const [authError, setAuthError] = useState<string | null>(null)
   const forgotPasswordMutation = useForgotPassword()
@@ -29,11 +31,7 @@ export default function ForgotPasswordForm() {
     setAuthError(null)
     forgotPasswordMutation.mutate(data, {
       onError: (error: any) => {
-        setAuthError(
-          error.response?.data?.message ||
-            error.message ||
-            'Failed to initiate password reset request. Please try again.'
-        )
+        setAuthError(extractAuthErrorMessage(error, 'Failed to initiate password reset request. Please try again.'))
       },
       onSuccess: () => {
         navigate('/verify-otp', { state: { email: data.email, type: 'forgot-password' } })
