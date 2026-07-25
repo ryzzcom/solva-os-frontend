@@ -6,11 +6,16 @@ import { StudentProfileHeader } from '../components/StudentProfileHeader'
 import { StudentProfileTabs, type ProfileTabType } from '../components/StudentProfileTabs'
 import { StudentPersonalTab } from '../components/StudentPersonalTab'
 import { StudentAttendanceTab } from '../components/StudentAttendanceTab'
+import { StudentResultsTab } from '../components/StudentExamsTab'
+import { StudentHomeworkTab } from '../components/StudentHomeworkTab'
+import { DeleteStudentModal } from '../components/DeleteStudentModal'
+import { Clock } from 'lucide-react'
 
 export default function StudentProfilePage() {
   const { id = '' } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState<ProfileTabType>('Profile')
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
 
   // API Hooks
   const { data: summaryData, isLoading: isSummaryLoading } = useStudentSummary(id)
@@ -54,8 +59,8 @@ export default function StudentProfilePage() {
       <StudentProfileHeader
         summaryData={summaryData}
         isLoading={isSummaryLoading}
-        onEditProfile={() => console.log('Edit profile', id)}
-        onDeleteStudent={() => console.log('Delete student', id)}
+        onEditProfile={() => navigate(`/students/edit/${id}`)}
+        onDeleteStudent={() => setIsDeleteModalOpen(true)}
       />
 
       {/* 3. Navigation Tabs */}
@@ -76,16 +81,57 @@ export default function StudentProfilePage() {
         <StudentAttendanceTab studentId={id} />
       )}
 
-      {activeTab !== 'Profile' && activeTab !== 'Attendance' && (
-        <div className="bg-white border border-[#d8dee8] rounded-[16px] p-12 text-center space-y-3 shadow-xs animate-in fade-in duration-200">
-          <h3 className="text-xl font-semibold font-urbanist text-[#0f172a]">
-            {activeTab} Records
-          </h3>
-          <p className="text-sm font-sans text-slate-500 max-w-md mx-auto">
-            Detailed {activeTab.toLowerCase()} records for this student will be displayed here once connected.
-          </p>
+      {activeTab === 'Results' && (
+        <StudentResultsTab studentId={id} />
+      )}
+
+      {activeTab === 'Homework' && (
+        <StudentHomeworkTab studentId={id} />
+      )}
+
+      {activeTab === 'Fees' && (
+        <div className="bg-white border border-[#d8dee8] rounded-[16px] p-12 text-center space-y-4 shadow-xs animate-in fade-in duration-200">
+          <div className="size-14 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
+            <Clock className="size-7" />
+          </div>
+          <div className="space-y-1 max-w-md mx-auto">
+            <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full uppercase tracking-wider font-urbanist mb-1">
+              Coming Soon
+            </div>
+            <h3 className="text-xl font-bold font-urbanist text-[#0f172a]">
+              Student Fees Management Module
+            </h3>
+            <p className="text-sm font-sans text-slate-500">
+              The fee ledger, transaction receipts, and payment history modules are currently under active development.
+            </p>
+          </div>
         </div>
       )}
+
+      {activeTab !== 'Profile' &&
+        activeTab !== 'Attendance' &&
+        activeTab !== 'Results' &&
+        activeTab !== 'Homework' &&
+        activeTab !== 'Fees' && (
+          <div className="bg-white border border-[#d8dee8] rounded-[16px] p-12 text-center space-y-3 shadow-xs animate-in fade-in duration-200">
+            <h3 className="text-xl font-semibold font-urbanist text-[#0f172a]">
+              {activeTab} Records
+            </h3>
+            <p className="text-sm font-sans text-slate-500 max-w-md mx-auto">
+              Detailed {(activeTab as string).toLowerCase()} records for this student will be displayed here once connected.
+            </p>
+          </div>
+        )}
+
+      {/* 5. Delete Student Confirmation Modal */}
+      <DeleteStudentModal
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        studentId={id}
+        studentName={summaryData?.header?.full_name}
+        className={summaryData?.header?.class_name}
+        sectionName={summaryData?.header?.section_name}
+      />
     </div>
   )
 }

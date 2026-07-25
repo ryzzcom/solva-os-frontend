@@ -36,6 +36,8 @@ export interface AcademicEnrollmentData {
   academic_year: string
   class_name: string
   section_name: string
+  class_id?: string
+  section_id?: string
   roll_number?: string | number
   class_teacher?: string
   assigned_subjects: string[]
@@ -54,3 +56,51 @@ export interface StudentPersonalProfileResponse {
   guardian_details: GuardianDetailsData
   id_card_url?: string
 }
+
+export interface StudentExamResultItem {
+  student_name: string
+  registration_no: string
+  exam_name: string
+  percentage: string
+  grade: string
+  status: 'Pass' | 'Failed' | string
+}
+
+export type StudentExamResultsResponse = StudentExamResultItem[]
+
+export interface StudentHomeworkItem {
+  subject: string
+  title: string
+  description?: string
+  teacher_name?: string
+  due_date: string
+  grade: string
+  status: 'Submitted' | 'Pending' | 'Overdue' | 'Late' | 'Unsubmitted' | string
+}
+
+export type StudentHomeworkResponse = StudentHomeworkItem[]
+
+export interface UpdateStudentPayload {
+  full_name?: string
+  dob?: string
+  gender?: 'Male' | 'Female' | 'Other' | string
+  blood_group?: string
+  country?: string
+  city?: string
+  address?: string
+  class_id?: string
+  section_id?: string
+  class_name?: string
+  section_name?: string
+  guardian_type?: 'PARENT' | 'GUARDIAN' | string
+  father_name?: string
+  father_phone?: string
+  guardian_name?: string
+  relation?: string
+  guardian_phone?: string
+  profile_picture?: File | null
+  profile_picture_url?: string
+}
+
+
+

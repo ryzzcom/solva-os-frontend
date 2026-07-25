@@ -1,13 +1,13 @@
 import React from 'react'
 
-export type ProfileTabType = 'Profile' | 'Attendance' | 'Exams' | 'Fees' | 'Homework'
+export type ProfileTabType = 'Profile' | 'Attendance' | 'Results' | 'Fees' | 'Homework'
 
 interface StudentProfileTabsProps {
   activeTab: ProfileTabType
   onTabChange: (tab: ProfileTabType) => void
 }
 
-const TABS: ProfileTabType[] = ['Profile', 'Attendance', 'Exams', 'Fees', 'Homework']
+const TABS: ProfileTabType[] = ['Profile', 'Attendance', 'Results', 'Fees', 'Homework']
 
 export const StudentProfileTabs: React.FC<StudentProfileTabsProps> = ({
   activeTab,
@@ -22,13 +22,18 @@ export const StudentProfileTabs: React.FC<StudentProfileTabsProps> = ({
             key={tab}
             type="button"
             onClick={() => onTabChange(tab)}
-            className={`pb-3 text-base md:text-lg font-urbanist font-medium transition-all relative shrink-0 cursor-pointer ${
+            className={`pb-3 text-base md:text-lg font-urbanist font-medium transition-all relative shrink-0 cursor-pointer flex items-center gap-1.5 ${
               isActive
                 ? 'text-[#2e67b1] font-semibold'
                 : 'text-[#64748b] hover:text-[#0f172a]'
             }`}
           >
-            {tab}
+            <span>{tab}</span>
+            {tab === 'Fees' && (
+              <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-700 border border-amber-200 leading-none">
+                Soon
+              </span>
+            )}
             {isActive && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2e67b1] rounded-full animate-in fade-in duration-200" />
             )}

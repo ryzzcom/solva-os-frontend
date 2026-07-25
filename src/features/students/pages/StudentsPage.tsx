@@ -6,6 +6,8 @@ import { StudentsFilterBar } from '../components/StudentsFilterBar'
 import { StudentsTable } from '../components/StudentsTable'
 import { StudentsPagination } from '../components/StudentsPagination'
 import { BulkUploadModal } from '../components/BulkUploadModal'
+import { DeleteStudentModal } from '../components/DeleteStudentModal'
+import type { StudentItem } from '../types'
 import { Skeleton } from '@/components/ui/skeleton'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Button } from '@/components/ui/button'
@@ -16,6 +18,10 @@ export default function StudentsPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const [showNotice, setShowNotice] = useState(false)
   const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false)
+
+  // Delete Modal State
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [studentToDelete, setStudentToDelete] = useState<StudentItem | null>(null)
 
   const page = parseInt(searchParams.get('page') || '1', 10)
   const limit = parseInt(searchParams.get('limit') || '10', 10)
@@ -68,6 +74,11 @@ export default function StudentsPage() {
       ...(classId ? { class_id: classId } : {}),
       ...(sectionId ? { section_id: sectionId } : {}),
     })
+  }
+
+  const handleDeleteClick = (student: StudentItem) => {
+    setStudentToDelete(student)
+    setIsDeleteModalOpen(true)
   }
 
   const studentsList = data?.students || []
@@ -168,8 +179,8 @@ export default function StudentsPage() {
           <StudentsTable
             data={studentsList}
             onView={(student) => navigate(`/students/${student.id || student.roll_no || student.rollNo}`)}
-            onEdit={(student) => console.log('Edit student', student)}
-            onDelete={(student) => console.log('Delete student', student)}
+            onEdit={(student) => navigate(`/students/edit/${student.id || student.roll_no || student.rollNo}`)}
+            onDelete={(student) => handleDeleteClick(student)}
           />
 
           {/* 6. Pagination Bar */}
@@ -188,6 +199,17 @@ export default function StudentsPage() {
         isOpen={isBulkUploadOpen}
         onClose={() => setIsBulkUploadOpen(false)}
       />
+
+      {/* 8. Delete Student Confirmation Modal */}
+      <DeleteStudentModal
+        open={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        studentId={studentToDelete?.id || ''}
+        studentName={studentToDelete?.name || studentToDelete?.full_name}
+        className={studentToDelete?.class_name}
+        sectionName={studentToDelete?.section_name}
+      />
     </div>
   )
 }
+

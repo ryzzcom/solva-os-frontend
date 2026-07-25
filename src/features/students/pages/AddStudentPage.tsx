@@ -8,7 +8,7 @@ import { useClassesOverview, useClassSections } from '@/features/classes/api/use
 import type { SelectOption } from '@/components/ui/select-dropdown'
 import { useCreateStudent } from '../api/useCreateStudent'
 import type { CreateStudentPayload } from '../types'
-import { addStudentSchema } from '../validations/studentSchema'
+import { addStudentSchema } from '../schemas/studentSchema'
 
 import { StudentProfilePhotoUpload } from '../components/StudentProfilePhotoUpload'
 import { StudentFormFields } from '../components/StudentFormFields'

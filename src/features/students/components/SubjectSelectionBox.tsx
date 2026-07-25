@@ -3,6 +3,7 @@ import { Search, Plus, Check } from 'lucide-react'
 
 interface SubjectSelectionBoxProps {
   section: string
+  disabled?: boolean
   subjectSearch: string
   setSubjectSearch: (val: string) => void
   selectedSubjects: string[]
@@ -17,6 +18,7 @@ interface SubjectSelectionBoxProps {
 
 export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
   section,
+  disabled = false,
   subjectSearch,
   setSubjectSearch,
   selectedSubjects,
@@ -28,6 +30,7 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
   setNewSubjectInput,
   onAddCustomSubject,
 }) => {
+  const isDisabled = disabled || (!section && selectedSubjects.length === 0)
   const filteredSubjects = subjectsList.filter((s) =>
     s.toLowerCase().includes(subjectSearch.toLowerCase())
   )
@@ -39,12 +42,12 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
       </label>
       <div
         className={`border rounded-[12px] p-6 space-y-5 transition-all ${
-          !section
+          isDisabled
             ? 'bg-slate-50 border-slate-200 opacity-60 pointer-events-none select-none'
             : 'bg-white border-[#d8dee8]'
         }`}
       >
-        {!section && (
+        {isDisabled && (
           <p className="text-slate-500 font-urbanist font-medium text-base text-center py-2">
             Please select a Class & Section first to view and select Subjects.
           </p>
@@ -55,7 +58,7 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[#94a3b8]" />
           <input
             type="text"
-            disabled={!section}
+            disabled={isDisabled}
             value={subjectSearch}
             onChange={(e) => setSubjectSearch(e.target.value)}
             placeholder="Search Subjects..."
@@ -63,7 +66,7 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
           />
         </div>
 
-        {section && filteredSubjects.length > 0 && (
+        {!isDisabled && filteredSubjects.length > 0 && (
           <>
             <hr className="border-[#d8dee8]" />
 
@@ -97,7 +100,7 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
         )}
 
         {/* Add Custom Subject Toggle */}
-        {section && (
+        {!isDisabled && (
           <>
             {showAddCustomSubject ? (
               <div className="flex items-center gap-3 pt-2">
