@@ -77,17 +77,17 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
   return (
     <div className="space-y-6">
       {/* 1. Section: Personal Details */}
-      <div className="bg-white border border-[#d8dee8] rounded-[16px] shadow-xs relative flex">
-        <div className="w-2 bg-[#2e67b1] shrink-0 rounded-l-[16px]" />
+      <div className="bg-white border border-card-border rounded-[16px] shadow-xs relative flex">
+        <div className="w-2 bg-brand-primary shrink-0 rounded-l-[16px]" />
         <div className="p-6 md:p-8 flex-1 space-y-6">
-          <h2 className="text-xl font-bold font-urbanist text-[#0f172a]">
+          <h2 className="text-xl font-bold font-urbanist text-navy-main">
             Personal Details
           </h2>
 
           <div className="space-y-6">
             {/* Full Name */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Full Name *
               </label>
               <input
@@ -96,27 +96,27 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 placeholder="Enter your Full name"
-                className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
               />
             </div>
 
             {/* DOB & Gender */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+                <label className="block text-sm font-semibold font-urbanist text-navy-main">
                   Date of Birth
                 </label>
                 <input
                   type="date"
                   value={dob}
                   onChange={(e) => setDob(e.target.value)}
-                  className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                  className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main font-sans focus:outline-none focus:border-brand-primary transition-colors"
                 />
               </div>
 
               {/* Gender Radio Group */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+                <label className="block text-sm font-semibold font-urbanist text-navy-main">
                   Gender
                 </label>
                 <div className="flex items-center gap-6 h-12 pt-1">
@@ -131,9 +131,9 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                         value={g}
                         checked={gender === g}
                         onChange={() => setGender(g)}
-                        className="size-4 accent-[#2e67b1] cursor-pointer"
+                        className="size-4 accent-brand-primary cursor-pointer"
                       />
-                      <span className="text-sm font-medium font-urbanist text-[#0f172a]">
+                      <span className="text-sm font-medium font-urbanist text-navy-main">
                         {g}
                       </span>
                     </label>
@@ -145,7 +145,7 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
             {/* Phone & Email */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+                <label className="block text-sm font-semibold font-urbanist text-navy-main">
                   Phone Number
                 </label>
                 <input
@@ -153,12 +153,12 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+92 300 1234567"
-                  className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                  className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+                <label className="block text-sm font-semibold font-urbanist text-navy-main">
                   Email *
                 </label>
                 <input
@@ -167,14 +167,14 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="sarafat@gmail.com"
-                  className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                  className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
                 />
               </div>
             </div>
 
             {/* CNIC Number */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 CNIC / National ID Number *
               </label>
               <input
@@ -183,7 +183,7 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                 value={cnicNumber}
                 onChange={(e) => setCnicNumber(e.target.value)}
                 placeholder="42101-1234567-1"
-                className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
               />
             </div>
           </div>
@@ -191,21 +191,21 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
       </div>
 
       {/* 2. Section: School Detail */}
-      <div className="bg-white border border-[#d8dee8] rounded-[16px] shadow-xs relative flex">
-        <div className="w-2 bg-[#F36F26] shrink-0 rounded-l-[16px]" />
+      <div className="bg-white border border-card-border rounded-[16px] shadow-xs relative flex">
+        <div className="w-2 bg-accent-orange shrink-0 rounded-l-[16px]" />
         <div className="p-6 md:p-8 flex-1 space-y-6">
-          <h2 className="text-xl font-bold font-urbanist text-[#0f172a]">
+          <h2 className="text-xl font-bold font-urbanist text-navy-main">
             School Detail
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Teacher ID */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Teacher ID (Optional Registration No)
               </label>
-              <div className="flex items-center border border-[#e3e7ee] rounded-[10px] overflow-hidden focus-within:border-[#2e67b1] transition-colors">
-                <span className="bg-slate-100 border-r border-[#e3e7ee] px-4 py-3 text-base font-semibold font-urbanist text-[#0f172a]">
+              <div className="flex items-center border border-input-border rounded-[10px] overflow-hidden focus-within:border-brand-primary transition-colors">
+                <span className="bg-slate-100 border-r border-input-border px-4 py-3 text-base font-semibold font-urbanist text-navy-main">
                   {teacherIdPrefix}
                 </span>
                 <input
@@ -213,14 +213,14 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                   value={teacherIdNumber}
                   onChange={(e) => setTeacherIdNumber(e.target.value)}
                   placeholder="1058-45 (Auto-generated if blank)"
-                  className="w-full h-12 bg-white px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none"
+                  className="w-full h-12 bg-white px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none"
                 />
               </div>
             </div>
 
             {/* Department */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Department
               </label>
               <CustomSelect
@@ -234,7 +234,7 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
 
             {/* Designation */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Designation
               </label>
               <input
@@ -242,26 +242,26 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                 value={designation}
                 onChange={(e) => setDesignation(e.target.value)}
                 placeholder="Senior Faculty"
-                className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
               />
             </div>
 
             {/* Joining Date */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Joining Date
               </label>
               <input
                 type="date"
                 value={joiningDate}
                 onChange={(e) => setJoiningDate(e.target.value)}
-                className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main font-sans focus:outline-none focus:border-brand-primary transition-colors"
               />
             </div>
 
             {/* Monthly Salary */}
             <div className="space-y-2 md:col-span-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Monthly Salary ($ / PKR)
               </label>
               <input
@@ -269,7 +269,7 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
                 value={salary}
                 onChange={(e) => setSalary(e.target.value)}
                 placeholder="75000"
-                className="w-full h-12 bg-white border border-[#e3e7ee] rounded-[10px] px-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors"
+                className="w-full h-12 bg-white border border-input-border rounded-[10px] px-4 text-base text-navy-main placeholder-slate-muted font-sans focus:outline-none focus:border-brand-primary transition-colors"
               />
             </div>
           </div>
@@ -277,17 +277,17 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
       </div>
 
       {/* 3. Section: Class Teacher */}
-      <div className="bg-white border border-[#d8dee8] rounded-[16px] shadow-xs relative flex">
-        <div className="w-2 bg-[#F36F26] shrink-0 rounded-l-[16px]" />
+      <div className="bg-white border border-card-border rounded-[16px] shadow-xs relative flex">
+        <div className="w-2 bg-accent-orange shrink-0 rounded-l-[16px]" />
         <div className="p-6 md:p-8 flex-1 space-y-6">
-          <h2 className="text-xl font-bold font-urbanist text-[#0f172a]">
+          <h2 className="text-xl font-bold font-urbanist text-navy-main">
             Class Teacher
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Select Class */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Select Class
               </label>
               <CustomSelect
@@ -301,7 +301,7 @@ export const TeacherFormFields: React.FC<TeacherFormFieldsProps> = ({
 
             {/* Select Section */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold font-urbanist text-[#0f172a]">
+              <label className="block text-sm font-semibold font-urbanist text-navy-main">
                 Select Section
               </label>
               <CustomSelect

@@ -130,19 +130,19 @@ export default function AddTeacherPage() {
         <div className="flex items-center gap-2 text-base flex-wrap font-sans">
           <span
             onClick={() => navigate('/dashboard')}
-            className="text-[#475569] hover:underline cursor-pointer"
+            className="text-slate-sub hover:underline cursor-pointer"
           >
             Principal Dashboard.
           </span>
-          <ChevronRight className="size-4 text-[#475569]" />
+          <ChevronRight className="size-4 text-slate-sub" />
           <span
             onClick={() => navigate('/teachers')}
-            className="text-[#475569] hover:underline cursor-pointer"
+            className="text-slate-sub hover:underline cursor-pointer"
           >
             Teachers
           </span>
-          <ChevronRight className="size-4 text-[#475569]" />
-          <span className="text-[#0f172a] font-medium font-urbanist capitalize">
+          <ChevronRight className="size-4 text-slate-sub" />
+          <span className="text-navy-main font-medium font-urbanist capitalize">
             add teacher
           </span>
         </div>
@@ -150,7 +150,7 @@ export default function AddTeacherPage() {
         <button
           type="button"
           onClick={() => navigate('/teachers')}
-          className="inline-flex items-center gap-2 text-sm font-medium font-urbanist text-[#2e67b1] hover:underline cursor-pointer"
+          className="inline-flex items-center gap-2 text-sm font-medium font-urbanist text-brand-primary hover:underline cursor-pointer"
         >
           <ArrowLeft className="size-4" />
           Back to Directory
@@ -174,10 +174,10 @@ export default function AddTeacherPage() {
 
       {/* 2. Header Banner */}
       <div>
-        <h1 className="text-2xl md:text-3xl font-bold text-[#0f172a] font-urbanist leading-[40px]">
+        <h1 className="text-2xl md:text-3xl font-bold text-navy-main font-urbanist leading-[40px]">
           Onboard Faculty
         </h1>
-        <p className="text-[#334155] text-base font-normal font-sans leading-[24px]">
+        <p className="text-slate-body text-base font-normal font-sans leading-[24px]">
           Initialize a new academic profile. This will create institutional credentials and system access.
         </p>
       </div>

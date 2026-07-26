@@ -51,7 +51,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
         className={`h-[52px] px-6 border rounded-[10px] flex items-center justify-between gap-2 font-sans text-base transition-all w-full ${
           disabled
             ? 'bg-slate-100 border-slate-200 text-slate-400 cursor-not-allowed opacity-60'
-            : 'bg-white border-[#e3e7ee] hover:border-[#2e67b1] text-[#0f172a] cursor-pointer shadow-xs active:scale-[0.99]'
+            : 'bg-white border-input-border hover:border-brand-primary text-navy-main cursor-pointer shadow-xs active:scale-[0.99]'
         }`}
       >
         <span className="truncate">
@@ -59,8 +59,8 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
         </span>
         <ChevronDown
           className={`size-5 shrink-0 transition-transform duration-200 ${
-            disabled ? 'text-slate-400 opacity-40' : 'text-[#94a3b8]'
-          } ${isOpen ? 'rotate-180 text-[#2e67b1]' : ''}`}
+            disabled ? 'text-slate-400 opacity-40' : 'text-slate-muted'
+          } ${isOpen ? 'rotate-180 text-brand-primary' : ''}`}
         />
       </button>
 
@@ -74,12 +74,12 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
             }}
             className={`px-3.5 py-2 text-sm md:text-base font-medium font-urbanist rounded-[8px] cursor-pointer flex items-center justify-between transition-colors ${
               !value
-                ? 'bg-[#f5f4fb] text-[#2e67b1] font-semibold'
-                : 'text-slate-700 hover:bg-slate-50 hover:text-[#2e67b1]'
+                ? 'bg-bg-subtle text-brand-primary font-semibold'
+                : 'text-slate-700 hover:bg-slate-50 hover:text-brand-primary'
             }`}
           >
             <span>{placeholder}</span>
-            {!value && <Check className="size-4 text-[#2e67b1]" />}
+            {!value && <Check className="size-4 text-brand-primary" />}
           </div>
 
           {options
@@ -95,12 +95,12 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
                 }}
                 className={`px-3.5 py-2 text-sm md:text-base font-medium font-urbanist rounded-[8px] cursor-pointer flex items-center justify-between transition-colors ${
                   isSelected
-                    ? 'bg-[#f5f4fb] text-[#2e67b1] font-semibold'
-                    : 'text-slate-700 hover:bg-slate-50 hover:text-[#2e67b1]'
+                    ? 'bg-bg-subtle text-brand-primary font-semibold'
+                    : 'text-slate-700 hover:bg-slate-50 hover:text-brand-primary'
                 }`}
               >
                 <span>{option.label}</span>
-                {isSelected && <Check className="size-4 text-[#2e67b1]" />}
+                {isSelected && <Check className="size-4 text-brand-primary" />}
               </div>
             )
           })}

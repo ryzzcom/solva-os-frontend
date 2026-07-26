@@ -3,20 +3,53 @@
 @theme {
   --font-sans: "Inter", sans-serif;
   --font-urbanist: "Urbanist", sans-serif;
+
+  /* Solva OS Complete Semantic Color Tokens */
+  --color-brand-primary: #2e67b1;
+  --color-brand-hover: #1f4e8c;
+  --color-brand-dark: #1f3a8a;
+  --color-brand-light: #2563eb;
+
+  --color-navy-main: #0f172a;
+  --color-slate-body: #334155;
+  --color-slate-sub: #475569;
+  --color-slate-muted: #94a3b8;
+
+  --color-card-border: #d8dee8;
+  --color-input-border: #e3e7ee;
+  --color-divider: #e2e8f0;
+  --color-grid-line: #f1f5f9;
+  --color-bg-page: #f8fafc;
+  --color-bg-subtle: #f5f4fb;
+  --color-bg-neutral: #f3f4f6;
+
+  --color-accent-orange: #F36F26;
+  --color-accent-orange-hover: #d95c16;
+  --color-accent-blue: #4f8edc;
+
+  /* Status Colors */
+  --color-success-bg: #ecfdf5;
+  --color-success-text: #047857;
+  --color-danger-bg: #fef2f2;
+  --color-danger-text: #b91c1c;
 }
 
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --solva-primary: #2e67b1;
+  --solva-navy: #0f172a;
+  --solva-orange: #F36F26;
+  --solva-card-border: #d8dee8;
+  --solva-input-border: #e3e7ee;
+  --solva-text-slate: #334155;
+  --solva-text-muted: #94a3b8;
+  --solva-bg: #f8fafc;
+
+  --text: #334155;
+  --text-h: #0f172a;
+  --bg: #ffffff;
+  --border: #d8dee8;
+  --code-bg: #f8fafc;
+  --accent: #2e67b1;
 
   --sans: "Inter", system-ui, -apple-system, sans-serif;
   --heading: "Urbanist", system-ui, -apple-system, sans-serif;
@@ -24,7 +57,7 @@
 
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
-  color-scheme: light dark;
+  color-scheme: light;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -34,26 +67,6 @@
 
   @media (max-width: 1024px) {
     font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
   }
 }
 

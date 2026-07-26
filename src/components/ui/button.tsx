@@ -8,23 +8,23 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          'bg-[#2e67b1] text-white border border-transparent hover:bg-[#255694] shadow-xs',
+          'bg-brand-primary text-white border border-transparent hover:bg-brand-hover shadow-xs',
         secondary:
-          'bg-[#f36f26] text-white border border-transparent hover:bg-[#d85e1c] shadow-xs',
+          'bg-accent-orange text-white border border-transparent hover:bg-accent-orange-hover shadow-xs',
         tertiary:
-          'bg-transparent text-[#2e67b1] border border-[#2e67b1] hover:bg-[#e6effa]',
+          'bg-transparent text-brand-primary border border-brand-primary hover:bg-bg-subtle',
         outline:
-          'bg-white text-[#1e293b] border border-[#d8dee8] hover:bg-slate-50 hover:border-slate-300',
+          'bg-white text-navy-main border border-card-border hover:bg-slate-50 hover:border-slate-300',
         ghost:
-          'bg-transparent text-[#2e67b1] hover:bg-[#f5f4fb]',
+          'bg-transparent text-brand-primary hover:bg-bg-subtle',
         destructive:
-          'bg-[#dc2626] text-white border border-transparent hover:bg-[#b91c1c] shadow-xs',
-        link: 'text-[#2e67b1] underline-offset-4 hover:underline p-0 h-auto',
+          'bg-rose-600 text-white border border-transparent hover:bg-rose-700 shadow-xs',
+        link: 'text-brand-primary underline-offset-4 hover:underline p-0 h-auto',
       },
       size: {
-        default: 'h-[40px] px-4 py-2 text-[18px] leading-[20px] rounded-[8px] gap-1.5 [&_svg]:size-[20px]',
-        sm: 'h-[34px] px-3 py-1.5 text-sm rounded-[6px] gap-1 [&_svg]:size-[16px]',
-        lg: 'h-[48px] px-6 py-2.5 text-[18px] leading-[20px] rounded-[8px] gap-2 [&_svg]:size-[24px]',
+        default: 'h-[40px] px-4 py-2 text-[18px] rounded-[8px] gap-2 [&_svg]:size-[20px]',
+        sm: 'h-[34px] px-3 py-1.5 text-sm rounded-[6px] gap-1.5 [&_svg]:size-[16px]',
+        lg: 'h-[48px] px-6 py-2.5 text-[18px] rounded-[8px] gap-2.5 [&_svg]:size-[24px]',
         icon: 'size-[40px] rounded-[8px] p-0 flex items-center justify-center [&_svg]:size-[20px]',
         'icon-sm': 'size-[34px] rounded-[6px] p-0 flex items-center justify-center [&_svg]:size-[16px]',
         'icon-lg': 'size-[48px] rounded-[8px] p-0 flex items-center justify-center [&_svg]:size-[24px]',
@@ -68,13 +68,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading ? (
-          <span className="size-4 border-2 border-current border-t-transparent rounded-full animate-spin mr-1.5" />
+          <span className="size-4 border-2 border-current border-t-transparent rounded-full animate-spin shrink-0" />
         ) : (
-          leftIcon && <span className="inline-flex shrink-0">{leftIcon}</span>
+          leftIcon && <span className="inline-flex items-center justify-center shrink-0">{leftIcon}</span>
         )}
-        {children && <span>{children}</span>}
+        {children && <span className="inline-flex items-center leading-none">{children}</span>}
         {!isLoading && rightIcon && (
-          <span className="inline-flex shrink-0">{rightIcon}</span>
+          <span className="inline-flex items-center justify-center shrink-0">{rightIcon}</span>
         )}
       </button>
     )

@@ -58,17 +58,17 @@ export const TeachersFilterBar: React.FC<TeachersFilterBarProps> = ({
   return (
     <form
       onSubmit={handleApply}
-      className="bg-white border border-[#d8dee8] rounded-[8px] p-4 flex flex-col md:flex-row gap-4 items-center justify-between shadow-xs"
+      className="bg-white border border-card-border rounded-[8px] p-4 flex flex-col md:flex-row gap-4 items-center justify-between shadow-xs"
     >
       {/* Search Bar */}
       <div className="relative flex-1 w-full">
-        <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[#94a3b8]" />
+        <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-slate-muted" />
         <input
           type="text"
           value={localSearch}
           onChange={(e) => setLocalSearch(e.target.value)}
           placeholder="Search by teacher name, employee ID, or email"
-          className="w-full bg-white border border-[#d8dee8] rounded-[8px] pl-11 pr-4 py-2 text-base md:text-lg text-[#0f172a] placeholder-[#94a3b8] font-urbanist focus:outline-none focus:border-[#2e67b1] transition-colors"
+          className="w-full bg-white border border-card-border rounded-[8px] pl-11 pr-4 py-2 text-base md:text-lg text-navy-main placeholder-slate-muted font-urbanist focus:outline-none focus:border-brand-primary transition-colors"
         />
       </div>
 

@@ -107,18 +107,18 @@ export default function StudentsPage() {
 
       {/* 1. Breadcrumbs */}
       <div className="flex items-center gap-2 text-base">
-        <span className="text-[#475569] font-sans font-normal">Principal Dashboard.</span>
-        <ChevronRight className="size-4 text-[#475569]" />
-        <span className="text-[#0f172a] font-urbanist font-medium capitalize">Students</span>
+        <span className="text-slate-sub font-sans font-normal">Principal Dashboard.</span>
+        <ChevronRight className="size-4 text-slate-sub" />
+        <span className="text-navy-main font-urbanist font-medium capitalize">Students</span>
       </div>
 
       {/* 2. Header Title & Add Button */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl md:text-3xl font-semibold text-[#0f172a] font-urbanist leading-[40px]">
+          <h1 className="text-2xl md:text-3xl font-semibold text-navy-main font-urbanist leading-[40px]">
             Students Directory
           </h1>
-          <p className="text-[#334155] text-base font-normal font-sans leading-[24px]">
+          <p className="text-slate-body text-base font-normal font-sans leading-[24px]">
             Manage all enrolled students across classes.
           </p>
         </div>
@@ -134,7 +134,7 @@ export default function StudentsPage() {
           <Button
             onClick={() => setIsBulkUploadOpen(true)}
             variant="outline"
-            leftIcon={<Upload className="size-5 text-[#2e67b1]" />}
+            leftIcon={<Upload className="size-5 text-brand-primary" />}
           >
             Import CSV
           </Button>
@@ -145,8 +145,8 @@ export default function StudentsPage() {
       <MetricCard
         value={isLoading ? '...' : totalCount}
         label="Total Students"
-        gradientClass="from-[#2e67b1] to-[#4f8edc] border border-[#2e67b1] shadow-blue-600/15"
-        iconColorClass="text-[#2e67b1]"
+        gradientClass="from-brand-primary to-accent-blue border border-brand-primary shadow-blue-600/15"
+        iconColorClass="text-brand-primary"
         icon={Users}
       />
 
@@ -163,7 +163,7 @@ export default function StudentsPage() {
 
       {/* 5. Data Table Section */}
       {isLoading ? (
-        <div className="bg-white border border-[#d8dee8] rounded-[8px] p-6 space-y-4 shadow-xs">
+        <div className="bg-white border border-card-border rounded-[8px] p-6 space-y-4 shadow-xs">
           <Skeleton className="h-10 w-full rounded-md bg-slate-200" />
           {[...Array(5)].map((_, i) => (
             <Skeleton key={i} className="h-12 w-full rounded-md bg-slate-150" />

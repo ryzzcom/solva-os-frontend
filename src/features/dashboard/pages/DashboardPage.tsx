@@ -152,7 +152,7 @@ export default function DashboardPage() {
           {getGreeting()}, Principal
         </h1>
         <p className="text-slate-500 text-xs md:text-sm font-semibold tracking-wide">
-          Here's what's happening in your school today, <span className="text-[#2e67b1]">{formattedDate}.</span>
+          Here's what's happening in your school today, <span className="text-brand-primary">{formattedDate}.</span>
         </p>
       </div>
 
@@ -161,29 +161,29 @@ export default function DashboardPage() {
         <MetricCard
           value={metrics.student_stats.total_count}
           label="Total Students"
-          gradientClass="from-[#2e67b1] to-[#4f8edc] border border-[#2e67b1] shadow-blue-600/15"
-          iconColorClass="text-[#2e67b1]"
+          gradientClass="from-brand-primary to-accent-blue border border-brand-primary shadow-blue-600/15"
+          iconColorClass="text-brand-primary"
           icon={Users}
         />
         <MetricCard
           value={metrics.teacher_stats.total_count}
           label="Total Teachers"
-          gradientClass="from-[#f36f26] to-[#ff9a5a] border border-[#f36f26] shadow-orange-500/15"
-          iconColorClass="text-[#f36f26]"
+          gradientClass="from-accent-orange to-amber-500 border border-accent-orange shadow-orange-500/15"
+          iconColorClass="text-accent-orange"
           icon={BookOpen}
         />
         <MetricCard
           value={`${metrics.attendance_stats.today_rate.toFixed(1)}%`}
           label="Today's Attendance"
-          gradientClass="from-[#16a34a] to-[#4ade80] border border-[#16a34a] shadow-green-600/15"
-          iconColorClass="text-[#16a34a]"
+          gradientClass="from-emerald-600 to-emerald-400 border border-emerald-600 shadow-green-600/15"
+          iconColorClass="text-emerald-600"
           icon={GraduationCap}
         />
         <MetricCard
           value={formatCurrency(metrics.financial_stats.pending_fees)}
           label="Pending Fees"
-          gradientClass="from-[#7c3aed] to-[#a78bfa] border border-[#7c3aed] shadow-purple-600/15"
-          iconColorClass="text-[#7c3aed]"
+          gradientClass="from-purple-600 to-purple-400 border border-purple-600 shadow-purple-600/15"
+          iconColorClass="text-purple-600"
           icon={Wallet}
         />
       </div>
@@ -193,16 +193,16 @@ export default function DashboardPage() {
         <MetricCard
           value="Grade 1 & 2"
           label="Upcoming PTM"
-          gradientClass="from-[#f59e0b] to-[#fcd34d] border border-[#f59e0b] shadow-amber-500/15"
-          iconColorClass="text-[#f59e0b]"
+          gradientClass="from-amber-500 to-amber-300 border border-amber-500 shadow-amber-500/15"
+          iconColorClass="text-amber-500"
           icon={Calendar}
           truncateValue
         />
         <MetricCard
           value={metrics.student_stats.low_attendance_count}
           label="Low Attendance Students"
-          gradientClass="from-[#dc2626] to-[#f87171] border border-[#dc2626] shadow-red-600/15"
-          iconColorClass="text-[#dc2626]"
+          gradientClass="from-rose-600 to-rose-400 border border-rose-600 shadow-red-600/15"
+          iconColorClass="text-rose-600"
           icon={AlertTriangle}
         />
         <MetricCard
@@ -212,8 +212,8 @@ export default function DashboardPage() {
               : `${metrics.parent_engagement?.grade || '75%'}`
           }
           label="Parent Engagement"
-          gradientClass="from-[#0ea5e9] to-[#38bdf8] border border-[#0ea5e9] shadow-sky-500/15"
-          iconColorClass="text-[#0ea5e9]"
+          gradientClass="from-sky-500 to-sky-300 border border-sky-500 shadow-sky-500/15"
+          iconColorClass="text-sky-500"
           icon={Heart}
         />
       </div>

@@ -143,7 +143,7 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
           <div className="flex items-center justify-center">
             <button
               onClick={() => onView?.(info.row.original)}
-              className="p-2 text-slate-500 hover:text-[#2e67b1] transition-colors rounded-lg hover:bg-slate-100 cursor-pointer"
+              className="p-2 text-slate-500 hover:text-brand-primary transition-colors rounded-lg hover:bg-slate-100 cursor-pointer"
               title="View Teacher Profile"
             >
               <Eye className="size-4" />
@@ -162,18 +162,18 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
   })
 
   return (
-    <div className="bg-white border border-[#d8dee8] rounded-[8px] overflow-x-auto shadow-xs">
+    <div className="bg-white border border-card-border rounded-[8px] overflow-x-auto shadow-xs">
       <table className="w-full text-left border-collapse min-w-[800px]">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr
               key={headerGroup.id}
-              className="bg-[#f9fafb] border-b border-[#d8dee8]"
+              className="bg-[#f9fafb] border-b border-card-border"
             >
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="px-4 py-3.5 text-base font-medium text-[#1e293b] font-urbanist capitalize"
+                  className="px-4 py-3.5 text-base font-medium text-slate-800 font-urbanist capitalize"
                 >
                   {header.isPlaceholder
                     ? null
@@ -186,7 +186,7 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
             </tr>
           ))}
         </thead>
-        <tbody className="divide-y divide-[#d8dee8]">
+        <tbody className="divide-y divide-card-border">
           {table.getRowModel().rows.length > 0 ? (
             table.getRowModel().rows.map((row) => (
               <tr

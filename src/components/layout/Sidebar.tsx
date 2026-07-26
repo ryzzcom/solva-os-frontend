@@ -56,7 +56,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
 
   return (
     <aside
-      className={`h-screen bg-[#f8fafc] border-r border-slate-200/80 flex flex-col justify-between transition-all duration-300 relative select-none ${
+      className={`h-screen bg-bg-page border-r border-slate-200/80 flex flex-col justify-between transition-all duration-300 relative select-none ${
         isCollapsed ? 'w-16' : 'w-56'
       }`}
     >
@@ -85,7 +85,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
           {/* Toggle Collapsed Button */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="absolute -right-3 top-1/2 -translate-y-1/2 size-6 rounded-full bg-[#2e67b1] border border-white text-white hover:bg-[#2e67b1]/90 flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer z-50"
+            className="absolute -right-3 top-1/2 -translate-y-1/2 size-6 rounded-full bg-brand-primary border border-white text-white hover:bg-brand-hover flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer z-50"
           >
             {isCollapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
           </button>
@@ -100,7 +100,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
               className={({ isActive }) =>
                 `group flex items-center h-11 px-2.5 rounded-xl font-medium text-sm transition-all relative overflow-hidden ${
                   isActive
-                    ? 'bg-[#2e67b1]/8 text-[#2e67b1]'
+                    ? 'bg-brand-primary/10 text-brand-primary'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                 }`
               }
@@ -110,7 +110,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                   {/* Icon */}
                   <item.icon
                     className={`size-5 transition-transform shrink-0 group-hover:scale-105 ${
-                      isActive ? 'text-[#2e67b1]' : 'text-slate-400 group-hover:text-slate-600'
+                      isActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-slate-600'
                     }`}
                   />
                   {/* Label */}
@@ -121,7 +121,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
                   )}
                   {/* Active Right Vertical Indicator Bar */}
                   {isActive && (
-                    <span className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#2e67b1] w-1.5 h-6 rounded-l-md" />
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 bg-brand-primary w-1.5 h-6 rounded-l-md" />
                   )}
                 </>
               )}
@@ -131,14 +131,14 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
       </div>
 
       {/* Bottom Section: Settings & Logout */}
-      <div className="p-2 border-t border-slate-200/80 space-y-1 bg-[#f8fafc]">
+      <div className="p-2 border-t border-slate-200/80 space-y-1 bg-bg-page">
         {/* Settings Link */}
         <NavLink
           to="/settings"
           className={({ isActive }) =>
             `group flex items-center h-11 px-2.5 rounded-xl font-medium text-sm transition-all relative overflow-hidden ${
               isActive
-                ? 'bg-[#2e67b1]/8 text-[#2e67b1]'
+                ? 'bg-brand-primary/10 text-brand-primary'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
             }`
           }
@@ -147,14 +147,14 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }: SidebarProps) {
             <>
               <Settings
                 className={`size-5 shrink-0 transition-transform group-hover:rotate-45 ${
-                  isActive ? 'text-[#2e67b1]' : 'text-slate-400 group-hover:text-slate-600'
+                  isActive ? 'text-brand-primary' : 'text-slate-400 group-hover:text-slate-600'
                 }`}
               />
               {!isCollapsed && (
                 <span className="ml-3 font-semibold truncate">Settings</span>
               )}
               {isActive && (
-                <span className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#2e67b1] w-1.5 h-6 rounded-l-md" />
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 bg-brand-primary w-1.5 h-6 rounded-l-md" />
               )}
             </>
           )}

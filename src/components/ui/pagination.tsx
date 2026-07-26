@@ -41,7 +41,7 @@ export const DataTablePagination: React.FC<DataTablePaginationProps> = ({
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-2">
       {/* Items count summary */}
-      <p className="text-[#334155] text-base font-normal font-sans">
+      <p className="text-slate-body text-base font-normal font-sans">
         Showing <span className="font-semibold">{currentCount}</span> of{' '}
         <span className="font-semibold">{totalCount}</span> {entityName}
       </p>
@@ -52,7 +52,7 @@ export const DataTablePagination: React.FC<DataTablePaginationProps> = ({
           type="button"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage <= 1}
-          className="bg-[#f3f4f6] disabled:opacity-50 text-[#1e293b] font-medium font-urbanist rounded-[8px] px-4 py-2 text-base hover:bg-slate-200 transition-colors disabled:cursor-not-allowed cursor-pointer"
+          className="bg-bg-neutral disabled:opacity-50 text-slate-800 font-medium font-urbanist rounded-[8px] px-4 py-2 text-base hover:bg-slate-200 transition-colors disabled:cursor-not-allowed cursor-pointer"
         >
           Previous
         </button>
@@ -76,8 +76,8 @@ export const DataTablePagination: React.FC<DataTablePaginationProps> = ({
               onClick={() => onPageChange(pageNum)}
               className={`rounded-[8px] px-4 py-2 text-base font-medium font-urbanist transition-colors cursor-pointer ${
                 isActive
-                  ? 'bg-[#2e67b1] text-white shadow-xs'
-                  : 'bg-white border border-[#e2e8f0] text-[#1e293b] hover:bg-slate-50'
+                  ? 'bg-brand-primary text-white shadow-xs'
+                  : 'bg-white border border-divider text-slate-800 hover:bg-slate-50'
               }`}
             >
               {pageNum}
@@ -89,7 +89,7 @@ export const DataTablePagination: React.FC<DataTablePaginationProps> = ({
           type="button"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage >= totalPages}
-          className="bg-[#f3f4f6] disabled:opacity-50 text-[#0f172a] font-medium font-urbanist rounded-[8px] px-4 py-2 text-base hover:bg-slate-200 transition-colors disabled:cursor-not-allowed cursor-pointer"
+          className="bg-bg-neutral disabled:opacity-50 text-navy-main font-medium font-urbanist rounded-[8px] px-4 py-2 text-base hover:bg-slate-200 transition-colors disabled:cursor-not-allowed cursor-pointer"
         >
           Next
         </button>
