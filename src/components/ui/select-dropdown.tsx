@@ -42,7 +42,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
   }, [])
 
   return (
-    <div ref={containerRef} className={`relative h-[52px] inline-block ${className}`}>
+    <div ref={containerRef} className={`relative h-[52px] w-full ${className}`}>
       {/* Trigger Button matching Form Input Fields */}
       <button
         type="button"
@@ -82,7 +82,9 @@ export const CustomSelect: React.FC<CustomSelectProps> = ({
             {!value && <Check className="size-4 text-[#2e67b1]" />}
           </div>
 
-          {options.map((option) => {
+          {options
+            .filter((opt) => opt.value !== '')
+            .map((option) => {
             const isSelected = option.value === value
             return (
               <div

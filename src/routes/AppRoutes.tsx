@@ -10,6 +10,8 @@ import StudentsPage from '@/features/students/pages/StudentsPage'
 import AddStudentPage from '@/features/students/pages/AddStudentPage'
 import StudentProfilePage from '@/features/students/pages/StudentProfilePage'
 import EditStudentPage from '@/features/students/pages/EditStudentPage'
+import TeachersPage from '@/features/teachers/pages/TeachersPage'
+import AddTeacherPage from '@/features/teachers/pages/AddTeacherPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -33,7 +35,8 @@ export const AppRoutes = () => {
           <Route path="/students/edit/:id" element={<EditStudentPage />} />
           <Route path="/students/:id" element={<StudentProfilePage />} />
 
-          <Route path="/teachers" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/teachers" element={<TeachersPage />} />
+          <Route path="/teachers/add" element={<AddTeacherPage />} />
           <Route path="/classes" element={<Navigate to="/dashboard" replace />} />
           <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />
           <Route path="/homework" element={<Navigate to="/dashboard" replace />} />
