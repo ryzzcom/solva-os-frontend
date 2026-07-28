@@ -27,6 +27,7 @@ export const useUpdateTeacher = (teacherId?: string) => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['teacher-profile-header', teacherId] })
       queryClient.invalidateQueries({ queryKey: ['teacher-profile-tab', teacherId] })
+      queryClient.invalidateQueries({ queryKey: ['teacher-schedule-tab', teacherId] })
       queryClient.invalidateQueries({ queryKey: ['teachers'] })
     },
   })

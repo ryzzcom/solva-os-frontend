@@ -35,6 +35,8 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
     )
   }
 
+  const [imgError, setImgError] = React.useState(false)
+
   const initials = headerData.full_name
     .split(' ')
     .map((n) => n[0])
@@ -55,10 +57,11 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
 
             {/* Profile Image Frame */}
             <div className="relative z-10 w-[192px] h-[240px] rounded-[8px] bg-gradient-to-br from-[#2e67b1] to-[#1e3a8a] text-white flex items-center justify-center font-bold text-4xl font-urbanist shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] overflow-hidden">
-              {headerData.profile_picture ? (
+              {headerData.profile_picture && !imgError ? (
                 <img
                   src={headerData.profile_picture}
                   alt={headerData.full_name}
+                  onError={() => setImgError(true)}
                   className="size-full object-cover"
                 />
               ) : (

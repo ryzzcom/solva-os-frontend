@@ -291,7 +291,7 @@ export default function AssignSchedulePage() {
             <span>Schedule & Timings</span>
           </div>
 
-          {/* Time Input Fields (Native HTML time inputs per user request) */}
+          {/* Time Input Fields (Native HTML time inputs with live validation) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-sm font-semibold text-slate-700 font-sans">
@@ -302,7 +302,11 @@ export default function AssignSchedulePage() {
                   type="time"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
-                  className="w-full h-12 px-4 bg-[#f8fafc] border border-[#d8dee8] rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none focus:border-[#2e67b1] focus:bg-white transition-all cursor-pointer"
+                  className={`w-full h-12 px-4 bg-[#f8fafc] border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
+                    startTime >= endTime
+                      ? 'border-rose-400 focus:border-rose-500'
+                      : 'border-[#d8dee8] focus:border-[#2e67b1] focus:bg-white'
+                  }`}
                 />
               </div>
             </div>
@@ -316,11 +320,21 @@ export default function AssignSchedulePage() {
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className="w-full h-12 px-4 bg-[#f8fafc] border border-[#d8dee8] rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none focus:border-[#2e67b1] focus:bg-white transition-all cursor-pointer"
+                  className={`w-full h-12 px-4 bg-[#f8fafc] border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
+                    startTime >= endTime
+                      ? 'border-rose-400 focus:border-rose-500'
+                      : 'border-[#d8dee8] focus:border-[#2e67b1] focus:bg-white'
+                  }`}
                 />
               </div>
             </div>
           </div>
+
+          {startTime >= endTime && (
+            <p className="text-xs text-rose-600 font-sans font-medium">
+              End time must be later than start time.
+            </p>
+          )}
 
           {/* Active Days Pills */}
           <div className="space-y-3 pt-2">

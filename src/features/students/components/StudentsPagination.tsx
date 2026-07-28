@@ -1,15 +1,9 @@
 import React from 'react'
 import { DataTablePagination } from '@/components/ui/pagination'
+import type { DataTablePaginationProps } from '@/components/ui/pagination'
 
-interface StudentsPaginationProps {
-  currentPage: number
-  totalPages: number
-  totalCount: number
-  currentCount: number
-  onPageChange: (page: number) => void
-}
+export type StudentsPaginationProps = DataTablePaginationProps
 
 export const StudentsPagination: React.FC<StudentsPaginationProps> = (props) => {
-  return <DataTablePagination {...props} entityName="students" />
+  return <DataTablePagination {...props} />
 }
-

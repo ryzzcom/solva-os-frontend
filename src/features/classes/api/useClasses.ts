@@ -1,6 +1,13 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
 
+export interface SubjectItem {
+  id?: string
+  subject_id?: string
+  name?: string
+  subject_name?: string
+}
+
 export interface BackendSectionItem {
   id?: string
   section_id?: string
@@ -9,7 +16,7 @@ export interface BackendSectionItem {
   student_count?: number
   current_students?: number
   max_capacity?: number
-  subjects?: any[]
+  subjects?: (string | SubjectItem)[]
 }
 
 export interface BackendClassItem {
@@ -33,6 +40,7 @@ export const useClassesOverview = () => {
         return []
       }
     },
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
   })
 }
 
@@ -51,5 +59,6 @@ export const useClassSections = (classId: string) => {
       }
     },
     enabled: Boolean(classId),
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
   })
 }
