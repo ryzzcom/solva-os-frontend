@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 import { Menu, X, Search, Bell, Moon, LogOut, School, User as UserIcon } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
+import { useAuthMe } from '@/features/auth/api/useAuthMe'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,15 +18,19 @@ export default function MainLayout() {
   const { user, isAuthenticated, logout } = useAuthStore()
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
+  const [logoError, setLogoError] = useState(false)
+
+  // Sync real user and school details from backend GET /auth/me
+  useAuthMe()
 
   // Redirect if not logged in
   if (!isAuthenticated || !user) {
     return <Navigate to="/login" replace />
   }
 
-  const schoolName = user.school?.name || 'Karachi Public School'
+  const schoolName = user.school?.name || 'School'
   const schoolLogo = user.school?.logo_url || null
-  const userName = (user as any)?.fullName || (user as any)?.name || (user as any)?.full_name || 'Sara Khan'
+  const userName = (user as any)?.fullName || (user as any)?.name || (user as any)?.full_name || 'Principal'
   const userAvatar = user.profile_picture_url || null
   const userRole = user.role || 'Administrator'
 
@@ -86,8 +91,13 @@ export default function MainLayout() {
             {/* School Profile Card */}
             <div className="flex items-center gap-2.5">
               <div className="size-9 bg-white border border-slate-150 rounded-xl flex items-center justify-center shadow-sm overflow-hidden p-1.5 shrink-0">
-                {schoolLogo ? (
-                  <img src={schoolLogo} alt="School Logo" className="size-full object-contain" />
+                {schoolLogo && !logoError ? (
+                  <img
+                    src={schoolLogo}
+                    alt="School Logo"
+                    className="size-full object-contain"
+                    onError={() => setLogoError(true)}
+                  />
                 ) : (
                   <div className="size-full bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 font-bold text-sm font-urbanist">
                     <School className="size-4.5" />

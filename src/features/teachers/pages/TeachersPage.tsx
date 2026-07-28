@@ -5,6 +5,7 @@ import { useTeachers } from '../api/useTeachers'
 import { TeachersFilterBar } from '../components/TeachersFilterBar'
 import { TeachersTable } from '../components/TeachersTable'
 import { TeachersPagination } from '../components/TeachersPagination'
+import { TeacherBulkUploadModal } from '../components/TeacherBulkUploadModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { Button } from '@/components/ui/button'
@@ -13,6 +14,7 @@ import { useDebounce } from '@/hooks/useDebounce'
 export default function TeachersPage() {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
+  const [isBulkUploadOpen, setIsBulkUploadOpen] = useState(false)
 
   const page = parseInt(searchParams.get('page') || '1', 10)
   const limit = parseInt(searchParams.get('limit') || '10', 10)
@@ -104,7 +106,7 @@ export default function TeachersPage() {
             Onboard Teacher
           </Button>
           <Button
-            onClick={() => console.log('Bulk import teachers')}
+            onClick={() => setIsBulkUploadOpen(true)}
             variant="outline"
             leftIcon={<Upload className="size-5 text-brand-primary" />}
           >
@@ -150,7 +152,7 @@ export default function TeachersPage() {
         <>
           <TeachersTable
             data={teachersList}
-            onView={(teacher) => console.log('View teacher profile', teacher.id)}
+            onView={(teacher) => navigate(`/teachers/${teacher.id}`)}
           />
 
           {/* 6. Pagination Bar */}
@@ -163,6 +165,12 @@ export default function TeachersPage() {
           />
         </>
       )}
+
+      {/* 7. Bulk Upload CSV Modal */}
+      <TeacherBulkUploadModal
+        isOpen={isBulkUploadOpen}
+        onClose={() => setIsBulkUploadOpen(false)}
+      />
     </div>
   )
 }

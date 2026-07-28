@@ -12,6 +12,9 @@ import StudentProfilePage from '@/features/students/pages/StudentProfilePage'
 import EditStudentPage from '@/features/students/pages/EditStudentPage'
 import TeachersPage from '@/features/teachers/pages/TeachersPage'
 import AddTeacherPage from '@/features/teachers/pages/AddTeacherPage'
+import TeacherProfilePage from '@/features/teachers/pages/TeacherProfilePage'
+import EditTeacherPage from '@/features/teachers/pages/EditTeacherPage'
+import AssignSchedulePage from '@/features/teachers/pages/AssignSchedulePage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -37,6 +40,9 @@ export const AppRoutes = () => {
 
           <Route path="/teachers" element={<TeachersPage />} />
           <Route path="/teachers/add" element={<AddTeacherPage />} />
+          <Route path="/teachers/edit/:id" element={<EditTeacherPage />} />
+          <Route path="/teachers/:id" element={<TeacherProfilePage />} />
+          <Route path="/teachers/:id/assign-schedule" element={<AssignSchedulePage />} />
           <Route path="/classes" element={<Navigate to="/dashboard" replace />} />
           <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />
           <Route path="/homework" element={<Navigate to="/dashboard" replace />} />
