@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { ChevronRight, AlertCircle, ArrowLeft, Loader2, Check } from 'lucide-react'
+import { Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
+import { PageBreadcrumb } from '@/components/ui/breadcrumb'
+import { FormAlert } from '@/components/ui/form-alert'
 import { useClassesOverview, useClassSections } from '@/features/classes/api/useClasses'
 import type { SelectOption } from '@/components/ui/select-dropdown'
 import { useCreateTeacher } from '../api/useCreateTeacher'
@@ -127,50 +128,25 @@ export default function AddTeacherPage() {
     <div className="w-full px-[32px] space-y-6 md:space-y-8 animate-in fade-in duration-300 pb-16">
       {/* 1. Breadcrumbs */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex items-center gap-2 text-base flex-wrap font-sans">
-          <span
-            onClick={() => navigate('/dashboard')}
-            className="text-slate-sub hover:underline cursor-pointer"
-          >
-            Principal Dashboard.
-          </span>
-          <ChevronRight className="size-4 text-slate-sub" />
-          <span
-            onClick={() => navigate('/teachers')}
-            className="text-slate-sub hover:underline cursor-pointer"
-          >
-            Teachers
-          </span>
-          <ChevronRight className="size-4 text-slate-sub" />
-          <span className="text-navy-main font-medium font-urbanist capitalize">
-            add teacher
-          </span>
-        </div>
+        <PageBreadcrumb
+          items={[
+            { label: 'Principal Dashboard.', href: '/dashboard' },
+            { label: 'Teachers', href: '/teachers' },
+            { label: 'Add Teacher' },
+          ]}
+        />
 
         <button
           type="button"
           onClick={() => navigate('/teachers')}
-          className="inline-flex items-center gap-2 text-sm font-medium font-urbanist text-brand-primary hover:underline cursor-pointer"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-sm font-semibold font-urbanist cursor-pointer"
         >
-          <ArrowLeft className="size-4" />
-          Back to Directory
+          <span>Back to Teachers</span>
         </button>
       </div>
 
       {/* Notices */}
-      {errorMessage && (
-        <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-xl flex items-center gap-3 animate-in fade-in duration-200">
-          <AlertCircle className="size-5 text-red-600 shrink-0" />
-          <p className="font-urbanist text-base font-medium">{errorMessage}</p>
-        </div>
-      )}
-
-      {successMessage && (
-        <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl flex items-center gap-3 animate-in fade-in duration-200">
-          <Check className="size-5 text-emerald-600 shrink-0" />
-          <p className="font-urbanist text-base font-medium">{successMessage}</p>
-        </div>
-      )}
+      <FormAlert error={errorMessage} success={successMessage} />
 
       {/* 2. Header Banner */}
       <div>

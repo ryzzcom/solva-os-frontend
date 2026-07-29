@@ -250,6 +250,9 @@ export default function AddStudentPage() {
           selectedSubjects={selectedSubjects}
           toggleSubject={toggleSubject}
           subjectsList={subjectsList}
+          onDeleteSubject={(subjToDelete) => {
+            setSelectedSubjects((prev: string[]) => prev.filter((s: string) => s !== subjToDelete))
+          }}
           showAddCustomSubject={showAddCustomSubject}
           setShowAddCustomSubject={setShowAddCustomSubject}
           newSubjectInput={newSubjectInput}

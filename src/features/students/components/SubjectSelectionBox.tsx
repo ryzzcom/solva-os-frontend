@@ -1,16 +1,30 @@
 import React from 'react'
-import { Search, Plus, Check } from 'lucide-react'
+import { Search, Plus, Check, Trash2 } from 'lucide-react'
+
+export const GRADE_1_TO_10_DEFAULT_SUBJECTS = [
+  'Mathematics',
+  'English Literature',
+  'General Science',
+  'Physics',
+  'Chemistry',
+  'Biology',
+  'Computer Science & IT',
+  'Social Studies / History',
+  'Urdu / Regional Language',
+  'Islamic Studies / Ethics',
+]
 
 interface SubjectSelectionBoxProps {
-  section: string
+  section?: string
   disabled?: boolean
   subjectSearch: string
   setSubjectSearch: (val: string) => void
   selectedSubjects: string[]
   toggleSubject: (subject: string) => void
   subjectsList: string[]
-  showAddCustomSubject: boolean
-  setShowAddCustomSubject: (val: boolean) => void
+  onDeleteSubject?: (subject: string) => void
+  showAddCustomSubject?: boolean
+  setShowAddCustomSubject?: (val: boolean) => void
   newSubjectInput: string
   setNewSubjectInput: (val: string) => void
   onAddCustomSubject: () => void
@@ -24,27 +38,33 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
   selectedSubjects,
   toggleSubject,
   subjectsList,
-  showAddCustomSubject,
-  setShowAddCustomSubject,
+  onDeleteSubject,
+  showAddCustomSubject = true,
   newSubjectInput,
   setNewSubjectInput,
   onAddCustomSubject,
 }) => {
-  const isDisabled = disabled || (!section && selectedSubjects.length === 0)
-  const filteredSubjects = subjectsList.filter((s) =>
+  const isDisabled = disabled || (section !== undefined && !section && selectedSubjects.length === 0)
+  
+  // Merge pre-loaded Grade 1-10 defaults with current subjects list and selected subjects
+  const allSubjects = Array.from(
+    new Set([...GRADE_1_TO_10_DEFAULT_SUBJECTS, ...subjectsList, ...selectedSubjects])
+  )
+
+  const filteredSubjects = allSubjects.filter((s) =>
     s.toLowerCase().includes(subjectSearch.toLowerCase())
   )
 
   return (
     <div className="space-y-2 pt-2">
-      <label className="block text-[18px] font-medium font-urbanist text-[#0f172a]">
+      <label className="block text-lg font-bold font-urbanist text-[#0f172a]">
         Subject Selection
       </label>
       <div
-        className={`border rounded-[12px] p-6 space-y-5 transition-all ${
+        className={`border rounded-2xl p-6 space-y-5 transition-all ${
           isDisabled
             ? 'bg-slate-50 border-slate-200 opacity-60 pointer-events-none select-none'
-            : 'bg-white border-[#d8dee8]'
+            : 'bg-white border-[#d8dee8] shadow-xs'
         }`}
       >
         {isDisabled && (
@@ -53,91 +73,93 @@ export const SubjectSelectionBox: React.FC<SubjectSelectionBoxProps> = ({
           </p>
         )}
 
-        {/* Inner Search Bar */}
-        <div className="relative w-full">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-5 text-[#94a3b8]" />
-          <input
-            type="text"
-            disabled={isDisabled}
-            value={subjectSearch}
-            onChange={(e) => setSubjectSearch(e.target.value)}
-            placeholder="Search Subjects..."
-            className="w-full h-[52px] bg-white border border-[#e3e7ee] rounded-[10px] pl-12 pr-4 text-base text-[#0f172a] placeholder-[#94a3b8] font-sans focus:outline-none focus:border-[#2e67b1] transition-colors disabled:bg-slate-100"
-          />
-        </div>
+        {/* Inner Search & Add Custom Subject Controls */}
+        <div className="flex flex-col sm:flex-row items-center gap-3">
+          <div className="relative w-full flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+            <input
+              type="text"
+              value={subjectSearch}
+              onChange={(e) => setSubjectSearch(e.target.value)}
+              placeholder="Search subjects..."
+              className="w-full h-11 pl-11 pr-4 bg-slate-50/80 border border-slate-200 rounded-xl text-sm font-sans focus:outline-none focus:border-[#2e67b1] focus:bg-white transition-all placeholder:text-slate-400"
+            />
+          </div>
 
-        {!isDisabled && filteredSubjects.length > 0 && (
-          <>
-            <hr className="border-[#d8dee8]" />
-
-            {/* Checkbox List */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {filteredSubjects.map((subj) => {
-                const isSelected = selectedSubjects.includes(subj)
-                return (
-                  <div
-                    key={subj}
-                    onClick={() => toggleSubject(subj)}
-                    className="flex items-center gap-3 cursor-pointer select-none group"
-                  >
-                    <div
-                      className={`size-[20px] rounded-[3px] border flex items-center justify-center transition-colors ${
-                        isSelected
-                          ? 'bg-[#2e67b1] border-[#2e67b1] text-white'
-                          : 'border-[#2e67b1] bg-white group-hover:border-[#255694]'
-                      }`}
-                    >
-                      {isSelected && <Check className="size-3.5 stroke-[3]" />}
-                    </div>
-                    <span className="font-urbanist text-[18px] font-medium text-[#0f172a] capitalize">
-                      {subj}
-                    </span>
-                  </div>
-                )
-              })}
-            </div>
-          </>
-        )}
-
-        {/* Add Custom Subject Toggle */}
-        {!isDisabled && (
-          <>
-            {showAddCustomSubject ? (
-              <div className="flex items-center gap-3 pt-2">
-                <input
-                  type="text"
-                  value={newSubjectInput}
-                  onChange={(e) => setNewSubjectInput(e.target.value)}
-                  placeholder="Enter custom subject name..."
-                  className="flex-1 h-[42px] bg-white border border-[#2e67b1] rounded-[8px] px-4 text-base font-urbanist focus:outline-none"
-                />
-                <button
-                  type="button"
-                  onClick={onAddCustomSubject}
-                  className="h-[42px] px-4 bg-[#2e67b1] hover:bg-[#255694] text-white text-base font-urbanist font-medium rounded-[8px] transition-colors"
-                >
-                  Add
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setShowAddCustomSubject(false)}
-                  className="h-[42px] px-3 border border-[#d8dee8] text-[#475569] text-base font-urbanist font-medium rounded-[8px]"
-                >
-                  Cancel
-                </button>
-              </div>
-            ) : (
+          {showAddCustomSubject && (
+            <div className="flex items-center gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                value={newSubjectInput}
+                onChange={(e) => setNewSubjectInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    onAddCustomSubject()
+                  }
+                }}
+                placeholder="Custom subject name..."
+                className="w-full sm:w-56 h-11 px-3.5 bg-[#f8fafc] border border-slate-200 rounded-xl text-sm font-sans focus:outline-none focus:border-[#2e67b1]"
+              />
               <button
                 type="button"
-                onClick={() => setShowAddCustomSubject(true)}
-                className="flex items-center gap-2 text-[#2e67b1] font-medium font-urbanist text-base hover:underline pt-1 cursor-pointer"
+                onClick={onAddCustomSubject}
+                className="h-11 px-4 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white rounded-xl text-sm font-medium font-urbanist shrink-0 cursor-pointer transition-colors flex items-center gap-1.5"
               >
                 <Plus className="size-4" />
-                Add Another Subject
+                <span>Add</span>
               </button>
-            )}
-          </>
-        )}
+            </div>
+          )}
+        </div>
+
+        {/* Subjects Checkbox Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-1">
+          {filteredSubjects.map((subj) => {
+            const isChecked = selectedSubjects.includes(subj)
+            return (
+              <div
+                key={subj}
+                className={`group flex items-center justify-between p-3 rounded-xl border transition-all select-none ${
+                  isChecked
+                    ? 'border-[#2e67b1] bg-blue-50/50 text-[#2e67b1]'
+                    : 'border-slate-200 hover:border-slate-300 text-slate-700 bg-white'
+                }`}
+              >
+                <div
+                  onClick={() => toggleSubject(subj)}
+                  className="flex items-center gap-3 flex-1 cursor-pointer"
+                >
+                  <div
+                    className={`size-5 rounded flex items-center justify-center border transition-colors shrink-0 ${
+                      isChecked
+                        ? 'bg-[#2e67b1] border-[#2e67b1] text-white'
+                        : 'border-slate-300 bg-white'
+                    }`}
+                  >
+                    {isChecked && <Check className="size-3.5 stroke-[3]" />}
+                  </div>
+                  <span className="text-sm font-medium font-sans truncate">{subj}</span>
+                </div>
+
+                {/* Delete Subject Option */}
+                {onDeleteSubject && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onDeleteSubject(subj)
+                    }}
+                    className="opacity-0 group-hover:opacity-100 text-slate-400 hover:text-rose-600 p-1.5 rounded-lg hover:bg-rose-50 transition-all cursor-pointer shrink-0"
+                    title={`Delete ${subj}`}
+                  >
+                    <Trash2 className="size-3.5" />
+                  </button>
+                )}
+              </div>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

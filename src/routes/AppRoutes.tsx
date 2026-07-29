@@ -15,6 +15,9 @@ import AddTeacherPage from '@/features/teachers/pages/AddTeacherPage'
 import TeacherProfilePage from '@/features/teachers/pages/TeacherProfilePage'
 import EditTeacherPage from '@/features/teachers/pages/EditTeacherPage'
 import AssignSchedulePage from '@/features/teachers/pages/AssignSchedulePage'
+import ClassesPage from '@/features/classes/pages/ClassesPage'
+import AddClassPage from '@/features/classes/pages/AddClassPage'
+import EditClassPage from '@/features/classes/pages/EditClassPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -43,7 +46,9 @@ export const AppRoutes = () => {
           <Route path="/teachers/edit/:id" element={<EditTeacherPage />} />
           <Route path="/teachers/:id" element={<TeacherProfilePage />} />
           <Route path="/teachers/:id/assign-schedule" element={<AssignSchedulePage />} />
-          <Route path="/classes" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/classes" element={<ClassesPage />} />
+          <Route path="/classes/add" element={<AddClassPage />} />
+          <Route path="/classes/edit/:id" element={<EditClassPage />} />
           <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />
           <Route path="/homework" element={<Navigate to="/dashboard" replace />} />
           <Route path="/holidays" element={<Navigate to="/dashboard" replace />} />
