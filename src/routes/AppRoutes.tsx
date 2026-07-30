@@ -18,6 +18,10 @@ import AssignSchedulePage from '@/features/teachers/pages/AssignSchedulePage'
 import ClassesPage from '@/features/classes/pages/ClassesPage'
 import AddClassPage from '@/features/classes/pages/AddClassPage'
 import EditClassPage from '@/features/classes/pages/EditClassPage'
+import ClassSectionsPage from '@/features/classes/sections/pages/ClassSectionsPage'
+import AddSectionPage from '@/features/classes/sections/pages/AddSectionPage'
+import EditSectionPage from '@/features/classes/sections/pages/EditSectionPage'
+import SectionDetailPage from '@/features/classes/sections/pages/SectionDetailPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -49,6 +53,11 @@ export const AppRoutes = () => {
           <Route path="/classes" element={<ClassesPage />} />
           <Route path="/classes/add" element={<AddClassPage />} />
           <Route path="/classes/edit/:id" element={<EditClassPage />} />
+          <Route path="/classes/:id/sections" element={<ClassSectionsPage />} />
+          <Route path="/classes/:id/sections/add" element={<AddSectionPage />} />
+          <Route path="/classes/:classId/sections/edit/:sectionId" element={<EditSectionPage />} />
+          <Route path="/classes/sections/edit/:sectionId" element={<EditSectionPage />} />
+          <Route path="/classes/sections/:sectionId" element={<SectionDetailPage />} />
           <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />
           <Route path="/homework" element={<Navigate to="/dashboard" replace />} />
           <Route path="/holidays" element={<Navigate to="/dashboard" replace />} />
