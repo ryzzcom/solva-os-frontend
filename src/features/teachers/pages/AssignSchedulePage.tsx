@@ -190,7 +190,7 @@ export default function AssignSchedulePage() {
             >
               <ArrowLeft className="size-5" />
             </button>
-            <h1 className="text-2xl md:text-3xl font-semibold text-[#0f172a] font-urbanist leading-[40px]">
+            <h1 className="text-2xl md:text-3xl font-semibold text-navy-main font-urbanist leading-[40px]">
               Assign New Class
             </h1>
           </div>
@@ -200,7 +200,7 @@ export default function AssignSchedulePage() {
           </p>
         </div>
 
-        <div className="size-20 md:size-24 rounded-2xl bg-[#2e67b1] text-white flex items-center justify-center font-urbanist text-2xl font-bold shadow-md shrink-0 border-2 border-white">
+        <div className="size-20 md:size-24 rounded-2xl bg-brand-primary text-white flex items-center justify-center font-urbanist text-2xl font-bold shadow-md shrink-0 border-2 border-white">
           <BookOpen className="size-10 text-white" />
         </div>
       </div>
@@ -224,9 +224,9 @@ export default function AssignSchedulePage() {
         )}
 
         {/* Card 1: Class Details */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
-          <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
-            <BookOpen className="size-5 text-[#2e67b1]" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
+            <BookOpen className="size-5 text-brand-primary" />
             <span>Class Details</span>
           </div>
 
@@ -264,7 +264,7 @@ export default function AssignSchedulePage() {
             <label className="text-sm font-semibold text-slate-700 font-sans flex items-center justify-between">
               <span>Academic Subject <span className="text-red-500">*</span></span>
               {selectedSectionId && rawSectionSubjects.length > 0 && (
-                <span className="text-xs text-[#2e67b1] font-normal">
+                <span className="text-xs text-brand-primary font-normal">
                   ({rawSectionSubjects.length} subject(s) in this section)
                 </span>
               )}
@@ -285,9 +285,9 @@ export default function AssignSchedulePage() {
         </div>
 
         {/* Card 2: Schedule & Timings */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
-          <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
-            <Clock className="size-5 text-[#2e67b1]" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-sm">
+          <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
+            <Clock className="size-5 text-brand-primary" />
             <span>Schedule & Timings</span>
           </div>
 
@@ -302,10 +302,10 @@ export default function AssignSchedulePage() {
                   type="time"
                   value={startTime}
                   onChange={(e) => setStartTime(e.target.value)}
-                  className={`w-full h-12 px-4 bg-[#f8fafc] border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
+                  className={`w-full h-12 px-4 bg-slate-50 border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
                     startTime >= endTime
                       ? 'border-rose-400 focus:border-rose-500'
-                      : 'border-[#d8dee8] focus:border-[#2e67b1] focus:bg-white'
+                      : 'border-card-border focus:border-brand-primary focus:bg-white'
                   }`}
                 />
               </div>
@@ -320,10 +320,10 @@ export default function AssignSchedulePage() {
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  className={`w-full h-12 px-4 bg-[#f8fafc] border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
+                  className={`w-full h-12 px-4 bg-slate-50 border rounded-xl text-base text-slate-800 font-sans font-medium focus:outline-none transition-all cursor-pointer ${
                     startTime >= endTime
                       ? 'border-rose-400 focus:border-rose-500'
-                      : 'border-[#d8dee8] focus:border-[#2e67b1] focus:bg-white'
+                      : 'border-card-border focus:border-brand-primary focus:bg-white'
                   }`}
                 />
               </div>
@@ -340,7 +340,7 @@ export default function AssignSchedulePage() {
           <div className="space-y-3 pt-2">
             <label className="text-sm font-semibold text-slate-700 font-sans flex items-center justify-between">
               <span>Active Teaching Days <span className="text-red-500">*</span></span>
-              <span className="text-[#2e67b1] font-medium">{selectedDays.length} selected</span>
+              <span className="text-brand-primary font-medium">{selectedDays.length} selected</span>
             </label>
 
             <div className="flex flex-wrap gap-3">
@@ -353,8 +353,8 @@ export default function AssignSchedulePage() {
                     onClick={() => toggleDay(dayObj.label)}
                     className={`px-5 py-2.5 rounded-xl text-sm font-medium font-urbanist transition-all cursor-pointer flex items-center gap-2 border ${
                       isSelected
-                        ? 'bg-[#2e67b1] text-white border-[#2e67b1] shadow-sm scale-105'
-                        : 'bg-white text-slate-600 border-slate-250 hover:border-[#2e67b1] hover:bg-blue-50/50'
+                        ? 'bg-brand-primary text-white border-brand-primary shadow-sm scale-105'
+                        : 'bg-white text-slate-600 border-slate-200 hover:border-brand-primary hover:bg-blue-50/50'
                     }`}
                   >
                     {isSelected && <Check className="size-4 stroke-[2.5]" />}
@@ -379,7 +379,7 @@ export default function AssignSchedulePage() {
           <button
             type="submit"
             disabled={assignScheduleMutation.isPending}
-            className="w-full sm:w-auto h-13 px-8 rounded-xl bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white text-base font-medium font-urbanist transition-colors shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full sm:w-auto h-13 px-8 rounded-xl bg-brand-primary hover:bg-brand-hover text-white text-base font-medium font-urbanist transition-colors shadow-md cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {assignScheduleMutation.isPending ? (
               <>

@@ -11,6 +11,7 @@ import {
   AlertCircle,
   FileCheck2,
 } from 'lucide-react'
+import { HasRole } from '@/components/auth/HasRole'
 import { useLeaveRequestsList, useUpdateLeaveStatus } from '../api/useLeaveRequests'
 import type { LeaveRequestItem } from '../types/attendance.types'
 
@@ -216,35 +217,37 @@ export const LeaveRequestsManagerPage: React.FC = () => {
 
                 {/* Card Action Row (For PENDING status) */}
                 {isPending && (
-                  <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
-                    <button
-                      type="button"
-                      disabled={updateStatusMutation.isPending}
-                      onClick={() => handleUpdateStatus(item.id, 'APPROVED')}
-                      className="flex-1 py-2.5 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-xs transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
-                    >
-                      {updateStatusMutation.isPending ? (
-                        <Loader2 className="size-4 animate-spin" />
-                      ) : (
-                        <Check className="size-4 stroke-[2.5]" />
-                      )}
-                      <span>APPROVE</span>
-                    </button>
+                  <HasRole allowedRoles={['SUPER_ADMIN', 'PRINCIPAL']}>
+                    <div className="flex items-center gap-3 pt-3 border-t border-slate-100">
+                      <button
+                        type="button"
+                        disabled={updateStatusMutation.isPending}
+                        onClick={() => handleUpdateStatus(item.id, 'APPROVED')}
+                        className="flex-1 py-2.5 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-xs transition-all shadow-xs cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                      >
+                        {updateStatusMutation.isPending ? (
+                          <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                          <Check className="size-4 stroke-[2.5]" />
+                        )}
+                        <span>APPROVE</span>
+                      </button>
 
-                    <button
-                      type="button"
-                      disabled={updateStatusMutation.isPending}
-                      onClick={() => handleUpdateStatus(item.id, 'REJECTED')}
-                      className="flex-1 py-2.5 bg-white border border-brand-primary text-brand-primary hover:bg-brand-soft rounded-xl font-urbanist font-medium text-xs transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
-                    >
-                      {updateStatusMutation.isPending ? (
-                        <Loader2 className="size-4 animate-spin" />
-                      ) : (
-                        <X className="size-4 stroke-[2.5]" />
-                      )}
-                      <span>Reject</span>
-                    </button>
-                  </div>
+                      <button
+                        type="button"
+                        disabled={updateStatusMutation.isPending}
+                        onClick={() => handleUpdateStatus(item.id, 'REJECTED')}
+                        className="flex-1 py-2.5 bg-white border border-brand-primary text-brand-primary hover:bg-brand-soft rounded-xl font-urbanist font-medium text-xs transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50"
+                      >
+                        {updateStatusMutation.isPending ? (
+                          <Loader2 className="size-4 animate-spin" />
+                        ) : (
+                          <X className="size-4 stroke-[2.5]" />
+                        )}
+                        <span>Reject</span>
+                      </button>
+                    </div>
+                  </HasRole>
                 )}
               </div>
             )

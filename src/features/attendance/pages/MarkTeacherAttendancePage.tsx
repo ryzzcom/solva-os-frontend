@@ -12,6 +12,7 @@ import {
   AlertCircle,
   UserCheck,
 } from 'lucide-react'
+import { HasRole } from '@/components/auth/HasRole'
 import {
   useTeachersAttendanceList,
   useMarkTeacherAttendance,
@@ -100,19 +101,21 @@ export const MarkTeacherAttendancePage: React.FC = () => {
             </div>
 
             {/* Mark All Present Primary Action Button */}
-            <button
-              type="button"
-              disabled={bulkMarkMutation.isPending || isLoading}
-              onClick={handleBulkMarkPresent}
-              className="px-5 py-2.5 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-xs md:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-2 disabled:opacity-50 shrink-0"
-            >
-              {bulkMarkMutation.isPending ? (
-                <Loader2 className="size-4 animate-spin" />
-              ) : (
-                <CheckCheck className="size-4 stroke-[2.5]" />
-              )}
-              <span>Mark All Present</span>
-            </button>
+            <HasRole allowedRoles={['SUPER_ADMIN', 'PRINCIPAL']}>
+              <button
+                type="button"
+                disabled={bulkMarkMutation.isPending || isLoading}
+                onClick={handleBulkMarkPresent}
+                className="px-5 py-2.5 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-xs md:text-sm transition-all shadow-xs cursor-pointer flex items-center gap-2 disabled:opacity-50 shrink-0"
+              >
+                {bulkMarkMutation.isPending ? (
+                  <Loader2 className="size-4 animate-spin" />
+                ) : (
+                  <CheckCheck className="size-4 stroke-[2.5]" />
+                )}
+                <span>Mark All Present</span>
+              </button>
+            </HasRole>
           </div>
         </div>
       </div>
