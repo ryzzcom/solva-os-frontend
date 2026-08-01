@@ -30,6 +30,8 @@ import HomeworkOverviewPage from '@/features/homework/pages/HomeworkOverviewPage
 import HomeworkDetailsPage from '@/features/homework/pages/HomeworkDetailsPage'
 import HolidaysPage from '@/features/holidays/pages/HolidaysPage'
 import AddHolidayPage from '@/features/holidays/pages/AddHolidayPage'
+import PtmManagementPage from '@/features/ptm/pages/PtmManagementPage'
+import SchedulePtmPage from '@/features/ptm/pages/SchedulePtmPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -77,7 +79,8 @@ export const AppRoutes = () => {
           <Route path="/exams" element={<Navigate to="/dashboard" replace />} />
           <Route path="/fees" element={<Navigate to="/dashboard" replace />} />
           <Route path="/announcements" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/ptm" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/ptm" element={<PtmManagementPage />} />
+          <Route path="/ptm/schedule" element={<SchedulePtmPage />} />
           <Route path="/notifications" element={<Navigate to="/dashboard" replace />} />
           <Route path="/reports" element={<Navigate to="/dashboard" replace />} />
           <Route path="/settings" element={<Navigate to="/dashboard" replace />} />

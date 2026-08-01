@@ -1,0 +1,17 @@
+import { useQuery } from '@tanstack/react-query'
+import { axiosInstance } from '@/lib/axios'
+import type { PtmItem } from '../types/ptm.types'
+
+export const usePtmDetails = (ptmId?: string | null) => {
+  return useQuery({
+    queryKey: ['ptm-details', ptmId],
+    queryFn: async () => {
+      if (!ptmId) throw new Error('PTM ID is required')
+      const response = await axiosInstance.get(`/ptm/${ptmId}`)
+      const payload = response.data?.data || response.data
+      return payload as PtmItem
+    },
+    enabled: Boolean(ptmId),
+    staleTime: 30 * 1000,
+  })
+}
