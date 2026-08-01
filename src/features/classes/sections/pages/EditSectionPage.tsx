@@ -67,7 +67,7 @@ export default function EditSectionPage() {
     if (!teacherId || teacherId === currentTeacherId) return null
     const teacherObj = teacherList.find((t) => t.id === teacherId)
     if (teacherObj?.assigned_classes && teacherObj.assigned_classes.length > 0) {
-      return `This teacher is already assigned to another class section (${teacherObj.assigned_classes.join(', ')}).`
+      return `This teacher is already assigned to another class section (${teacherObj.assigned_classes.join(', ')}). Assigning them here will transfer their class teacher access and automatically unassign them from their previous section.`
     }
     return null
   }

@@ -10,18 +10,29 @@ import {
   AlertCircle,
   ArrowLeft,
   GraduationCap,
+  Eye,
+  ArrowRightLeft,
 } from 'lucide-react'
 import { PageBreadcrumb } from '@/components/ui/breadcrumb'
 import { KpiStatCard } from '@/components/ui/kpi-card'
 import { AttendanceStatusBadge } from '@/components/ui/status-badge'
 import { useSectionDetailsFull } from '../api/useSectionDetailsFull'
 import type { SectionStudentItem } from '../api/useSectionDetailsFull'
+import { AssignTeacherModal } from '../components/AssignTeacherModal'
+import { MoveStudentModal } from '@/features/students/components/MoveStudentModal'
 
 export default function SectionDetailPage() {
   const navigate = useNavigate()
   const { sectionId } = useParams<{ sectionId: string }>()
 
   const { data: sectionData, isLoading, isError } = useSectionDetailsFull(sectionId)
+
+  // Assign Teacher Modal State
+  const [assignTeacherModalOpen, setAssignTeacherModalOpen] = useState(false)
+
+  // Move Student Modal State
+  const [moveModalOpen, setMoveModalOpen] = useState(false)
+  const [selectedStudentForMove, setSelectedStudentForMove] = useState<SectionStudentItem | null>(null)
 
   // Search & Filter State
   const [searchTerm, setSearchTerm] = useState('')
@@ -150,18 +161,28 @@ export default function SectionDetailPage() {
           {/* Right Header Actions & Class Teacher Card */}
           <div className="flex items-center gap-4 shrink-0 flex-wrap">
             {/* Class Teacher Info Box */}
-            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center gap-3 backdrop-blur-xs">
-              <div className="size-11 rounded-xl bg-white/20 text-white font-bold text-lg flex items-center justify-center font-urbanist shrink-0">
-                {headerInfo.class_teacher?.name
-                  ? headerInfo.class_teacher.name.charAt(0)
-                  : 'T'}
+            <div className="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center justify-between gap-4 backdrop-blur-xs">
+              <div className="flex items-center gap-3">
+                <div className="size-11 rounded-xl bg-white/20 text-white font-bold text-lg flex items-center justify-center font-urbanist shrink-0">
+                  {headerInfo.class_teacher?.name
+                    ? headerInfo.class_teacher.name.charAt(0)
+                    : 'T'}
+                </div>
+                <div className="space-y-0.5">
+                  <span className="text-xs text-blue-200 font-sans block">Class Teacher</span>
+                  <span className="text-sm font-bold font-urbanist text-white block max-w-[150px] truncate">
+                    {headerInfo.class_teacher?.name || 'Not Assigned'}
+                  </span>
+                </div>
               </div>
-              <div className="space-y-0.5">
-                <span className="text-xs text-blue-200 font-sans block">Class Teacher</span>
-                <span className="text-sm font-bold font-urbanist text-white block max-w-[150px] truncate">
-                  {headerInfo.class_teacher?.name || 'Not Assigned'}
-                </span>
-              </div>
+
+              <button
+                type="button"
+                onClick={() => setAssignTeacherModalOpen(true)}
+                className="text-xs font-bold text-blue-200 hover:text-white hover:underline font-urbanist cursor-pointer shrink-0 ml-2"
+              >
+                {headerInfo.class_teacher?.name ? 'Change' : 'Assign'}
+              </button>
             </div>
 
             {/* Edit Section Button */}
@@ -292,61 +313,130 @@ export default function SectionDetailPage() {
                 <th className="py-3.5 px-4">Registration ID</th>
                 <th className="py-3.5 px-4">Today's Status</th>
                 <th className="py-3.5 px-4">Monthly Rate</th>
+                <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 text-sm">
               {filteredStudents.length === 0 ? (
                 <tr>
-                  <td colSpan={4} className="py-8 text-center text-slate-500 font-medium">
+                  <td colSpan={5} className="py-8 text-center text-slate-500 font-medium">
                     No students found matching your criteria.
                   </td>
                 </tr>
               ) : (
-                filteredStudents.map((student: SectionStudentItem, idx: number) => (
-                  <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
-                    {/* Student Name */}
-                    <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-3">
-                        <div className="size-9 rounded-full bg-[#e6effa] text-[#2e67b1] font-bold text-sm flex items-center justify-center font-urbanist shrink-0">
-                          {student.student_name ? student.student_name.charAt(0) : 'S'}
+                filteredStudents.map((student: SectionStudentItem, idx: number) => {
+                  const targetStudentId = student.student_id || student.id
+
+                  return (
+                    <tr key={idx} className="hover:bg-slate-50/50 transition-colors">
+                      {/* Student Name */}
+                      <td className="py-3.5 px-4">
+                        <div
+                          onClick={() =>
+                            targetStudentId
+                              ? navigate(`/students/${targetStudentId}`)
+                              : navigate('/students')
+                          }
+                          className="flex items-center gap-3 cursor-pointer group/st"
+                        >
+                          <div className="size-9 rounded-full bg-[#e6effa] text-[#2e67b1] font-bold text-sm flex items-center justify-center font-urbanist shrink-0 group-hover/st:bg-[#2e67b1] group-hover/st:text-white transition-colors">
+                            {student.student_name ? student.student_name.charAt(0) : 'S'}
+                          </div>
+                          <span className="font-semibold text-slate-900 font-urbanist group-hover/st:text-[#2e67b1] transition-colors">
+                            {student.student_name}
+                          </span>
                         </div>
-                        <span className="font-semibold text-slate-900 font-urbanist">
-                          {student.student_name}
-                        </span>
-                      </div>
-                    </td>
+                      </td>
 
-                    {/* Registration ID */}
-                    <td className="py-3.5 px-4 font-mono text-xs text-slate-600">
-                      {student.registration_id}
-                    </td>
+                      {/* Registration ID */}
+                      <td className="py-3.5 px-4 font-mono text-xs text-slate-600">
+                        {student.registration_id}
+                      </td>
 
-                    {/* Today's Status */}
-                    <td className="py-3.5 px-4">
-                      <AttendanceStatusBadge status={student.today_status} />
-                    </td>
+                      {/* Today's Status */}
+                      <td className="py-3.5 px-4">
+                        <AttendanceStatusBadge status={student.today_status} />
+                      </td>
 
-                    {/* Monthly Rate */}
-                    <td className="py-3.5 px-4">
-                      <div className="flex items-center gap-3 max-w-xs">
-                        <span className="font-bold text-xs font-urbanist text-slate-800 w-12">
-                          {student.monthly_attendance_avg}%
-                        </span>
-                        <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-[#2e67b1] rounded-full"
-                            style={{ width: `${Math.min(100, student.monthly_attendance_avg)}%` }}
-                          />
+                      {/* Monthly Rate */}
+                      <td className="py-3.5 px-4">
+                        <div className="flex items-center gap-3 max-w-xs">
+                          <span className="font-bold text-xs font-urbanist text-slate-800 w-12">
+                            {student.monthly_attendance_avg}%
+                          </span>
+                          <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-[#2e67b1] rounded-full"
+                              style={{ width: `${Math.min(100, student.monthly_attendance_avg)}%` }}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))
+                      </td>
+
+                      {/* Action Icon Buttons */}
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          {/* View Student Profile */}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              targetStudentId
+                                ? navigate(`/students/${targetStudentId}`)
+                                : navigate('/students')
+                            }
+                            className="p-2 rounded-lg text-slate-400 hover:text-[#2e67b1] hover:bg-blue-50 transition-colors cursor-pointer"
+                            title="View Student Profile"
+                          >
+                            <Eye className="size-4" />
+                          </button>
+
+                          {/* Move Class / Section */}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedStudentForMove(student)
+                              setMoveModalOpen(true)
+                            }}
+                            className="p-2 rounded-lg text-slate-400 hover:text-amber-600 hover:bg-amber-50 transition-colors cursor-pointer"
+                            title="Move Class / Section"
+                          >
+                            <ArrowRightLeft className="size-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })
               )}
             </tbody>
           </table>
         </div>
       </div>
+
+      {/* Assign Teacher Portal Modal */}
+      <AssignTeacherModal
+        open={assignTeacherModalOpen}
+        onClose={() => setAssignTeacherModalOpen(false)}
+        sectionId={sectionId}
+        sectionName={sectionName}
+        currentTeacherId={headerInfo.class_teacher_id || headerInfo.class_teacher?.id}
+        classId={classId}
+      />
+
+      {/* Move Student Class / Section Portal Modal */}
+      <MoveStudentModal
+        open={moveModalOpen}
+        onClose={() => {
+          setMoveModalOpen(false)
+          setSelectedStudentForMove(null)
+        }}
+        studentId={selectedStudentForMove?.student_id || selectedStudentForMove?.id}
+        studentName={selectedStudentForMove?.student_name}
+        currentClassName={className}
+        currentSectionName={sectionName}
+        currentClassId={classId}
+        currentSectionId={sectionId}
+      />
     </div>
   )
 }

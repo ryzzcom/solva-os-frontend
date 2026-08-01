@@ -6,6 +6,7 @@ import { KpiStatCard } from '@/components/ui/kpi-card'
 import { useClassSectionsOverview } from '../api/useClassSectionsOverview'
 import type { SectionOverviewItem } from '../api/useClassSectionsOverview'
 import { DeleteSectionModal } from '../components/DeleteSectionModal'
+import { AssignTeacherModal } from '../components/AssignTeacherModal'
 
 export default function ClassSectionsPage() {
   const navigate = useNavigate()
@@ -16,6 +17,10 @@ export default function ClassSectionsPage() {
   // Modal State for Section Deletion
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [selectedSectionForDelete, setSelectedSectionForDelete] = useState<SectionOverviewItem | null>(null)
+
+  // Modal State for Teacher Assignment
+  const [assignTeacherModalOpen, setAssignTeacherModalOpen] = useState(false)
+  const [selectedSectionForAssignTeacher, setSelectedSectionForAssignTeacher] = useState<SectionOverviewItem | null>(null)
 
   const className = classSectionsData?.class_name || 'Grade Sections'
   const sections = classSectionsData?.sections || []
@@ -247,7 +252,11 @@ export default function ClassSectionsPage() {
 
                     <button
                       type="button"
-                      onClick={() => navigate(`/classes/${classId}/sections/edit/${sec.section_id}`)}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setSelectedSectionForAssignTeacher(sec)
+                        setAssignTeacherModalOpen(true)
+                      }}
                       className="text-xs font-semibold text-[#2e67b1] hover:underline font-urbanist cursor-pointer shrink-0"
                     >
                       {sec.class_teacher ? 'Change' : 'Assign'}
@@ -277,6 +286,25 @@ export default function ClassSectionsPage() {
         }
         className={className}
         currentStudents={selectedSectionForDelete?.current_students}
+        classId={classId}
+      />
+
+      {/* Assign Teacher Portal Modal */}
+      <AssignTeacherModal
+        open={assignTeacherModalOpen}
+        onClose={() => {
+          setAssignTeacherModalOpen(false)
+          setSelectedSectionForAssignTeacher(null)
+        }}
+        sectionId={selectedSectionForAssignTeacher?.section_id}
+        sectionName={
+          selectedSectionForAssignTeacher?.section_name
+            ? selectedSectionForAssignTeacher.section_name.startsWith('Section')
+              ? selectedSectionForAssignTeacher.section_name
+              : `Section ${selectedSectionForAssignTeacher.section_name}`
+            : 'Section'
+        }
+        currentTeacherId={selectedSectionForAssignTeacher?.class_teacher?.id}
         classId={classId}
       />
     </div>
