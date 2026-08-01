@@ -28,6 +28,8 @@ import MarkTeacherAttendancePage from '@/features/attendance/pages/MarkTeacherAt
 import LeaveRequestsManagerPage from '@/features/attendance/pages/LeaveRequestsManagerPage'
 import HomeworkOverviewPage from '@/features/homework/pages/HomeworkOverviewPage'
 import HomeworkDetailsPage from '@/features/homework/pages/HomeworkDetailsPage'
+import HolidaysPage from '@/features/holidays/pages/HolidaysPage'
+import AddHolidayPage from '@/features/holidays/pages/AddHolidayPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -70,7 +72,8 @@ export const AppRoutes = () => {
           <Route path="/attendance/sections/:sectionId" element={<SectionStudentAttendancePage />} />
           <Route path="/homework" element={<HomeworkOverviewPage />} />
           <Route path="/homework/:homeworkId" element={<HomeworkDetailsPage />} />
-          <Route path="/holidays" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/holidays" element={<HolidaysPage />} />
+          <Route path="/holidays/add" element={<AddHolidayPage />} />
           <Route path="/exams" element={<Navigate to="/dashboard" replace />} />
           <Route path="/fees" element={<Navigate to="/dashboard" replace />} />
           <Route path="/announcements" element={<Navigate to="/dashboard" replace />} />
