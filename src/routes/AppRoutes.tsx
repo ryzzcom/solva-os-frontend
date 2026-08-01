@@ -22,6 +22,10 @@ import ClassSectionsPage from '@/features/classes/sections/pages/ClassSectionsPa
 import AddSectionPage from '@/features/classes/sections/pages/AddSectionPage'
 import EditSectionPage from '@/features/classes/sections/pages/EditSectionPage'
 import SectionDetailPage from '@/features/classes/sections/pages/SectionDetailPage'
+import AttendanceOverviewPage from '@/features/attendance/pages/AttendanceOverviewPage'
+import SectionStudentAttendancePage from '@/features/attendance/pages/SectionStudentAttendancePage'
+import MarkTeacherAttendancePage from '@/features/attendance/pages/MarkTeacherAttendancePage'
+import LeaveRequestsManagerPage from '@/features/attendance/pages/LeaveRequestsManagerPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -58,7 +62,10 @@ export const AppRoutes = () => {
           <Route path="/classes/:classId/sections/edit/:sectionId" element={<EditSectionPage />} />
           <Route path="/classes/sections/edit/:sectionId" element={<EditSectionPage />} />
           <Route path="/classes/sections/:sectionId" element={<SectionDetailPage />} />
-          <Route path="/attendance" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/attendance" element={<AttendanceOverviewPage />} />
+          <Route path="/attendance/teachers" element={<MarkTeacherAttendancePage />} />
+          <Route path="/attendance/leaves" element={<LeaveRequestsManagerPage />} />
+          <Route path="/attendance/sections/:sectionId" element={<SectionStudentAttendancePage />} />
           <Route path="/homework" element={<Navigate to="/dashboard" replace />} />
           <Route path="/holidays" element={<Navigate to="/dashboard" replace />} />
           <Route path="/exams" element={<Navigate to="/dashboard" replace />} />
