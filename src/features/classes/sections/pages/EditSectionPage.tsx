@@ -140,7 +140,7 @@ export default function EditSectionPage() {
   if (isLoading) {
     return (
       <div className="w-full px-[32px] py-16 flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="size-8 text-[#2e67b1] animate-spin" />
+        <Loader2 className="size-8 text-brand-primary animate-spin" />
         <p className="text-slate-600 font-sans font-medium text-base">
           Loading section details...
         </p>
@@ -197,7 +197,7 @@ export default function EditSectionPage() {
       </div>
 
       {/* 2. Hero Header Card (Distinct Dark Navy Gradient styling for Edit) */}
-      <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-3 shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-navy-main to-brand-dark border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-3 shadow-md relative overflow-hidden">
         <div className="flex items-center justify-between flex-wrap gap-4 relative z-10">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -227,9 +227,9 @@ export default function EditSectionPage() {
         <FormAlert error={errorMessage} success={successMessage} />
 
         {/* Card 1: Section Details */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
-          <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
-            <BookOpen className="size-5 text-[#2e67b1]" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
+          <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
+            <BookOpen className="size-5 text-brand-primary" />
             <span>Section Parameters</span>
           </div>
 
@@ -244,7 +244,7 @@ export default function EditSectionPage() {
                 value={sectionName}
                 onChange={(e) => setSectionName(e.target.value)}
                 placeholder="Section Name (e.g. Section A)"
-                className="w-full h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1] transition-all"
+                className="w-full h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary transition-all"
               />
             </div>
 
@@ -282,7 +282,7 @@ export default function EditSectionPage() {
                 min={1}
                 value={maxCapacity}
                 onChange={(e) => setMaxCapacity(Math.max(1, Number(e.target.value) || 1))}
-                className="w-full md:w-48 h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                className="w-full md:w-48 h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
               />
               <div className="flex items-center gap-1.5">
                 <button
@@ -343,7 +343,7 @@ export default function EditSectionPage() {
                 <Check className="size-4" />
               )
             }
-            className="px-10 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white"
+            className="px-10 bg-brand-primary hover:bg-brand-hover text-white"
           >
             {updateSectionMutation.isPending ? 'Saving Changes...' : 'Save Changes'}
           </Button>

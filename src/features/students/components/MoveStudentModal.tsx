@@ -131,7 +131,7 @@ export const MoveStudentModal: React.FC<MoveStudentModalProps> = ({
           {/* Student Current Info Card */}
           <div className="p-4 bg-slate-50 border border-slate-200 rounded-2xl space-y-1">
             <span className="text-xs text-slate-500 font-sans block">Moving Student</span>
-            <p className="text-base font-bold font-urbanist text-[#0f172a]">
+            <p className="text-base font-bold font-urbanist text-navy-main">
               {studentName}
             </p>
             <p className="text-xs font-sans text-amber-700 font-medium">
@@ -144,20 +144,20 @@ export const MoveStudentModal: React.FC<MoveStudentModalProps> = ({
             {/* 1. Target Class Selection */}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-urbanist flex items-center gap-1.5">
-                <BookOpen className="size-3.5 text-[#2e67b1]" />
+                <BookOpen className="size-3.5 text-brand-primary" />
                 <span>Select Target Class Level</span>
               </label>
 
               {isClassesLoading ? (
                 <div className="h-11 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center gap-2 text-xs text-slate-500">
-                  <Loader2 className="size-4 animate-spin text-[#2e67b1]" />
+                  <Loader2 className="size-4 animate-spin text-brand-primary" />
                   <span>Loading class levels...</span>
                 </div>
               ) : (
                 <select
                   value={targetClassId}
                   onChange={(e) => handleClassChange(e.target.value)}
-                  className="w-full h-11 px-3.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold font-urbanist text-slate-900 focus:outline-none focus:border-[#2e67b1] cursor-pointer"
+                  className="w-full h-11 px-3.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold font-urbanist text-slate-900 focus:outline-none focus:border-brand-primary cursor-pointer"
                 >
                   <option value="">Select a class...</option>
                   {classesList.map((c) => (
@@ -172,7 +172,7 @@ export const MoveStudentModal: React.FC<MoveStudentModalProps> = ({
             {/* 2. Target Section Selection */}
             <div className="space-y-1.5">
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 font-urbanist flex items-center gap-1.5">
-                <Layers className="size-3.5 text-[#2e67b1]" />
+                <Layers className="size-3.5 text-brand-primary" />
                 <span>Select Target Section</span>
               </label>
 
@@ -182,14 +182,14 @@ export const MoveStudentModal: React.FC<MoveStudentModalProps> = ({
                 </div>
               ) : isSectionsLoading ? (
                 <div className="h-11 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-center gap-2 text-xs text-slate-500">
-                  <Loader2 className="size-4 animate-spin text-[#2e67b1]" />
+                  <Loader2 className="size-4 animate-spin text-brand-primary" />
                   <span>Loading sections...</span>
                 </div>
               ) : (
                 <select
                   value={targetSectionId}
                   onChange={(e) => setTargetSectionId(e.target.value)}
-                  className="w-full h-11 px-3.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold font-urbanist text-slate-900 focus:outline-none focus:border-[#2e67b1] cursor-pointer"
+                  className="w-full h-11 px-3.5 bg-white border border-slate-200 rounded-xl text-sm font-semibold font-urbanist text-slate-900 focus:outline-none focus:border-brand-primary cursor-pointer"
                 >
                   <option value="">Select a section...</option>
                   {sectionsList.map((sec) => {

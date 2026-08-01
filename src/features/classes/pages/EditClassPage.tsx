@@ -301,7 +301,7 @@ export default function EditClassPage() {
       </div>
 
       {/* 2. Hero Header Banner (Distinct styling for Edit Class) */}
-      <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-3 shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-navy-main to-brand-dark border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-3 shadow-md relative overflow-hidden">
         <div className="flex items-center justify-between flex-wrap gap-4 relative z-10">
           <div className="space-y-1">
             <div className="flex items-center gap-2">
@@ -331,7 +331,7 @@ export default function EditClassPage() {
         <FormAlert error={errorMessage} success={successMessage} />
 
         {/* Card 1: Class Name */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-4 shadow-xs">
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-4 shadow-xs">
           <label className="text-sm font-semibold font-sans text-slate-800 block">
             Class Name <span className="text-red-500">*</span>
           </label>
@@ -340,15 +340,15 @@ export default function EditClassPage() {
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             placeholder="Class Name (e.g. Grade 10)"
-            className="w-full h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1] transition-all"
+            className="w-full h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary transition-all"
           />
         </div>
 
         {/* Card 2: Manage Sections */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg">
-              <BookOpen className="size-5 text-[#2e67b1]" />
+            <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg">
+              <BookOpen className="size-5 text-brand-primary" />
               <span>Manage Sections & Teachers</span>
             </div>
             <span className="text-xs text-slate-500 font-sans">
@@ -364,11 +364,11 @@ export default function EditClassPage() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold font-urbanist uppercase tracking-wider text-[#2e67b1]">
+                    <span className="text-xs font-bold font-urbanist uppercase tracking-wider text-brand-primary">
                       Section #{idx + 1}
                     </span>
                     {sec.current_students !== undefined && sec.current_students > 0 && (
-                      <span className="px-2 py-0.5 bg-blue-100 text-[#2e67b1] rounded-md text-[11px] font-semibold font-sans flex items-center gap-1">
+                      <span className="px-2 py-0.5 bg-blue-100 text-brand-primary rounded-md text-[11px] font-semibold font-sans flex items-center gap-1">
                         <Users className="size-3" />
                         {sec.current_students} Student(s) Enrolled
                       </span>
@@ -398,7 +398,7 @@ export default function EditClassPage() {
                       value={sec.section_name}
                       onChange={(e) => handleSectionChange(idx, 'section_name', e.target.value)}
                       placeholder="e.g. Section A"
-                      className="w-full h-11 px-3.5 bg-white border border-[#d8dee8] rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                      className="w-full h-11 px-3.5 bg-white border border-card-border rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
                     />
                   </div>
 
@@ -442,7 +442,7 @@ export default function EditClassPage() {
                           Math.max(1, Number(e.target.value) || 1)
                         )
                       }
-                      className="w-full md:w-48 h-11 px-3.5 bg-white border border-[#d8dee8] rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                      className="w-full md:w-48 h-11 px-3.5 bg-white border border-card-border rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
                     />
                     <div className="flex items-center gap-1.5">
                       <button
@@ -469,7 +469,7 @@ export default function EditClassPage() {
           <button
             type="button"
             onClick={handleAddSection}
-            className="w-full py-3 border-2 border-dashed border-[#2e67b1]/40 hover:border-[#2e67b1] bg-blue-50/30 hover:bg-blue-50/70 text-[#2e67b1] rounded-xl font-urbanist font-semibold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="w-full py-3 border-2 border-dashed border-brand-primary/40 hover:border-brand-primary bg-blue-50/30 hover:bg-blue-50/70 text-brand-primary rounded-xl font-urbanist font-semibold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <Plus className="size-4" />
             <span>Add Another Section</span>
@@ -513,7 +513,7 @@ export default function EditClassPage() {
                 <Check className="size-4" />
               )
             }
-            className="px-10 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white"
+            className="px-10 bg-brand-primary hover:bg-brand-hover text-white"
           >
             {updateClassMutation.isPending ? 'Updating Class...' : 'Update Class'}
           </Button>

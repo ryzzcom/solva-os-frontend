@@ -217,8 +217,8 @@ export default function AddClassPage() {
       </div>
 
       {/* 2. Hero Header Banner matching Figma 736-7732 */}
-      <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-2 shadow-xs">
-        <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-[#0f172a]">
+      <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-2 shadow-xs">
+        <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-navy-main">
           Add New Section / Class
         </h1>
         <p className="text-sm font-sans text-slate-600">
@@ -232,7 +232,7 @@ export default function AddClassPage() {
         <FormAlert error={errorMessage} success={successMessage} />
 
         {/* Card 1: Class Name */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-4 shadow-xs">
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-4 shadow-xs">
           <label className="text-sm font-semibold font-sans text-slate-800 block">
             Class Name <span className="text-red-500">*</span>
           </label>
@@ -241,15 +241,15 @@ export default function AddClassPage() {
             value={className}
             onChange={(e) => setClassName(e.target.value)}
             placeholder="Class Name (e.g. Grade 10)"
-            className="w-full h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1] transition-all"
+            className="w-full h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary transition-all"
           />
         </div>
 
         {/* Card 2: Configure Sections (Dynamic List) */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
           <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-            <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg">
-              <BookOpen className="size-5 text-[#2e67b1]" />
+            <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg">
+              <BookOpen className="size-5 text-brand-primary" />
               <span>Configure Sections</span>
             </div>
             <span className="text-xs text-slate-500 font-sans">
@@ -264,7 +264,7 @@ export default function AddClassPage() {
                 className="p-5 border border-slate-200 rounded-xl bg-slate-50/50 space-y-4 relative"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold font-urbanist uppercase tracking-wider text-[#2e67b1]">
+                  <span className="text-xs font-bold font-urbanist uppercase tracking-wider text-brand-primary">
                     Section #{idx + 1}
                   </span>
                   {sections.length > 1 && (
@@ -290,7 +290,7 @@ export default function AddClassPage() {
                       value={sec.section_name}
                       onChange={(e) => handleSectionChange(idx, 'section_name', e.target.value)}
                       placeholder="e.g. Section A"
-                      className="w-full h-11 px-3.5 bg-white border border-[#d8dee8] rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                      className="w-full h-11 px-3.5 bg-white border border-card-border rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
                     />
                   </div>
 
@@ -334,7 +334,7 @@ export default function AddClassPage() {
                           Math.max(1, Number(e.target.value) || 1)
                         )
                       }
-                      className="w-full md:w-48 h-11 px-3.5 bg-white border border-[#d8dee8] rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                      className="w-full md:w-48 h-11 px-3.5 bg-white border border-card-border rounded-lg text-sm text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
                     />
                     <div className="flex items-center gap-1.5">
                       <button
@@ -361,7 +361,7 @@ export default function AddClassPage() {
           <button
             type="button"
             onClick={handleAddSection}
-            className="w-full py-3 border-2 border-dashed border-[#2e67b1]/40 hover:border-[#2e67b1] bg-blue-50/30 hover:bg-blue-50/70 text-[#2e67b1] rounded-xl font-urbanist font-semibold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
+            className="w-full py-3 border-2 border-dashed border-brand-primary/40 hover:border-brand-primary bg-blue-50/30 hover:bg-blue-50/70 text-brand-primary rounded-xl font-urbanist font-semibold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
             <Plus className="size-4" />
             <span>Add Another Section</span>
@@ -405,7 +405,7 @@ export default function AddClassPage() {
                 <Check className="size-4" />
               )
             }
-            className="px-10 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white"
+            className="px-10 bg-brand-primary hover:bg-brand-hover text-white"
           >
             {createClassMutation.isPending ? 'Creating Class...' : 'Save Class'}
           </Button>

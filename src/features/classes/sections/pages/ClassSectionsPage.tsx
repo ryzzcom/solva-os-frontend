@@ -41,7 +41,7 @@ export default function ClassSectionsPage() {
 
   // Capacity Progress Bar Color Helper
   const getCapacityColor = (percentage: number) => {
-    if (percentage >= 90) return { bar: 'bg-[#e11d48]', text: 'text-[#e11d48]' }
+    if (percentage >= 90) return { bar: 'bg-rose-600', text: 'text-rose-600' }
     if (percentage >= 70) return { bar: 'bg-amber-500', text: 'text-amber-600' }
     return { bar: 'bg-emerald-500', text: 'text-emerald-600' }
   }
@@ -49,7 +49,7 @@ export default function ClassSectionsPage() {
   if (isLoading) {
     return (
       <div className="w-full px-[32px] py-16 flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="size-8 text-[#2e67b1] animate-spin" />
+        <Loader2 className="size-8 text-brand-primary animate-spin" />
         <p className="text-slate-600 font-sans font-medium text-base">
           Loading class sections...
         </p>
@@ -101,15 +101,15 @@ export default function ClassSectionsPage() {
       </div>
 
       {/* 2. Hero Header Card matching Figma 191-5097 */}
-      <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="flex items-center gap-5">
           {/* Grade Badge */}
-          <div className="size-16 rounded-2xl bg-[#e6effa] text-[#2e67b1] font-urbanist font-bold text-2xl flex items-center justify-center shrink-0 shadow-xs">
+          <div className="size-16 rounded-2xl bg-brand-soft text-brand-primary font-urbanist font-bold text-2xl flex items-center justify-center shrink-0 shadow-xs">
             {getGradeBadge(className)}
           </div>
 
           <div className="space-y-1">
-            <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-[#0f172a]">
+            <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-navy-main">
               {className}
             </h1>
             <p className="text-sm font-sans text-slate-600 max-w-xl">
@@ -122,7 +122,7 @@ export default function ClassSectionsPage() {
         <button
           type="button"
           onClick={() => navigate(`/classes/${classId}/sections/add`)}
-          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white rounded-xl font-urbanist font-medium text-base shadow-sm hover:shadow transition-all cursor-pointer shrink-0"
+          className="flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-base shadow-sm hover:shadow transition-all cursor-pointer shrink-0"
         >
           <Plus className="size-5" />
           <span>Add Section</span>
@@ -134,19 +134,19 @@ export default function ClassSectionsPage() {
         <KpiStatCard
           label="Sections"
           value={totalSectionsCount}
-          accentColor="#2e67b1"
+          accentColor="var(--color-brand-primary)"
         />
 
         <KpiStatCard
           label="Students"
           value={totalStudentsCount}
-          accentColor="#f97316"
+          accentColor="var(--color-accent-orange)"
         />
 
         <KpiStatCard
           label="Fill Rate"
           value={`${fillRatePercentage}%`}
-          accentColor="#22c55e"
+          accentColor="var(--color-accent-green)"
         />
       </div>
 
@@ -160,7 +160,7 @@ export default function ClassSectionsPage() {
             <button
               type="button"
               onClick={() => navigate(`/classes/edit/${classId}`)}
-              className="px-5 py-2.5 bg-[#2e67b1] text-white rounded-xl text-sm font-semibold font-urbanist hover:bg-[#2e67b1]/90 transition-colors"
+              className="px-5 py-2.5 bg-brand-primary text-white rounded-xl text-sm font-semibold font-urbanist hover:bg-brand-hover transition-colors"
             >
               Configure Sections
             </button>
@@ -178,12 +178,12 @@ export default function ClassSectionsPage() {
                 <div
                   key={sec.section_id}
                   onClick={() => navigate(`/classes/sections/${sec.section_id}`)}
-                  className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer relative flex flex-col justify-between space-y-6 group"
+                  className="bg-white border border-card-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer relative flex flex-col justify-between space-y-6 group"
                 >
                   <div className="space-y-4">
                     {/* Top Row: Section Name & Action Icons */}
                     <div className="flex items-center justify-between">
-                      <h3 className="text-2xl font-bold font-urbanist text-[#0f172a] group-hover:text-[#2e67b1] transition-colors">
+                      <h3 className="text-2xl font-bold font-urbanist text-navy-main group-hover:text-brand-primary transition-colors">
                         {secDisplayName}
                       </h3>
 
@@ -194,7 +194,7 @@ export default function ClassSectionsPage() {
                             e.stopPropagation()
                             navigate(`/classes/${classId}/sections/edit/${sec.section_id}`)
                           }}
-                          className="p-2 rounded-lg text-slate-400 hover:text-[#2e67b1] hover:bg-blue-50 transition-colors"
+                          className="p-2 rounded-lg text-slate-400 hover:text-brand-primary hover:bg-blue-50 transition-colors"
                           title="Edit Section"
                         >
                           <Edit3 className="size-4" />
@@ -245,7 +245,7 @@ export default function ClassSectionsPage() {
                       <span className="text-xs text-slate-400 font-sans block">
                         Class Teacher
                       </span>
-                      <span className="text-sm font-bold font-urbanist text-[#0f172a] block truncate max-w-[180px]">
+                      <span className="text-sm font-bold font-urbanist text-navy-main block truncate max-w-[180px]">
                         {sec.class_teacher?.full_name || 'Not assigned'}
                       </span>
                     </div>
@@ -257,7 +257,7 @@ export default function ClassSectionsPage() {
                         setSelectedSectionForAssignTeacher(sec)
                         setAssignTeacherModalOpen(true)
                       }}
-                      className="text-xs font-semibold text-[#2e67b1] hover:underline font-urbanist cursor-pointer shrink-0"
+                      className="text-xs font-semibold text-brand-primary hover:underline font-urbanist cursor-pointer shrink-0"
                     >
                       {sec.class_teacher ? 'Change' : 'Assign'}
                     </button>

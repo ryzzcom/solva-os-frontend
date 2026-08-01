@@ -19,7 +19,7 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
 }) => {
   if (isLoading || !headerData) {
     return (
-      <div className="bg-white border border-[#d8dee8] rounded-[16px] p-6 animate-pulse space-y-6">
+      <div className="bg-white border border-card-border rounded-[16px] p-6 animate-pulse space-y-6">
         <div className="flex flex-col md:flex-row gap-6 items-start justify-between">
           <div className="flex gap-6 items-start">
             <div className="w-[192px] h-[240px] bg-slate-200 rounded-[8px] shrink-0" />
@@ -53,10 +53,10 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
           {/* Avatar Container with Backdrop and Floating Badge */}
           <div className="relative shrink-0 pt-4 pl-4">
             {/* Background Accent Decorative Circle */}
-            <div className="absolute top-0 left-0 size-24 bg-[#e6effa] rounded-[24px] -z-0" />
+            <div className="absolute top-0 left-0 size-24 bg-brand-soft rounded-[24px] -z-0" />
 
             {/* Profile Image Frame */}
-            <div className="relative z-10 w-[192px] h-[240px] rounded-[8px] bg-gradient-to-br from-[#2e67b1] to-[#1e3a8a] text-white flex items-center justify-center font-bold text-4xl font-urbanist shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] overflow-hidden">
+            <div className="relative z-10 w-[192px] h-[240px] rounded-[8px] bg-gradient-to-br from-brand-primary to-brand-dark text-white flex items-center justify-center font-bold text-4xl font-urbanist shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)] overflow-hidden">
               {headerData.profile_picture && !imgError ? (
                 <img
                   src={headerData.profile_picture}
@@ -70,7 +70,7 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
             </div>
 
             {/* Floating Role Badge */}
-            <div className="absolute z-20 bottom-4 -right-4 bg-[#2e67b1] text-[#dbe6ff] text-base font-urbanist font-medium px-4 py-2 rounded-[8px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] uppercase whitespace-nowrap">
+            <div className="absolute z-20 bottom-4 -right-4 bg-brand-primary text-blue-100 text-base font-urbanist font-medium px-4 py-2 rounded-[8px] shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] uppercase whitespace-nowrap">
               SENIOR FACULTY
             </div>
           </div>
@@ -79,37 +79,37 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
           <div className="space-y-2 pt-4 flex-1">
             {/* Dept Badge + ID Tag */}
             <div className="flex flex-wrap items-center gap-3">
-              <span className="px-3 py-1 bg-[#e7e8ee] text-[#1e293b] rounded-[8px] text-sm font-sans font-normal">
+              <span className="px-3 py-1 bg-slate-100 text-slate-800 rounded-[8px] text-sm font-sans font-normal">
                 {headerData.department_name || 'Humanities Dept'}
               </span>
-              <div className="flex items-center gap-1.5 text-sm text-[#334155] font-sans">
-                <CheckCircle2 className="size-3.5 text-[#2e67b1]" />
+              <div className="flex items-center gap-1.5 text-sm text-slate-600 font-sans">
+                <CheckCircle2 className="size-3.5 text-brand-primary" />
                 <span>ID: {headerData.employee_id || 'N/A'}</span>
               </div>
             </div>
 
             {/* Teacher Name Heading */}
-            <h1 className="text-2xl md:text-[32px] font-semibold text-[#0f172a] font-urbanist leading-[40px]">
+            <h1 className="text-2xl md:text-[32px] font-semibold text-navy-main font-urbanist leading-[40px]">
               {headerData.full_name}
             </h1>
 
             {/* Summary Text */}
-            <p className="text-[#334155] text-base font-sans leading-[24px] max-w-[576px] pt-1">
+            <p className="text-slate-600 text-base font-sans leading-[24px] max-w-[576px] pt-1">
               {headerData.summary}
             </p>
           </div>
         </div>
 
         {/* Right Administrative Actions Sidebar */}
-        <div className="bg-white border border-[#d8dee8] rounded-[16px] p-6 shadow-xs flex flex-col gap-3 w-full lg:w-72 shrink-0">
-          <h3 className="text-xl font-semibold text-[#0f172a] font-urbanist pb-1">
+        <div className="bg-white border border-card-border rounded-[16px] p-6 shadow-xs flex flex-col gap-3 w-full lg:w-72 shrink-0">
+          <h3 className="text-xl font-semibold text-navy-main font-urbanist pb-1">
             Administrative Actions
           </h3>
 
           <button
             type="button"
             onClick={onAssignClass}
-            className="w-full h-[52px] bg-[#2e67b1] hover:bg-[#2e67b1]/95 text-white text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+            className="w-full h-[52px] bg-brand-primary hover:bg-brand-hover text-white text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
           >
             <Plus className="size-5" />
             <span>Assign New Class</span>
@@ -118,7 +118,7 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
           <button
             type="button"
             onClick={onEditProfile}
-            className="w-full h-[52px] border border-[#2e67b1] text-[#2e67b1] hover:bg-blue-50/70 text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+            className="w-full h-[52px] border border-brand-primary text-brand-primary hover:bg-blue-50/70 text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
           >
             <Edit3 className="size-5" />
             <span>Edit Profile</span>
@@ -127,7 +127,7 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
           <button
             type="button"
             onClick={onDeleteAccount}
-            className="w-full h-[52px] text-[#dc2626] hover:bg-rose-50/70 text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
+            className="w-full h-[52px] text-rose-600 hover:bg-rose-50/70 text-[18px] font-medium font-urbanist rounded-[8px] flex items-center justify-center gap-2 cursor-pointer transition-colors"
           >
             <Trash2 className="size-5" />
             <span>Delete Account</span>
@@ -138,33 +138,33 @@ export const TeacherProfileHeader: React.FC<TeacherProfileHeaderProps> = ({
       {/* 2. Quick Info KPI Cards Row */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Card 1: Class Teacher */}
-        <div className="bg-[#f3f3fa] border border-[#d8dee8] rounded-[8px] p-4 flex flex-col gap-1">
-          <span className="text-[#1e293b] text-base font-sans font-normal">Class Teacher :</span>
-          <p className="text-[18px] font-medium text-[#1e293b] font-urbanist capitalize truncate">
+        <div className="bg-slate-50 border border-card-border rounded-[8px] p-4 flex flex-col gap-1">
+          <span className="text-slate-700 text-base font-sans font-normal">Class Teacher :</span>
+          <p className="text-[18px] font-medium text-slate-900 font-urbanist capitalize truncate">
             {headerData.kpi_class_leader || 'N/A'}
           </p>
         </div>
 
         {/* Card 2: Email Address */}
-        <div className="bg-[#f3f3fa] border border-[#d8dee8] rounded-[8px] p-4 flex flex-col gap-1">
-          <span className="text-[#334155] text-base font-sans font-normal">Email Address</span>
-          <p className="text-[18px] font-medium text-[#1e293b] font-urbanist truncate" title={headerData.email}>
+        <div className="bg-slate-50 border border-card-border rounded-[8px] p-4 flex flex-col gap-1">
+          <span className="text-slate-600 text-base font-sans font-normal">Email Address</span>
+          <p className="text-[18px] font-medium text-slate-900 font-urbanist truncate" title={headerData.email}>
             {headerData.email || 'N/A'}
           </p>
         </div>
 
         {/* Card 3: Phone Number */}
-        <div className="bg-[#f3f3fa] border border-[#d8dee8] rounded-[8px] p-4 flex flex-col gap-1">
-          <span className="text-[#334155] text-base font-sans font-normal">Phone Number</span>
-          <p className="text-[18px] font-medium text-[#1e293b] font-urbanist truncate">
+        <div className="bg-slate-50 border border-card-border rounded-[8px] p-4 flex flex-col gap-1">
+          <span className="text-slate-600 text-base font-sans font-normal">Phone Number</span>
+          <p className="text-[18px] font-medium text-slate-900 font-urbanist truncate">
             {headerData.phone_number || 'N/A'}
           </p>
         </div>
 
         {/* Card 4: Avg Student Rating */}
-        <div className="bg-[#f3f3fa] border border-[#d8dee8] rounded-[8px] p-4 flex flex-col gap-1">
-          <span className="text-[#334155] text-base font-sans font-normal">Avg. Student Rating</span>
-          <p className="text-[18px] font-medium text-[#1e293b] font-urbanist truncate">
+        <div className="bg-slate-50 border border-card-border rounded-[8px] p-4 flex flex-col gap-1">
+          <span className="text-slate-600 text-base font-sans font-normal">Avg. Student Rating</span>
+          <p className="text-[18px] font-medium text-slate-900 font-urbanist truncate">
             {headerData.kpi_avg_student_attendance || '98.4%'}
           </p>
         </div>

@@ -225,7 +225,7 @@ export default function DashboardPage() {
         <div className="bg-white border border-slate-100 rounded-[28px] p-6 shadow-xl shadow-slate-150/10 relative overflow-hidden flex flex-col justify-between">
           <div className="mb-4">
             <h3 className="text-lg font-bold text-slate-800 font-urbanist flex items-center gap-2">
-              <TrendingUp className="size-5 text-[#2e67b1]" />
+              <TrendingUp className="size-5 text-brand-primary" />
               Monthly Attendance Overview
             </h3>
             <p className="text-xs text-slate-400 font-semibold uppercase mt-0.5">Jan - Jun Analytics</p>
@@ -240,17 +240,17 @@ export default function DashboardPage() {
               className="min-w-[500px]"
             >
               {/* Grids and Axis lines */}
-              <line x1="0" y1="0" x2={chartWidth} y2="0" stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={chartHeight * 0.25} x2={chartWidth} y2={chartHeight * 0.25} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={chartHeight * 0.5} x2={chartWidth} y2={chartHeight * 0.5} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={chartHeight * 0.75} x2={chartWidth} y2={chartHeight * 0.75} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={chartHeight} x2={chartWidth} y2={chartHeight} stroke="#e2e8f0" strokeWidth="1.5" />
+              <line x1="0" y1="0" x2={chartWidth} y2="0" stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={chartHeight * 0.25} x2={chartWidth} y2={chartHeight * 0.25} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={chartHeight * 0.5} x2={chartWidth} y2={chartHeight * 0.5} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={chartHeight * 0.75} x2={chartWidth} y2={chartHeight * 0.75} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={chartHeight} x2={chartWidth} y2={chartHeight} stroke="var(--color-divider)" strokeWidth="1.5" />
 
               {/* Area Gradient Fill */}
               <defs>
                 <linearGradient id="attendanceGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#2e67b1" stopOpacity="0.22" />
-                  <stop offset="100%" stopColor="#2e67b1" stopOpacity="0.0" />
+                  <stop offset="0%" stopColor="var(--color-brand-primary)" stopOpacity="0.22" />
+                  <stop offset="100%" stopColor="var(--color-brand-primary)" stopOpacity="0.0" />
                 </linearGradient>
               </defs>
 
@@ -262,7 +262,7 @@ export default function DashboardPage() {
                   {/* Trend Path */}
                   <polyline
                     fill="none"
-                    stroke="#2e67b1"
+                    stroke="var(--color-brand-primary)"
                     strokeWidth="3.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -280,7 +280,7 @@ export default function DashboardPage() {
                           cx={x}
                           cy={y}
                           r="5.5"
-                          className="fill-white stroke-[#2e67b1] stroke-[3px] shadow-sm hover:r-7 transition-all"
+                          className="fill-white stroke-brand-primary stroke-[3px] shadow-sm hover:r-7 transition-all"
                         />
                         <text
                           x={x}
@@ -325,11 +325,11 @@ export default function DashboardPage() {
               className="min-w-[500px]"
             >
               {/* Grids and Axis lines */}
-              <line x1="0" y1="0" x2={barChartWidth} y2="0" stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={barChartHeight * 0.25} x2={barChartWidth} y2={barChartHeight * 0.25} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={barChartHeight * 0.5} x2={barChartWidth} y2={barChartHeight * 0.5} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={barChartHeight * 0.75} x2={barChartWidth} y2={barChartHeight * 0.75} stroke="#f1f5f9" strokeWidth="1" />
-              <line x1="0" y1={barChartHeight} x2={barChartWidth} y2={barChartHeight} stroke="#e2e8f0" strokeWidth="1.5" />
+              <line x1="0" y1="0" x2={barChartWidth} y2="0" stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={barChartHeight * 0.25} x2={barChartWidth} y2={barChartHeight * 0.25} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={barChartHeight * 0.5} x2={barChartWidth} y2={barChartHeight * 0.5} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={barChartHeight * 0.75} x2={barChartWidth} y2={barChartHeight * 0.75} stroke="var(--color-grid-line)" strokeWidth="1" />
+              <line x1="0" y1={barChartHeight} x2={barChartWidth} y2={barChartHeight} stroke="var(--color-divider)" strokeWidth="1.5" />
 
               {/* Draw Grouped Bars */}
               {feeStatus.map((item, idx) => {
@@ -349,7 +349,7 @@ export default function DashboardPage() {
                       width="16"
                       height={colH1}
                       rx="4"
-                      className="fill-[#2e67b1] hover:fill-[#2e67b1]/90 transition-colors"
+                      className="fill-brand-primary hover:fill-brand-primary/90 transition-colors"
                     />
 
                     {/* Pending Bar (Light Slate/Lavender) */}
@@ -386,7 +386,7 @@ export default function DashboardPage() {
 
           <div className="flex items-center justify-center gap-6 mt-4.5 border-t border-slate-50 pt-3">
             <div className="flex items-center gap-2">
-              <span className="size-3.5 rounded-full bg-[#2e67b1]" />
+              <span className="size-3.5 rounded-full bg-brand-primary" />
               <span className="text-xs font-bold text-slate-655 font-urbanist">Collected Fees</span>
             </div>
             <div className="flex items-center gap-2">
@@ -410,7 +410,7 @@ export default function DashboardPage() {
             {metrics.recent_activities.map((act, idx) => (
               <div key={idx} className="relative animate-in slide-in-from-left-5 duration-300" style={{ animationDelay: `${idx * 100}ms` }}>
                 {/* Visual timeline circle node */}
-                <span className="absolute -left-[33px] top-1.5 size-4 rounded-full bg-[#2e67b1] border-[3px] border-white shadow-md ring-2 ring-blue-100" />
+                <span className="absolute -left-[33px] top-1.5 size-4 rounded-full bg-brand-primary border-[3px] border-white shadow-md ring-2 ring-blue-100" />
                 
                 <div className="space-y-1">
                   <p className="text-sm font-bold text-slate-800 font-urbanist leading-tight">

@@ -14,12 +14,12 @@ export const KpiStatCard: React.FC<KpiStatCardProps> = ({
   label,
   value,
   subValue,
-  accentColor = '#2e67b1',
+  accentColor = 'var(--color-brand-primary)',
   icon: Icon,
   progressPercentage,
 }) => {
   return (
-    <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between space-y-2">
+    <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between space-y-2">
       <div
         className="absolute top-0 left-0 bottom-0 w-1.5 rounded-l-2xl"
         style={{ backgroundColor: accentColor }}
@@ -31,7 +31,7 @@ export const KpiStatCard: React.FC<KpiStatCardProps> = ({
       </div>
 
       <div className="pl-2 space-y-1">
-        <p className="text-3xl font-bold font-urbanist text-[#0f172a]" style={{ color: accentColor }}>
+        <p className="text-3xl font-bold font-urbanist text-navy-main" style={{ color: accentColor }}>
           {value}{' '}
           {subValue && <span className="text-sm font-normal text-slate-500">{subValue}</span>}
         </p>

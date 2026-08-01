@@ -45,7 +45,7 @@ export default function ClassesPage() {
       {/* 2. Hero Title & Primary Action Button */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-[#0f172a]">
+          <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-navy-main">
             Classes
           </h1>
           <p className="text-sm md:text-base font-sans text-slate-600">
@@ -56,7 +56,7 @@ export default function ClassesPage() {
         <button
           type="button"
           onClick={() => navigate('/classes/add')}
-          className="flex items-center justify-center gap-2 px-6 py-3 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white rounded-xl font-urbanist font-medium text-base shadow-sm hover:shadow transition-all cursor-pointer shrink-0"
+          className="flex items-center justify-center gap-2 px-6 py-3 bg-brand-primary hover:bg-brand-hover text-white rounded-xl font-urbanist font-medium text-base shadow-sm hover:shadow transition-all cursor-pointer shrink-0"
         >
           <Plus className="size-5" />
           <span>Add Class</span>
@@ -66,45 +66,45 @@ export default function ClassesPage() {
       {/* 3. Top Stats KPI Cards Bar (4 Cards in a Row) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* Card 1: Total Classes */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#2e67b1] rounded-l-2xl" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-brand-primary rounded-l-2xl" />
           <span className="text-sm font-sans font-normal text-slate-600 pl-2">
             Total Classes
           </span>
-          <p className="text-3xl font-bold font-urbanist text-[#2e67b1] pl-2 mt-2">
+          <p className="text-3xl font-bold font-urbanist text-brand-primary pl-2 mt-2">
             {isLoading ? '...' : kpiStats.total_classes}
           </p>
         </div>
 
         {/* Card 2: Total Sections */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#f97316] rounded-l-2xl" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-accent-orange rounded-l-2xl" />
           <span className="text-sm font-sans font-normal text-slate-600 pl-2">
             Total Sections
           </span>
-          <p className="text-3xl font-bold font-urbanist text-[#f97316] pl-2 mt-2">
+          <p className="text-3xl font-bold font-urbanist text-accent-orange pl-2 mt-2">
             {isLoading ? '...' : kpiStats.total_sections}
           </p>
         </div>
 
         {/* Card 3: Total Students */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#22c55e] rounded-l-2xl" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-accent-green rounded-l-2xl" />
           <span className="text-sm font-sans font-normal text-slate-600 pl-2">
             Total Students
           </span>
-          <p className="text-3xl font-bold font-urbanist text-[#22c55e] pl-2 mt-2">
+          <p className="text-3xl font-bold font-urbanist text-accent-green pl-2 mt-2">
             {isLoading ? '...' : kpiStats.total_students}
           </p>
         </div>
 
         {/* Card 4: Avg. Students/Class */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
-          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-[#a855f7] rounded-l-2xl" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-accent-purple rounded-l-2xl" />
           <span className="text-sm font-sans font-normal text-slate-600 pl-2">
             Avg. Students/Class
           </span>
-          <p className="text-3xl font-bold font-urbanist text-[#a855f7] pl-2 mt-2">
+          <p className="text-3xl font-bold font-urbanist text-accent-purple pl-2 mt-2">
             {isLoading ? '...' : kpiStats.avg_students_per_class}
           </p>
         </div>
@@ -129,13 +129,13 @@ export default function ClassesPage() {
               <div
                 key={cls.id}
                 onClick={() => navigate(`/classes/${cls.id}/sections`)}
-                className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer group relative flex flex-col justify-between"
+                className="bg-white border border-card-border rounded-2xl p-6 shadow-sm hover:shadow-md transition-all cursor-pointer group relative flex flex-col justify-between"
               >
                 <div>
                   {/* Top Row: Icon Badge & Edit/Delete Action Icons */}
                   <div className="flex items-center justify-between pb-4">
-                    <div className="size-11 rounded-xl bg-[#e6effa] text-[#2e67b1] flex items-center justify-center">
-                      <Star className="size-5 fill-[#2e67b1]/20 stroke-[#2e67b1]" />
+                    <div className="size-11 rounded-xl bg-brand-soft text-brand-primary flex items-center justify-center">
+                      <Star className="size-5 fill-brand-primary/20 stroke-brand-primary" />
                     </div>
 
                     <div className="flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
@@ -145,7 +145,7 @@ export default function ClassesPage() {
                           e.stopPropagation()
                           navigate(`/classes/edit/${cls.id}`)
                         }}
-                        className="p-2 rounded-lg text-slate-400 hover:text-[#2e67b1] hover:bg-blue-50 transition-colors"
+                        className="p-2 rounded-lg text-slate-400 hover:text-brand-primary hover:bg-blue-50 transition-colors"
                         title="Edit Class"
                       >
                         <Edit3 className="size-4" />
@@ -167,7 +167,7 @@ export default function ClassesPage() {
 
                   {/* Class Title */}
                   <div className="space-y-1">
-                    <h3 className="text-2xl font-bold font-urbanist text-[#0f172a] group-hover:text-[#2e67b1] transition-colors">
+                    <h3 className="text-2xl font-bold font-urbanist text-navy-main group-hover:text-brand-primary transition-colors">
                       {cls.name || cls.class_name}
                     </h3>
                   </div>
@@ -177,14 +177,14 @@ export default function ClassesPage() {
                 <div className="pt-6 mt-6 border-t border-slate-100 grid grid-cols-2 gap-4 text-left">
                   <div>
                     <span className="text-xs font-sans text-slate-400 block">Sections</span>
-                    <span className="text-base font-bold font-urbanist text-[#0f172a]">
+                    <span className="text-base font-bold font-urbanist text-navy-main">
                       {cls.sections_count ?? 0} Sections
                     </span>
                   </div>
 
                   <div>
                     <span className="text-xs font-sans text-slate-400 block">Total Students</span>
-                    <span className="text-base font-bold font-urbanist text-[#0f172a]">
+                    <span className="text-base font-bold font-urbanist text-navy-main">
                       {cls.total_students ?? 0} Students
                     </span>
                   </div>
@@ -195,13 +195,13 @@ export default function ClassesPage() {
             {/* Dashed Add Card: Establish Level */}
             <div
               onClick={() => navigate('/classes/add')}
-              className="border-2 border-dashed border-slate-300 hover:border-[#2e67b1] bg-slate-50/50 hover:bg-blue-50/20 transition-all cursor-pointer rounded-2xl flex flex-col items-center justify-center p-8 text-center space-y-3 min-h-[220px] group"
+              className="border-2 border-dashed border-slate-300 hover:border-brand-primary bg-slate-50/50 hover:bg-blue-50/20 transition-all cursor-pointer rounded-2xl flex flex-col items-center justify-center p-8 text-center space-y-3 min-h-[220px] group"
             >
-              <div className="size-12 rounded-full bg-slate-200/70 group-hover:bg-[#2e67b1] text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
+              <div className="size-12 rounded-full bg-slate-200/70 group-hover:bg-brand-primary text-slate-600 group-hover:text-white flex items-center justify-center transition-colors">
                 <Plus className="size-6" />
               </div>
               <div className="space-y-1">
-                <h4 className="text-lg font-bold font-urbanist text-[#0f172a] group-hover:text-[#2e67b1] transition-colors">
+                <h4 className="text-lg font-bold font-urbanist text-navy-main group-hover:text-brand-primary transition-colors">
                   Establish Level
                 </h4>
                 <p className="text-xs font-sans text-slate-500 max-w-xs leading-relaxed">

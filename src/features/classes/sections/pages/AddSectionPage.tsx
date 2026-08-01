@@ -141,8 +141,8 @@ export default function AddSectionPage() {
       </div>
 
       {/* 2. Hero Header Card */}
-      <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-2 shadow-xs">
-        <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-[#0f172a]">
+      <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-2 shadow-xs">
+        <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-navy-main">
           Add New Section for {className}
         </h1>
         <p className="text-sm font-sans text-slate-600">
@@ -156,9 +156,9 @@ export default function AddSectionPage() {
         <FormAlert error={errorMessage} success={successMessage} />
 
         {/* Card 1: Section Details */}
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
-          <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
-            <BookOpen className="size-5 text-[#2e67b1]" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 md:p-8 space-y-6 shadow-xs">
+          <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-lg border-b border-slate-100 pb-3">
+            <BookOpen className="size-5 text-brand-primary" />
             <span>Section Details</span>
           </div>
 
@@ -173,7 +173,7 @@ export default function AddSectionPage() {
                 value={sectionName}
                 onChange={(e) => setSectionName(e.target.value)}
                 placeholder="Section Name (e.g. Section G)"
-                className="w-full h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1] transition-all"
+                className="w-full h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary transition-all"
               />
             </div>
 
@@ -211,7 +211,7 @@ export default function AddSectionPage() {
                 min={1}
                 value={maxCapacity}
                 onChange={(e) => setMaxCapacity(Math.max(1, Number(e.target.value) || 1))}
-                className="w-full md:w-48 h-12 px-4 bg-white border border-[#d8dee8] rounded-xl text-base text-slate-900 font-sans focus:outline-none focus:border-[#2e67b1]"
+                className="w-full md:w-48 h-12 px-4 bg-white border border-card-border rounded-xl text-base text-slate-900 font-sans focus:outline-none focus:border-brand-primary"
               />
               <div className="flex items-center gap-1.5">
                 <button
@@ -270,7 +270,7 @@ export default function AddSectionPage() {
                 <Check className="size-4" />
               )
             }
-            className="px-10 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white"
+            className="px-10 bg-brand-primary hover:bg-brand-hover text-white"
           >
             {createSectionMutation.isPending ? 'Creating Section...' : 'Save Section'}
           </Button>

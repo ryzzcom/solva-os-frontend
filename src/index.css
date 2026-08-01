@@ -9,6 +9,7 @@
   --color-brand-hover: #1f4e8c;
   --color-brand-dark: #1f3a8a;
   --color-brand-light: #2563eb;
+  --color-brand-soft: #e6effa;
 
   --color-navy-main: #0f172a;
   --color-slate-body: #334155;
@@ -23,9 +24,12 @@
   --color-bg-subtle: #f5f4fb;
   --color-bg-neutral: #f3f4f6;
 
-  --color-accent-orange: #F36F26;
+  --color-accent-orange: #f97316;
   --color-accent-orange-hover: #d95c16;
   --color-accent-blue: #4f8edc;
+  --color-accent-purple: #a855f7;
+  --color-accent-green: #22c55e;
+  --color-accent-amber: #f59e0b;
 
   /* Status Colors */
   --color-success-bg: #ecfdf5;

@@ -81,7 +81,7 @@ export default function SectionDetailPage() {
   if (isLoading) {
     return (
       <div className="w-full px-[32px] py-16 flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="size-8 text-[#2e67b1] animate-spin" />
+        <Loader2 className="size-8 text-brand-primary animate-spin" />
         <p className="text-slate-600 font-sans font-medium text-base">
           Loading section details...
         </p>
@@ -138,7 +138,7 @@ export default function SectionDetailPage() {
       </div>
 
       {/* 2. Hero Header Banner */}
-      <div className="bg-gradient-to-r from-[#0f172a] via-[#1e3a8a] to-[#2e67b1] border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-6 shadow-md relative overflow-hidden">
+      <div className="bg-gradient-to-r from-navy-main via-brand-dark to-brand-primary border border-slate-800 text-white rounded-2xl p-6 md:p-8 space-y-6 shadow-md relative overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap">
@@ -193,9 +193,9 @@ export default function SectionDetailPage() {
                   ? navigate(`/classes/${classId}/sections/edit/${sectionId}`)
                   : navigate(`/classes/sections/edit/${sectionId}`)
               }
-              className="flex items-center gap-2 px-5 py-3 bg-white text-[#0f172a] hover:bg-slate-100 rounded-xl font-urbanist font-semibold text-sm shadow-sm transition-all cursor-pointer"
+              className="flex items-center gap-2 px-5 py-3 bg-white text-navy-main hover:bg-slate-100 rounded-xl font-urbanist font-semibold text-sm shadow-sm transition-all cursor-pointer"
             >
-              <Edit3 className="size-4 text-[#2e67b1]" />
+              <Edit3 className="size-4 text-brand-primary" />
               <span>Edit Section</span>
             </button>
           </div>
@@ -208,21 +208,21 @@ export default function SectionDetailPage() {
           label="Enrolled Students"
           value={totalStudents}
           subValue={`/ ${maxCapacity}`}
-          accentColor="#2e67b1"
+          accentColor="var(--color-brand-primary)"
           icon={Users}
         />
 
         <KpiStatCard
           label="Fill Rate"
           value={`${fillRatePercentage}%`}
-          accentColor="#f97316"
+          accentColor="var(--color-accent-orange)"
           progressPercentage={fillRatePercentage}
         />
 
         <KpiStatCard
           label="Monthly Avg Attendance"
           value={`${avgAttendance}%`}
-          accentColor="#22c55e"
+          accentColor="var(--color-accent-green)"
           icon={CheckCircle2}
         />
 
@@ -230,16 +230,16 @@ export default function SectionDetailPage() {
           label="Assigned Subjects"
           value={assignedSubjects.length}
           subValue="Subjects"
-          accentColor="#a855f7"
+          accentColor="var(--color-accent-purple)"
           icon={BookOpen}
         />
       </div>
 
       {/* 4. Assigned Subjects Tags Bar */}
       {assignedSubjects.length > 0 && (
-        <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-xs space-y-3">
-          <div className="flex items-center gap-2 text-[#0f172a] font-semibold font-urbanist text-base">
-            <BookOpen className="size-4 text-[#2e67b1]" />
+        <div className="bg-white border border-card-border rounded-2xl p-6 shadow-xs space-y-3">
+          <div className="flex items-center gap-2 text-navy-main font-semibold font-urbanist text-base">
+            <BookOpen className="size-4 text-brand-primary" />
             <span>Assigned Curriculum Subjects</span>
           </div>
 
@@ -247,7 +247,7 @@ export default function SectionDetailPage() {
             {assignedSubjects.map((subj, idx) => (
               <span
                 key={idx}
-                className="px-3.5 py-1.5 bg-[#e6effa] border border-[#2e67b1]/20 text-[#2e67b1] rounded-xl text-xs font-semibold font-urbanist flex items-center gap-1.5"
+                className="px-3.5 py-1.5 bg-brand-soft border border-brand-primary/20 text-brand-primary rounded-xl text-xs font-semibold font-urbanist flex items-center gap-1.5"
               >
                 <BookOpen className="size-3.5" />
                 <span>{subj.subject_name}</span>
@@ -258,11 +258,11 @@ export default function SectionDetailPage() {
       )}
 
       {/* 5. Enrolled Student Roster Data Table */}
-      <div className="bg-white border border-[#d8dee8] rounded-2xl shadow-xs overflow-hidden space-y-4 p-6">
+      <div className="bg-white border border-card-border rounded-2xl shadow-xs overflow-hidden space-y-4 p-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div className="space-y-1">
-            <h3 className="text-xl font-bold font-urbanist text-[#0f172a] flex items-center gap-2">
-              <GraduationCap className="size-5 text-[#2e67b1]" />
+            <h3 className="text-xl font-bold font-urbanist text-navy-main flex items-center gap-2">
+              <GraduationCap className="size-5 text-brand-primary" />
               <span>Section Student Roster</span>
             </h3>
             <p className="text-xs font-sans text-slate-500">
@@ -280,7 +280,7 @@ export default function SectionDetailPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search student or ID..."
-                className="w-full h-10 pl-9 pr-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1]"
+                className="w-full h-10 pl-9 pr-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary"
               />
             </div>
 
@@ -293,7 +293,7 @@ export default function SectionDetailPage() {
                   onClick={() => setStatusFilter(tab)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-urbanist transition-all cursor-pointer ${
                     statusFilter === tab
-                      ? 'bg-white text-[#2e67b1] shadow-xs'
+                      ? 'bg-white text-brand-primary shadow-xs'
                       : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
@@ -339,10 +339,10 @@ export default function SectionDetailPage() {
                           }
                           className="flex items-center gap-3 cursor-pointer group/st"
                         >
-                          <div className="size-9 rounded-full bg-[#e6effa] text-[#2e67b1] font-bold text-sm flex items-center justify-center font-urbanist shrink-0 group-hover/st:bg-[#2e67b1] group-hover/st:text-white transition-colors">
+                          <div className="size-9 rounded-full bg-brand-soft text-brand-primary font-bold text-sm flex items-center justify-center font-urbanist shrink-0 group-hover/st:bg-brand-primary group-hover/st:text-white transition-colors">
                             {student.student_name ? student.student_name.charAt(0) : 'S'}
                           </div>
-                          <span className="font-semibold text-slate-900 font-urbanist group-hover/st:text-[#2e67b1] transition-colors">
+                          <span className="font-semibold text-slate-900 font-urbanist group-hover/st:text-brand-primary transition-colors">
                             {student.student_name}
                           </span>
                         </div>
@@ -366,7 +366,7 @@ export default function SectionDetailPage() {
                           </span>
                           <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
                             <div
-                              className="h-full bg-[#2e67b1] rounded-full"
+                              className="h-full bg-brand-primary rounded-full"
                               style={{ width: `${Math.min(100, student.monthly_attendance_avg)}%` }}
                             />
                           </div>
@@ -384,7 +384,7 @@ export default function SectionDetailPage() {
                                 ? navigate(`/students/${targetStudentId}`)
                                 : navigate('/students')
                             }
-                            className="p-2 rounded-lg text-slate-400 hover:text-[#2e67b1] hover:bg-blue-50 transition-colors cursor-pointer"
+                            className="p-2 rounded-lg text-slate-400 hover:text-brand-primary hover:bg-blue-50 transition-colors cursor-pointer"
                             title="View Student Profile"
                           >
                             <Eye className="size-4" />

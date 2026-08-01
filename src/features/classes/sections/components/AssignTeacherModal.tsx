@@ -86,11 +86,11 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
         {/* Header */}
         <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
           <div className="flex items-center gap-3">
-            <div className="size-10 rounded-xl bg-[#e6effa] text-[#2e67b1] flex items-center justify-center font-bold">
+            <div className="size-10 rounded-xl bg-brand-soft text-brand-primary flex items-center justify-center font-bold">
               <UserCheck className="size-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold font-urbanist text-[#0f172a]">
+              <h3 className="text-lg font-bold font-urbanist text-navy-main">
                 Assign Class Teacher
               </h3>
               <p className="text-xs font-sans text-slate-500">
@@ -121,7 +121,7 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search teacher by name or department..."
-              className="w-full h-10 pl-9 pr-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-[#2e67b1]"
+              className="w-full h-10 pl-9 pr-3.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none focus:border-brand-primary"
             />
           </div>
 
@@ -129,7 +129,7 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
           <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
             {isTeachersLoading ? (
               <div className="py-8 text-center text-slate-500 font-sans text-xs flex flex-col items-center justify-center space-y-2">
-                <Loader2 className="size-6 text-[#2e67b1] animate-spin" />
+                <Loader2 className="size-6 text-brand-primary animate-spin" />
                 <span>Loading faculty members...</span>
               </div>
             ) : filteredTeachers.length === 0 ? (
@@ -149,7 +149,7 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
                     onClick={() => setSelectedTeacherId(t.id)}
                     className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between gap-3 ${
                       isSelected
-                        ? 'bg-[#e6effa]/60 border-[#2e67b1] shadow-xs'
+                        ? 'bg-brand-soft/60 border-brand-primary shadow-xs'
                         : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50/50'
                     }`}
                   >
@@ -159,11 +159,11 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
                       </div>
                       <div className="min-w-0 space-y-0.5">
                         <div className="flex items-center gap-2">
-                          <span className="font-bold text-sm font-urbanist text-[#0f172a] truncate">
+                          <span className="font-bold text-sm font-urbanist text-navy-main truncate">
                             {t.full_name}
                           </span>
                           {isCurrent && (
-                            <span className="px-2 py-0.5 bg-blue-100 text-[#2e67b1] rounded-md text-[10px] font-bold uppercase font-urbanist">
+                            <span className="px-2 py-0.5 bg-blue-100 text-brand-primary rounded-md text-[10px] font-bold uppercase font-urbanist">
                               Current
                             </span>
                           )}
@@ -182,7 +182,7 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
                     <div
                       className={`size-6 rounded-full border flex items-center justify-center shrink-0 ${
                         isSelected
-                          ? 'bg-[#2e67b1] border-[#2e67b1] text-white'
+                          ? 'bg-brand-primary border-brand-primary text-white'
                           : 'border-slate-300 bg-white'
                       }`}
                     >
@@ -209,7 +209,7 @@ export const AssignTeacherModal: React.FC<AssignTeacherModalProps> = ({
             type="button"
             onClick={handleAssign}
             disabled={!selectedTeacherId || assignTeacherMutation.isPending}
-            className="px-6 py-2.5 rounded-xl bg-[#2e67b1] text-white hover:bg-[#2e67b1]/90 disabled:opacity-50 text-xs font-semibold font-urbanist shadow-xs transition-all flex items-center gap-2 cursor-pointer"
+            className="px-6 py-2.5 rounded-xl bg-brand-primary text-white hover:bg-brand-hover disabled:opacity-50 text-xs font-semibold font-urbanist shadow-xs transition-all flex items-center gap-2 cursor-pointer"
           >
             {assignTeacherMutation.isPending && (
               <Loader2 className="size-4 animate-spin" />

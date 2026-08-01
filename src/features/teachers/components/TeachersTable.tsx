@@ -36,11 +36,11 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
 
           return (
             <div className="flex items-center gap-3">
-              <div className="size-10 rounded-full bg-[#2e67b1]/10 border border-[#2e67b1]/20 flex items-center justify-center font-bold text-[#2e67b1] font-urbanist text-sm shrink-0">
+              <div className="size-10 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center font-bold text-brand-primary font-urbanist text-sm shrink-0">
                 {initials}
               </div>
               <div className="space-y-0.5">
-                <p className="font-semibold text-[#0f172a] text-base font-urbanist leading-tight">
+                <p className="font-semibold text-navy-main text-base font-urbanist leading-tight">
                   {name}
                 </p>
                 <p className="text-xs text-slate-500 font-sans">{email}</p>
@@ -65,7 +65,7 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
         cell: (info) => {
           const dept = info.getValue() || 'General'
           return (
-            <span className="text-[#334155] text-base font-sans font-medium">
+            <span className="text-slate-body text-base font-sans font-medium">
               {dept}
             </span>
           )
@@ -79,7 +79,7 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
             return <span className="text-slate-400 text-sm font-sans">—</span>
           }
           return (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200 text-[#2e67b1] rounded-full text-xs font-semibold font-urbanist">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-50 border border-blue-200 text-brand-primary rounded-full text-xs font-semibold font-urbanist">
               <Shield className="size-3" />
               {leader}
             </span>
