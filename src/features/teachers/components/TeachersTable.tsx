@@ -168,7 +168,7 @@ export const TeachersTable: React.FC<TeachersTableProps> = ({
           {table.getHeaderGroups().map((headerGroup) => (
             <tr
               key={headerGroup.id}
-              className="bg-[#f9fafb] border-b border-card-border"
+              className="bg-slate-50 border-b border-card-border"
             >
               {headerGroup.headers.map((header) => (
                 <th

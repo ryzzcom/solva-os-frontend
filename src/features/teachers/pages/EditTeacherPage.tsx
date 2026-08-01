@@ -161,7 +161,7 @@ export default function EditTeacherPage() {
   if (isLoadingInitial) {
     return (
       <div className="w-full px-[32px] py-12 flex flex-col items-center justify-center space-y-4 animate-pulse">
-        <Loader2 className="size-10 text-[#2e67b1] animate-spin" />
+        <Loader2 className="size-10 text-brand-primary animate-spin" />
         <p className="text-slate-500 font-sans text-base">Loading teacher profile details...</p>
       </div>
     )
@@ -212,10 +212,10 @@ export default function EditTeacherPage() {
       <div className="bg-gradient-to-r from-blue-900/5 via-blue-800/5 to-transparent p-6 rounded-2xl border border-blue-100 flex items-center justify-between gap-6">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#2e67b1]/10 rounded-xl text-[#2e67b1]">
+            <div className="p-2.5 bg-brand-soft rounded-xl text-brand-primary">
               <Edit3 className="size-6" />
             </div>
-            <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-[#0f172a]">
+            <h1 className="text-2xl md:text-3xl font-bold font-urbanist text-navy-main">
               Edit Teacher Profile
             </h1>
           </div>
@@ -298,7 +298,7 @@ export default function EditTeacherPage() {
                 <Check className="size-4" />
               )
             }
-            className="px-8 bg-[#2e67b1] hover:bg-[#2e67b1]/90 text-white"
+            className="px-8 bg-brand-primary hover:bg-brand-hover text-white"
           >
             {isSubmitting ? 'Saving Changes...' : 'Save Changes'}
           </Button>

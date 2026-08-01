@@ -34,12 +34,12 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
   return (
     <div className="space-y-6">
       {/* Tab Header Navigation */}
-      <div className="border-b border-[#d8dee8] flex gap-6 md:gap-8 overflow-x-auto select-none">
+      <div className="border-b border-card-border flex gap-6 md:gap-8 overflow-x-auto select-none">
         <button
           onClick={() => setActiveTab('profile')}
           className={`pb-3 text-base font-semibold font-urbanist transition-colors relative cursor-pointer whitespace-nowrap ${
             activeTab === 'profile'
-              ? 'text-[#024e97] border-b-2 border-[#024e97]'
+              ? 'text-brand-primary border-b-2 border-brand-primary'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
@@ -50,7 +50,7 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
           onClick={() => setActiveTab('schedule')}
           className={`pb-3 text-base font-semibold font-urbanist transition-colors relative cursor-pointer whitespace-nowrap ${
             activeTab === 'schedule'
-              ? 'text-[#024e97] border-b-2 border-[#024e97]'
+              ? 'text-brand-primary border-b-2 border-brand-primary'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
@@ -61,7 +61,7 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
           onClick={() => setActiveTab('attendance')}
           className={`pb-3 text-base font-semibold font-urbanist transition-colors relative cursor-pointer whitespace-nowrap ${
             activeTab === 'attendance'
-              ? 'text-[#024e97] border-b-2 border-[#024e97]'
+              ? 'text-brand-primary border-b-2 border-brand-primary'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
@@ -72,7 +72,7 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
           onClick={() => setActiveTab('leave-history')}
           className={`pb-3 text-base font-semibold font-urbanist transition-colors relative cursor-pointer whitespace-nowrap ${
             activeTab === 'leave-history'
-              ? 'text-[#024e97] border-b-2 border-[#024e97]'
+              ? 'text-brand-primary border-b-2 border-brand-primary'
               : 'text-slate-600 hover:text-slate-900'
           }`}
         >
