@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Outlet, Navigate } from 'react-router-dom'
+import { Outlet, Navigate, useNavigate } from 'react-router-dom'
 import { Menu, X, Search, Bell, Moon, LogOut, School, User as UserIcon } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import { useAuthMe } from '@/features/auth/api/useAuthMe'
@@ -34,9 +34,11 @@ export default function MainLayout() {
   const userAvatar = user.profile_picture_url || null
   const userRole = user.role || 'Administrator'
 
+  const navigate = useNavigate()
+
   const handleLogout = () => {
     logout()
-    window.location.href = '/login'
+    navigate('/login', { replace: true })
   }
 
   return (

@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type {
   HolidayOverviewStatsResponse,
   HolidaysListResponse,
@@ -9,8 +10,9 @@ import type {
 import type { HolidayFormValues } from '../schemas/holidaySchema'
 
 export const useHolidaysStats = () => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['holidays-stats'],
+    queryKey: ['holidays-stats', schoolId],
     queryFn: async () => {
       const response = await axiosInstance.get('/holidays/stats')
       const payload = response.data?.data || response.data
@@ -21,8 +23,9 @@ export const useHolidaysStats = () => {
 }
 
 export const useHolidaysList = () => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['holidays-list'],
+    queryKey: ['holidays-list', schoolId],
     queryFn: async () => {
       const response = await axiosInstance.get('/holidays')
       const payload = response.data?.data || response.data
@@ -33,8 +36,9 @@ export const useHolidaysList = () => {
 }
 
 export const useWeeklySchedule = () => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['holidays-weekly-schedule'],
+    queryKey: ['holidays-weekly-schedule', schoolId],
     queryFn: async () => {
       const response = await axiosInstance.get('/holidays/weekly-schedule')
       const payload = response.data?.data || response.data

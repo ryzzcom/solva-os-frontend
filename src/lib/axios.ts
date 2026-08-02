@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useAuthStore } from '@/store/authStore'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
@@ -9,6 +10,10 @@ export const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 })
+
+export const clearAxiosAuthHeader = () => {
+  delete axiosInstance.defaults.headers.common['Authorization']
+}
 
 // Request interceptor to attach bearer token if present in localStorage
 axiosInstance.interceptors.request.use(
@@ -44,7 +49,18 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config
 
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    // Bypass 401 token refresh logic for authentication endpoints
+    const requestUrl = originalRequest?.url || ''
+    const isAuthEndpoint =
+      requestUrl.includes('/auth/login') ||
+      requestUrl.includes('/auth/google') ||
+      requestUrl.includes('/auth/register') ||
+      requestUrl.includes('/auth/verify-signup') ||
+      requestUrl.includes('/auth/verify-otp') ||
+      requestUrl.includes('/auth/forgot-password') ||
+      requestUrl.includes('/auth/reset-password')
+
+    if (error.response?.status === 401 && !originalRequest?._retry && !isAuthEndpoint) {
       if (isRefreshing) {
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject })
@@ -80,9 +96,8 @@ axiosInstance.interceptors.response.use(
         return axiosInstance(originalRequest)
       } catch (refreshError) {
         processQueue(refreshError, null)
-        localStorage.removeItem('access_token')
-        // Redirect to login if refresh fails
-        window.location.href = '/login'
+        // Evict store session so ProtectedRoute automatically redirects to /login via SPA navigation
+        useAuthStore.getState().logout()
         return Promise.reject(refreshError)
       } finally {
         isRefreshing = false

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 
 export interface TeacherHeaderData {
   id: string
@@ -68,8 +69,9 @@ export interface TeacherLeaveItem {
 
 // 1. Fetch Header Data
 export const useTeacherProfileHeader = (teacherId?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teacher-profile-header', teacherId],
+    queryKey: ['teacher-profile-header', schoolId, teacherId],
     queryFn: async () => {
       const response = await axiosInstance.get(`/teachers/profile/${teacherId}/header`)
       return response.data?.data || response.data
@@ -80,8 +82,9 @@ export const useTeacherProfileHeader = (teacherId?: string) => {
 
 // 2. Fetch Profile Details Tab Data
 export const useTeacherProfileTab = (teacherId?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teacher-profile-tab', teacherId],
+    queryKey: ['teacher-profile-tab', schoolId, teacherId],
     queryFn: async () => {
       const response = await axiosInstance.get(`/teachers/profile/${teacherId}/tab-profile`)
       return response.data?.data || response.data
@@ -92,8 +95,9 @@ export const useTeacherProfileTab = (teacherId?: string) => {
 
 // 3. Fetch Classes & Schedule Tab Data
 export const useTeacherScheduleTab = (teacherId?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teacher-schedule-tab', teacherId],
+    queryKey: ['teacher-schedule-tab', schoolId, teacherId],
     queryFn: async () => {
       const response = await axiosInstance.get(`/teachers/profile/${teacherId}/tab-schedule`)
       return response.data?.data || response.data
@@ -104,8 +108,9 @@ export const useTeacherScheduleTab = (teacherId?: string) => {
 
 // 4. Fetch Attendance Tab Data
 export const useTeacherAttendanceTab = (teacherId?: string, year?: number, month?: number) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teacher-attendance-tab', teacherId, year, month],
+    queryKey: ['teacher-attendance-tab', schoolId, teacherId, year, month],
     queryFn: async () => {
       const params = year && month ? { year, month } : {}
       const response = await axiosInstance.get(`/teachers/profile/${teacherId}/tab-attendance`, { params })
@@ -117,8 +122,9 @@ export const useTeacherAttendanceTab = (teacherId?: string, year?: number, month
 
 // 5. Fetch Leave History Tab Data
 export const useTeacherLeaveHistoryTab = (teacherId?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teacher-leave-history-tab', teacherId],
+    queryKey: ['teacher-leave-history-tab', schoolId, teacherId],
     queryFn: async () => {
       const response = await axiosInstance.get(`/teachers/profile/${teacherId}/tab-leave-history`)
       return response.data?.data || response.data

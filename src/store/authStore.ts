@@ -1,4 +1,6 @@
 import { create } from 'zustand'
+import { clearAppCache } from '@/lib/queryClient'
+import { clearAxiosAuthHeader } from '@/lib/axios'
 
 export interface School {
   id: string
@@ -13,7 +15,7 @@ export interface User {
   fullName: string
   email: string
   role: string
-  schoolId: string
+  schoolId: string | null
   profile_picture_url?: string | null
   school?: School | null
 }
@@ -76,8 +78,8 @@ export const useAuthStore = create<AuthState>((set) => {
     updateSchool: (updatedSchoolFields) =>
       set((state) => {
         if (!state.user) return {}
-        const currentSchool = state.user.school || {
-          id: state.user.schoolId,
+        const currentSchool: School = state.user.school || {
+          id: state.user.schoolId || '',
           schoolCode: '',
           name: '',
           email: '',
@@ -90,9 +92,18 @@ export const useAuthStore = create<AuthState>((set) => {
       }),
 
     logout: () => {
+      // 1. Clear LocalStorage
       localStorage.removeItem('user')
       localStorage.removeItem('access_token')
       localStorage.removeItem('school')
+
+      // 2. Clear Axios Common Authorization Header
+      clearAxiosAuthHeader()
+
+      // 3. Clear In-Memory TanStack Query Cache
+      clearAppCache()
+
+      // 4. Reset Zustand State
       set({ user: null, accessToken: null, isAuthenticated: false })
     },
   }

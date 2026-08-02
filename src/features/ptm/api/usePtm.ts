@@ -1,11 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { PtmListResponse, PtmQueryParams } from '../types/ptm.types'
 import type { PtmFormValues } from '../schemas/ptmSchema'
 
 export const usePtmList = (params?: PtmQueryParams) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['ptm-list', params?.search, params?.classId, params?.sectionId, params?.status],
+    queryKey: ['ptm-list', schoolId, params?.search, params?.classId, params?.sectionId, params?.status],
     queryFn: async () => {
       const response = await axiosInstance.get('/ptm', {
         params: {

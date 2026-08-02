@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { SectionStudentsAttendanceResponse } from '../types/attendance.types'
 
 export const useSectionStudentsAttendance = (sectionId?: string, date?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['section-students-attendance', sectionId, date],
+    queryKey: ['section-students-attendance', schoolId, sectionId, date],
     queryFn: async () => {
       if (!sectionId) throw new Error('Section ID is required')
       const response = await axiosInstance.get(`/attendance/sections/${sectionId}/students`, {

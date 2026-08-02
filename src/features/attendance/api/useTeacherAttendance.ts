@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type {
   TeacherAttendanceItem,
   MarkTeacherAttendancePayload,
@@ -7,8 +8,9 @@ import type {
 } from '../types/attendance.types'
 
 export const useTeachersAttendanceList = (date?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teachers-attendance-list', date],
+    queryKey: ['teachers-attendance-list', schoolId, date],
     queryFn: async () => {
       const response = await axiosInstance.get('/attendance/teachers', {
         params: {

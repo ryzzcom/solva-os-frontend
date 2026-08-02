@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { AttendanceDashboardResponse, AttendanceDashboardQueryParams } from '../types/attendance.types'
 
 export const useAttendanceDashboard = (params?: AttendanceDashboardQueryParams) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['attendance-dashboard', params?.classId, params?.sectionId, params?.date],
+    queryKey: ['attendance-dashboard', schoolId, params?.classId, params?.sectionId, params?.date],
     queryFn: async () => {
       const response = await axiosInstance.get('/attendance/dashboard', {
         params: {

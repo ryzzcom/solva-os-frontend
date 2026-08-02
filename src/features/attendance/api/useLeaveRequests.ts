@@ -1,10 +1,12 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { LeaveRequestItem, UpdateLeaveStatusPayload } from '../types/attendance.types'
 
 export const useLeaveRequestsList = (status?: string) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['leave-requests-list', status],
+    queryKey: ['leave-requests-list', schoolId, status],
     queryFn: async () => {
       const response = await axiosInstance.get('/leaves', {
         params: {

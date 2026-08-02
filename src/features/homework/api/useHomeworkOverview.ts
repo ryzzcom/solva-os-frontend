@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { HomeworkOverviewResponse, HomeworkQueryParams } from '../types/homework.types'
 
 export const useHomeworkOverview = (params?: HomeworkQueryParams) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['homework-overview', params?.classId, params?.sectionId],
+    queryKey: ['homework-overview', schoolId, params?.classId, params?.sectionId],
     queryFn: async () => {
       const response = await axiosInstance.get('/homework/overview', {
         params: {

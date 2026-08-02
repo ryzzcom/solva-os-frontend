@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 import type { TeachersDirectoryResponse, TeachersQueryParams } from '../types'
 
 export const fetchTeachers = async (
@@ -21,8 +22,9 @@ export const fetchTeachers = async (
 }
 
 export const useTeachers = (params: TeachersQueryParams) => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery({
-    queryKey: ['teachers', params],
+    queryKey: ['teachers', schoolId, params],
     queryFn: () => fetchTeachers(params),
   })
 }
