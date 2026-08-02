@@ -32,6 +32,8 @@ import HolidaysPage from '@/features/holidays/pages/HolidaysPage'
 import AddHolidayPage from '@/features/holidays/pages/AddHolidayPage'
 import PtmManagementPage from '@/features/ptm/pages/PtmManagementPage'
 import SchedulePtmPage from '@/features/ptm/pages/SchedulePtmPage'
+import AnnouncementsPage from '@/features/announcements/pages/AnnouncementsPage'
+import CreateAnnouncementPage from '@/features/announcements/pages/CreateAnnouncementPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -78,7 +80,8 @@ export const AppRoutes = () => {
           <Route path="/holidays/add" element={<AddHolidayPage />} />
           <Route path="/exams" element={<Navigate to="/dashboard" replace />} />
           <Route path="/fees" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/announcements" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/announcements" element={<AnnouncementsPage />} />
+          <Route path="/announcements/create" element={<CreateAnnouncementPage />} />
           <Route path="/ptm" element={<PtmManagementPage />} />
           <Route path="/ptm/schedule" element={<SchedulePtmPage />} />
           <Route path="/notifications" element={<Navigate to="/dashboard" replace />} />
