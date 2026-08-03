@@ -24,13 +24,14 @@ export const ReportsTabsNav: React.FC<ReportsTabsNavProps> = ({ activeTab, setAc
       {/* Tab 2: Academic Performance */}
       <button
         type="button"
-        disabled
-        className="pb-3 text-sm sm:text-base font-bold font-urbanist text-slate-400 cursor-not-allowed flex items-center gap-2"
+        onClick={() => setActiveTab('academic')}
+        className={`pb-3 text-sm sm:text-base font-bold font-urbanist transition-all relative cursor-pointer ${
+          activeTab === 'academic'
+            ? 'text-brand-primary border-b-2 border-brand-primary'
+            : 'text-slate-500 hover:text-slate-800'
+        }`}
       >
-        <span>Academic Performance</span>
-        <span className="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
-          Soon
-        </span>
+        Academic Performance
       </button>
 
       {/* Tab 3: Institutional Analytics */}

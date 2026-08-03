@@ -2,27 +2,44 @@ import React, { useState } from 'react'
 import { ChevronRight, Download, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { axiosInstance } from '@/lib/axios'
-import type { AttendanceReportQueryParams } from '../types/reports.types'
 
 interface ReportsHeaderProps {
-  filters: AttendanceReportQueryParams
+  activeTab: 'attendance' | 'academic' | 'analytics'
+  attendanceFilters: any
+  academicFilters: any
 }
 
-export const ReportsHeader: React.FC<ReportsHeaderProps> = ({ filters }) => {
+export const ReportsHeader: React.FC<ReportsHeaderProps> = ({
+  activeTab,
+  attendanceFilters,
+  academicFilters,
+}) => {
   const [isExporting, setIsExporting] = useState(false)
 
   const handleExportCSV = async () => {
     try {
       setIsExporting(true)
-      const response = await axiosInstance.get('/reports/attendance/export-csv', {
-        params: filters,
+      const endpoint =
+        activeTab === 'academic'
+          ? '/reports/academic/export-csv'
+          : '/reports/attendance/export-csv'
+
+      const filename =
+        activeTab === 'academic'
+          ? 'academic_performance_report.csv'
+          : 'student_attendance_report.csv'
+
+      const params = activeTab === 'academic' ? academicFilters : attendanceFilters
+
+      const response = await axiosInstance.get(endpoint, {
+        params,
         responseType: 'blob',
       })
 
       const url = window.URL.createObjectURL(new Blob([response.data]))
       const link = document.createElement('a')
       link.href = url
-      link.setAttribute('download', 'student_attendance_report.csv')
+      link.setAttribute('download', filename)
       document.body.appendChild(link)
       link.click()
       link.remove()
@@ -49,7 +66,7 @@ export const ReportsHeader: React.FC<ReportsHeaderProps> = ({ filters }) => {
             Reports & Analytics
           </h1>
           <p className="text-sm text-slate-500 mt-1 max-w-2xl font-sans">
-            Gain actionable insights into student attendance, academic trends, class metrics, and risk monitoring.
+            Gain actionable insights into student attendance, academic trends, exam distributions, and institutional metrics.
           </p>
         </div>
 

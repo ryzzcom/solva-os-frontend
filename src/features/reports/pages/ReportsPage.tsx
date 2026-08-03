@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ReportsHeader } from '../components/ReportsHeader'
 import { ReportsTabsNav } from '../components/ReportsTabsNav'
+// Tab 1 Attendance Imports
 import { AttendanceReportFilters } from '../components/AttendanceReportFilters'
 import { AttendanceReportKpis } from '../components/AttendanceReportKpis'
 import { AttendanceTrendsChart } from '../components/AttendanceTrendsChart'
@@ -12,69 +13,133 @@ import { useClassAttendanceSummary } from '../api/useClassAttendanceSummary'
 import { useStudentAttendanceRoster } from '../api/useStudentAttendanceRoster'
 import type { AttendanceReportQueryParams, RiskStatusBadge } from '../types/reports.types'
 
+// Tab 2 Academic Imports
+import { AcademicReportFilters } from '../components/AcademicReportFilters'
+import { AcademicReportKpis } from '../components/AcademicReportKpis'
+import { GradeDistributionChart } from '../components/GradeDistributionChart'
+import { SubjectPerformanceSummary } from '../components/SubjectPerformanceSummary'
+import { StudentAcademicRosterTable } from '../components/StudentAcademicRosterTable'
+import { useAcademicKPIs } from '../api/useAcademicKPIs'
+import { useGradeDistribution } from '../api/useGradeDistribution'
+import { useSubjectSummary } from '../api/useSubjectSummary'
+import { useStudentAcademicRoster } from '../api/useStudentAcademicRoster'
+import type { AcademicReportQueryParams, AcademicStatusBadge } from '../types/reports.types'
+
 export default function ReportsPage() {
   const [activeTab, setActiveTab] = useState<'attendance' | 'academic' | 'analytics'>('attendance')
 
-  // Filter state
-  const [filters, setFilters] = useState<AttendanceReportQueryParams>({})
-  const [search, setSearch] = useState('')
-  const [statusFilter, setStatusFilter] = useState<'ALL' | RiskStatusBadge>('ALL')
-  const [page, setPage] = useState(1)
+  /* ==========================================================================
+     TAB 1: ATTENDANCE STATE & API HOOKS
+     ========================================================================== */
+  const [attendanceFilters, setAttendanceFilters] = useState<AttendanceReportQueryParams>({})
+  const [attendanceSearch, setAttendanceSearch] = useState('')
+  const [attendanceStatusFilter, setAttendanceStatusFilter] = useState<'ALL' | RiskStatusBadge>('ALL')
+  const [attendancePage, setAttendancePage] = useState(1)
 
-  // Consolidated query parameters
-  const queryParams: AttendanceReportQueryParams = {
-    ...filters,
-    search: search.trim() || undefined,
-    status_filter: statusFilter !== 'ALL' ? statusFilter : undefined,
-    page,
+  const attendanceQueryParams: AttendanceReportQueryParams = {
+    ...attendanceFilters,
+    search: attendanceSearch.trim() || undefined,
+    status_filter: attendanceStatusFilter !== 'ALL' ? attendanceStatusFilter : undefined,
+    page: attendancePage,
     limit: 10,
   }
 
-  // TanStack Query API calls
-  const { data: kpisData, isLoading: isKpisLoading } = useAttendanceKPIs(filters)
-  const { data: trendsData, isLoading: isTrendsLoading } = useAttendanceTrends(filters)
-  const { data: classSummaryData, isLoading: isClassSummaryLoading } = useClassAttendanceSummary(filters)
-  const { data: rosterData, isLoading: isRosterLoading } = useStudentAttendanceRoster(queryParams)
+  const { data: attendanceKpis, isLoading: isAttendanceKpisLoading } = useAttendanceKPIs(attendanceFilters)
+  const { data: attendanceTrends, isLoading: isAttendanceTrendsLoading } = useAttendanceTrends(attendanceFilters)
+  const { data: classAttendanceSummary, isLoading: isClassAttendanceLoading } = useClassAttendanceSummary(attendanceFilters)
+  const { data: attendanceRosterData, isLoading: isAttendanceRosterLoading } = useStudentAttendanceRoster(attendanceQueryParams)
 
-  const handleApplyFilters = (newFilters: AttendanceReportQueryParams) => {
-    setFilters(newFilters)
-    setPage(1)
+  /* ==========================================================================
+     TAB 2: ACADEMIC STATE & API HOOKS
+     ========================================================================== */
+  const [academicFilters, setAcademicFilters] = useState<AcademicReportQueryParams>({})
+  const [academicSearch, setAcademicSearch] = useState('')
+  const [academicStatusFilter, setAcademicStatusFilter] = useState<'ALL' | AcademicStatusBadge>('ALL')
+  const [academicPage, setAcademicPage] = useState(1)
+
+  const academicQueryParams: AcademicReportQueryParams = {
+    ...academicFilters,
+    search: academicSearch.trim() || undefined,
+    status_filter: academicStatusFilter !== 'ALL' ? academicStatusFilter : undefined,
+    page: academicPage,
+    limit: 10,
   }
+
+  const { data: academicKpis, isLoading: isAcademicKpisLoading } = useAcademicKPIs(academicFilters)
+  const { data: gradeDistribution, isLoading: isGradeDistributionLoading } = useGradeDistribution(academicFilters)
+  const { data: subjectSummary, isLoading: isSubjectSummaryLoading } = useSubjectSummary(academicFilters)
+  const { data: academicRosterData, isLoading: isAcademicRosterLoading } = useStudentAcademicRoster(academicQueryParams)
 
   return (
     <div className="p-6 md:p-8 max-w-7xl mx-auto space-y-6 animate-in fade-in duration-200">
       {/* Top Header */}
-      <ReportsHeader filters={filters} />
+      <ReportsHeader
+        activeTab={activeTab}
+        attendanceFilters={attendanceFilters}
+        academicFilters={academicFilters}
+      />
 
       {/* Main 3 Tabs Navigation */}
       <ReportsTabsNav activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      {/* Tab 1 Content: Student Attendance Reports */}
+      {/* TAB 1: Student Attendance Reports */}
       {activeTab === 'attendance' && (
         <div className="space-y-6">
-          {/* Global Date & Class/Section Filter Toolbar */}
-          <AttendanceReportFilters onApplyFilters={handleApplyFilters} />
+          <AttendanceReportFilters
+            onApplyFilters={(f) => {
+              setAttendanceFilters(f)
+              setAttendancePage(1)
+            }}
+          />
 
-          {/* 5 KPI Metric Cards */}
-          <AttendanceReportKpis kpiData={kpisData} isLoading={isKpisLoading} />
+          <AttendanceReportKpis kpiData={attendanceKpis} isLoading={isAttendanceKpisLoading} />
 
-          {/* Grid: Trends Chart & Class Comparison Summary */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <AttendanceTrendsChart trends={trendsData} isLoading={isTrendsLoading} />
-            <ClassAttendanceSummary classesSummary={classSummaryData} isLoading={isClassSummaryLoading} />
+            <AttendanceTrendsChart trends={attendanceTrends} isLoading={isAttendanceTrendsLoading} />
+            <ClassAttendanceSummary classesSummary={classAttendanceSummary} isLoading={isClassAttendanceLoading} />
           </div>
 
-          {/* Student Roster & At-Risk Tracking Table */}
           <StudentAttendanceRosterTable
-            roster={rosterData?.roster || []}
-            isLoading={isRosterLoading}
-            search={search}
-            setSearch={setSearch}
-            statusFilter={statusFilter}
-            setStatusFilter={setStatusFilter}
-            page={page}
-            setPage={setPage}
-            pagination={rosterData?.pagination || { total: 0, page: 1, limit: 10, totalPages: 1 }}
+            roster={attendanceRosterData?.roster || []}
+            isLoading={isAttendanceRosterLoading}
+            search={attendanceSearch}
+            setSearch={setAttendanceSearch}
+            statusFilter={attendanceStatusFilter}
+            setStatusFilter={setAttendanceStatusFilter}
+            page={attendancePage}
+            setPage={setAttendancePage}
+            pagination={attendanceRosterData?.pagination || { total: 0, page: 1, limit: 10, totalPages: 1 }}
+          />
+        </div>
+      )}
+
+      {/* TAB 2: Academic Performance Reports */}
+      {activeTab === 'academic' && (
+        <div className="space-y-6">
+          <AcademicReportFilters
+            onApplyFilters={(f) => {
+              setAcademicFilters(f)
+              setAcademicPage(1)
+            }}
+          />
+
+          <AcademicReportKpis kpiData={academicKpis} isLoading={isAcademicKpisLoading} />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <GradeDistributionChart distribution={gradeDistribution} isLoading={isGradeDistributionLoading} />
+            <SubjectPerformanceSummary subjectSummary={subjectSummary} isLoading={isSubjectSummaryLoading} />
+          </div>
+
+          <StudentAcademicRosterTable
+            roster={academicRosterData?.roster || []}
+            isLoading={isAcademicRosterLoading}
+            search={academicSearch}
+            setSearch={setAcademicSearch}
+            statusFilter={academicStatusFilter}
+            setStatusFilter={setAcademicStatusFilter}
+            page={academicPage}
+            setPage={setAcademicPage}
+            pagination={academicRosterData?.pagination || { total: 0, page: 1, limit: 10, totalPages: 1 }}
           />
         </div>
       )}
