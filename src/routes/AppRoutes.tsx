@@ -34,6 +34,9 @@ import PtmManagementPage from '@/features/ptm/pages/PtmManagementPage'
 import SchedulePtmPage from '@/features/ptm/pages/SchedulePtmPage'
 import AnnouncementsPage from '@/features/announcements/pages/AnnouncementsPage'
 import CreateAnnouncementPage from '@/features/announcements/pages/CreateAnnouncementPage'
+import EditAnnouncementPage from '@/features/announcements/pages/EditAnnouncementPage'
+import FeesPage from '@/features/fees/pages/FeesPage'
+import NotificationsPage from '@/features/notifications/pages/NotificationsPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -79,12 +82,14 @@ export const AppRoutes = () => {
           <Route path="/holidays" element={<HolidaysPage />} />
           <Route path="/holidays/add" element={<AddHolidayPage />} />
           <Route path="/exams" element={<Navigate to="/dashboard" replace />} />
-          <Route path="/fees" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/results" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/fees" element={<FeesPage />} />
           <Route path="/announcements" element={<AnnouncementsPage />} />
           <Route path="/announcements/create" element={<CreateAnnouncementPage />} />
+          <Route path="/announcements/edit/:id" element={<EditAnnouncementPage />} />
           <Route path="/ptm" element={<PtmManagementPage />} />
           <Route path="/ptm/schedule" element={<SchedulePtmPage />} />
-          <Route path="/notifications" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/reports" element={<Navigate to="/dashboard" replace />} />
           <Route path="/settings" element={<Navigate to="/dashboard" replace />} />
         </Route>

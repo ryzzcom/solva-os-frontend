@@ -102,18 +102,18 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
                 {profileTabData.schedule_cards.map((card: ScheduleCardItem, idx: number) => (
                   <div
                     key={idx}
-                    className="bg-white border border-[#d8dee8] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between"
+                    className="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col justify-between"
                   >
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#2e67b1] border border-blue-100 rounded-md text-xs font-semibold font-sans">
+                        <span className="px-2.5 py-0.5 bg-blue-50 text-brand-primary border border-blue-100 rounded-md text-xs font-semibold font-sans">
                           {card.subject_name || 'Core Subject'}
                         </span>
-                        <BookOpen className="size-4 text-[#2e67b1]" />
+                        <BookOpen className="size-4 text-brand-primary" />
                       </div>
 
                       <div>
-                        <h4 className="text-xl font-bold text-[#1e293b] font-urbanist">
+                        <h4 className="text-xl font-bold text-slate-900 font-urbanist">
                           {card.class_name} {card.section_name}
                         </h4>
                         <p className="text-sm text-slate-600 font-sans mt-0.5">
@@ -149,8 +149,8 @@ export const TeacherProfileTabs: React.FC<TeacherProfileTabsProps> = ({ teacherI
           </div>
 
           {/* Personal Information Section */}
-          <div className="bg-white border border-[#d8dee8] rounded-2xl p-6 shadow-sm space-y-6">
-            <h3 className="text-lg font-semibold text-[#0f172a] font-urbanist border-b border-slate-100 pb-3">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-6">
+            <h3 className="text-lg font-semibold text-slate-900 font-urbanist border-b border-slate-100 pb-3">
               Personal Information
             </h3>
 

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Loader2, AlertCircle, Megaphone } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import { AnnouncementsHeader } from '../components/AnnouncementsHeader'
 import { AnnouncementsFilterBar } from '../components/AnnouncementsFilterBar'
 import { AnnouncementCard } from '../components/AnnouncementCard'
+import { DeleteConfirmModal } from '@/components/ui/delete-modal'
 import { useAnnouncements } from '../api/useAnnouncements'
 import { useDeleteAnnouncement } from '../api/useDeleteAnnouncement'
 import type { AnnouncementItem, AnnouncementsQueryParams } from '../types/announcements.types'
@@ -108,7 +108,6 @@ export default function AnnouncementsPage() {
       {/* Header */}
       <AnnouncementsHeader
         onCreateNotice={() => navigate('/announcements/create')}
-        onCreateExam={() => navigate('/exams')}
       />
 
       {/* Filter Toolbar */}
@@ -149,33 +148,17 @@ export default function AnnouncementsPage() {
       )}
 
       {/* Delete Confirmation Modal */}
-      {deletingAnnouncement && (
-        <div className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-100 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 animate-in fade-in duration-150">
-            <h3 className="text-lg font-bold text-slate-900 font-urbanist">Delete Announcement</h3>
-            <p className="text-sm text-slate-600">
-              Are you sure you want to delete <span className="font-semibold text-slate-900">"{deletingAnnouncement.title}"</span>? This action cannot be undone.
-            </p>
-            <div className="flex items-center justify-end gap-3 pt-2">
-              <Button
-                variant="outline"
-                onClick={() => setDeletingAnnouncement(null)}
-                disabled={deleteMutation.isPending}
-                className="h-10 px-4 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold"
-              >
-                Cancel
-              </Button>
-              <Button
-                onClick={handleDeleteConfirm}
-                isLoading={deleteMutation.isPending}
-                className="h-10 px-4 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold"
-              >
-                Delete Notice
-              </Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <DeleteConfirmModal
+        open={Boolean(deletingAnnouncement)}
+        onClose={() => setDeletingAnnouncement(null)}
+        title="Delete Announcement"
+        description="Are you sure you want to delete this notice? This action cannot be undone."
+        itemName={deletingAnnouncement?.title || ''}
+        itemCategory="Announcement"
+        onConfirm={handleDeleteConfirm}
+        isPending={deleteMutation.isPending}
+        error={deleteMutation.error}
+      />
     </div>
   )
 }

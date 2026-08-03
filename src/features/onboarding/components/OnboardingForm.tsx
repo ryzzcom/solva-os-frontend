@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Upload, X, ArrowRight, ArrowLeft, Loader2, FileText, CheckCircle2, ShieldCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -20,6 +21,7 @@ interface OnboardingFormProps {
 }
 
 export default function OnboardingForm({ step, setStep }: OnboardingFormProps) {
+  const navigate = useNavigate()
   const [logoPreview, setLogoPreview] = useState<string | null>(null)
   const [logoFile, setLogoFile] = useState<File | null>(null)
   const [billFile, setBillFile] = useState<File | null>(null)
@@ -149,7 +151,7 @@ export default function OnboardingForm({ step, setStep }: OnboardingFormProps) {
             }
           }
           setTimeout(() => {
-            window.location.href = '/dashboard'
+            navigate('/dashboard', { replace: true })
           }, 3000)
         },
       }

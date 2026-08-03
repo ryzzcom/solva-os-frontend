@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { axiosInstance } from '@/lib/axios'
+import { useAuthStore } from '@/store/authStore'
 
 export interface SubjectItem {
   id?: string
@@ -54,8 +55,9 @@ export interface ClassDetailsFullResponse {
 }
 
 export const useClassesOverviewFull = () => {
+  const schoolId = useAuthStore((state) => state.user?.schoolId)
   return useQuery<ClassesOverviewFullResponse, Error>({
-    queryKey: ['classes-overview-full'],
+    queryKey: ['classes-overview-full', schoolId],
     queryFn: async () => {
       const { data } = await axiosInstance.get('/classes/overview')
       const raw = data?.data || data

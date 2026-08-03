@@ -11,6 +11,7 @@ import {
   Pencil,
   CalendarDays,
   Layers,
+  FileSpreadsheet,
   Wallet,
   Megaphone,
   Calendar,
@@ -31,6 +32,7 @@ interface MenuItem {
   name: string
   path: string
   icon: React.ComponentType<{ className?: string }>
+  badge?: string
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed }) => {
@@ -45,8 +47,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed })
     { name: 'Attendance', path: '/attendance', icon: ClipboardList },
     { name: 'Homework', path: '/homework', icon: Pencil },
     { name: 'Holidays', path: '/holidays', icon: CalendarDays },
-    { name: 'Exams', path: '/exams', icon: Layers },
-    { name: 'Fees', path: '/fees', icon: Wallet },
+    { name: 'Examination', path: '/exams', icon: Layers },
+    { name: 'Result', path: '/results', icon: FileSpreadsheet },
+    { name: 'Fees', path: '/fees', icon: Wallet, badge: 'Soon' },
     { name: 'Announcements', path: '/announcements', icon: Megaphone },
     { name: 'PTM', path: '/ptm', icon: Calendar },
     { name: 'Notifications', path: '/notifications', icon: Bell },
@@ -138,6 +141,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ isCollapsed, setIsCollapsed })
                       <span className="ml-3 text-sm truncate tracking-tight">
                         {item.name}
                       </span>
+                      {item.badge && (
+                        <span className="ml-auto mr-2 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 border border-amber-200/80 rounded-md font-urbanist shrink-0">
+                          {item.badge}
+                        </span>
+                      )}
                       {isActive && (
                         <span className="absolute right-0 top-1/2 -translate-y-1/2 bg-brand-primary w-1.5 h-6 rounded-l-md" />
                       )}

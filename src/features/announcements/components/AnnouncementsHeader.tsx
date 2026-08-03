@@ -1,15 +1,13 @@
 import React from 'react'
-import { Sparkles, Plus, ChevronRight } from 'lucide-react'
+import { Plus, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface AnnouncementsHeaderProps {
   onCreateNotice?: () => void
-  onCreateExam?: () => void
 }
 
 export const AnnouncementsHeader: React.FC<AnnouncementsHeaderProps> = ({
   onCreateNotice,
-  onCreateExam,
 }) => {
   return (
     <div className="space-y-4 mb-6">
@@ -32,16 +30,6 @@ export const AnnouncementsHeader: React.FC<AnnouncementsHeaderProps> = ({
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          {/* Create Exam Button */}
-          <Button
-            variant="outline"
-            onClick={onCreateExam}
-            className="h-11 px-5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-all flex items-center gap-2"
-          >
-            <Sparkles className="size-4 text-brand-primary" />
-            <span>Create Exam</span>
-          </Button>
-
           {/* Create Notice Button */}
           <Button
             onClick={onCreateNotice}

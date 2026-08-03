@@ -113,7 +113,7 @@ export default function VerifyOtpForm() {
             })
           } else {
             setSuccessMessage('Account verified successfully!')
-            window.location.href = '/onboarding'
+            navigate('/onboarding', { replace: true })
           }
         },
       }
