@@ -26,13 +26,14 @@ export const SettingsTabsNav: React.FC<SettingsTabsNavProps> = ({ activeTab, set
       {/* Tab 2: Academic Year */}
       <button
         type="button"
-        disabled
-        className="pb-3 text-sm sm:text-base font-bold font-urbanist text-slate-400 cursor-not-allowed flex items-center gap-2 whitespace-nowrap"
+        onClick={() => setActiveTab('academic_year')}
+        className={`pb-3 text-sm sm:text-base font-bold font-urbanist transition-all whitespace-nowrap cursor-pointer ${
+          activeTab === 'academic_year'
+            ? 'text-brand-primary border-b-2 border-brand-primary'
+            : 'text-slate-500 hover:text-slate-800'
+        }`}
       >
-        <span>Academic Year</span>
-        <span className="px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-wider bg-slate-100 text-slate-500 border border-slate-200">
-          Soon
-        </span>
+        Academic Year
       </button>
 
       {/* Tab 3: User Roles */}

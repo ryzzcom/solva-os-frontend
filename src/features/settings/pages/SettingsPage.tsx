@@ -6,6 +6,7 @@ import { SettingsTabsNav, type SettingsTabType } from '../components/SettingsTab
 import { PrincipalProfileForm } from '../components/PrincipalProfileForm'
 import { SchoolInfoForm } from '../components/SchoolInfoForm'
 import { SettingsSaveFooter } from '../components/SettingsSaveFooter'
+import { AcademicYearTab } from '../components/AcademicYearTab'
 import { useProfileAndSchoolSettings } from '../api/useProfileAndSchoolSettings'
 import { useUpdateProfileAndSchool } from '../api/useUpdateProfileAndSchool'
 
@@ -123,26 +124,26 @@ export default function SettingsPage() {
         </div>
       )}
 
-      {/* Main Form Content */}
-      {isLoading ? (
-        <div className="p-16 text-center text-slate-500 font-sans text-xs flex flex-col items-center justify-center space-y-3 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
-          <Loader2 className="size-8 text-brand-primary animate-spin" />
-          <span>Loading profile & school settings...</span>
-        </div>
-      ) : isError ? (
-        <div className="p-8 text-center text-rose-700 font-sans space-y-3 bg-white border border-rose-200 rounded-2xl shadow-xs">
-          <AlertCircle className="size-8 text-rose-600 mx-auto" />
-          <p className="font-semibold text-sm">Failed to load settings.</p>
-          <Button
-            type="button"
-            onClick={() => refetch()}
-            className="px-4 py-2 bg-rose-600 text-white text-xs font-semibold rounded-xl hover:bg-rose-700 transition-colors"
-          >
-            Retry
-          </Button>
-        </div>
-      ) : (
-        activeTab === 'profile_school' && (
+      {/* TAB 1: Profile & School Info */}
+      {activeTab === 'profile_school' && (
+        isLoading ? (
+          <div className="p-16 text-center text-slate-500 font-sans text-xs flex flex-col items-center justify-center space-y-3 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
+            <Loader2 className="size-8 text-brand-primary animate-spin" />
+            <span>Loading profile & school settings...</span>
+          </div>
+        ) : isError ? (
+          <div className="p-8 text-center text-rose-700 font-sans space-y-3 bg-white border border-rose-200 rounded-2xl shadow-xs">
+            <AlertCircle className="size-8 text-rose-600 mx-auto" />
+            <p className="font-semibold text-sm">Failed to load settings.</p>
+            <Button
+              type="button"
+              onClick={() => refetch()}
+              className="px-4 py-2 bg-rose-600 text-white text-xs font-semibold rounded-xl hover:bg-rose-700 transition-colors"
+            >
+              Retry
+            </Button>
+          </div>
+        ) : (
           <div className="space-y-6">
             {/* Principal Profile Form Card */}
             <PrincipalProfileForm
@@ -186,6 +187,9 @@ export default function SettingsPage() {
           </div>
         )
       )}
+
+      {/* TAB 2: Academic Year & Student Promotion */}
+      {activeTab === 'academic_year' && <AcademicYearTab />}
     </div>
   )
 }

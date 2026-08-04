@@ -4,6 +4,10 @@ export interface StudentItem {
   roll_no: string
   class_name: string
   section_name: string
+  class_id?: string
+  section_id?: string
+  registration_no?: string
+  class?: { id: string; name: string }
   gender?: string
   father_name?: string
   father_phone?: string
