@@ -38,6 +38,7 @@ import EditAnnouncementPage from '@/features/announcements/pages/EditAnnouncemen
 import FeesPage from '@/features/fees/pages/FeesPage'
 import NotificationsPage from '@/features/notifications/pages/NotificationsPage'
 import ReportsPage from '@/features/reports/pages/ReportsPage'
+import SettingsPage from '@/features/settings/pages/SettingsPage'
 import MainLayout from '@/components/layout/MainLayout'
 import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
@@ -92,7 +93,7 @@ export const AppRoutes = () => {
           <Route path="/ptm/schedule" element={<SchedulePtmPage />} />
           <Route path="/notifications" element={<NotificationsPage />} />
           <Route path="/reports" element={<ReportsPage />} />
-          <Route path="/settings" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Route>
 
